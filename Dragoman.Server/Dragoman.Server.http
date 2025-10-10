@@ -1,0 +1,6 @@
+@Dragoman.Server_HostAddress = http://localhost:5171
+
+GET {{Dragoman.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

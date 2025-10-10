@@ -1,0 +1,32 @@
+/* src/app/reports/presence-interpretes/presence-interpretes.component.css */
+.table .center {
+  text-align: center;
+}
+
+.table .ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+
+@media print {
+  .toolbar {
+    display: none !important;
+  }
+
+  .card, .card--surface {
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .table-wrap {
+    max-height: unset;
+    overflow: visible;
+    margin: 0;
+  }
+
+  .table {
+    font-size: 12px;
+  }
+}

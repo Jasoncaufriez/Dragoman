@@ -1,0 +1,65 @@
+<app-navbarinter></app-navbarinter>
+
+<section class="card">
+  <header class="card-header">
+    <h2>Indisponibilités — Interprète #{{ tolkcode }}</h2>
+    <div class="card-actions">
+      <button type="button" class="btn" (click)="showForm = !showForm">
+        {{ showForm ? 'Fermer le formulaire' : 'Nouvelle indisponibilité' }}
+      </button>
+    </div>
+  </header>
+
+  <div *ngIf="error" class="alert alert--error">{{ error }}</div>
+  <div *ngIf="loading" class="alert alert--info">Chargement…</div>
+
+  <!-- Formulaire création (réactif) -->
+  <form *ngIf="showForm" [formGroup]="form" class="form-card" (ngSubmit)="add()">
+    <div class="form-grid-2">
+      <label>Début *<input type="date" formControlName="startindispo" /></label>
+      <label>Fin (optionnel)<input type="date" formControlName="endindispo" /></label>
+      <label>
+        Motif (max 5)
+        <input type="text" maxlength="5" formControlName="motifindispo" />
+      </label>
+      <label>
+        Commentaire
+        <textarea rows="2" formControlName="commentaire"></textarea>
+      </label>
+    </div>
+    <div class="card-actions">
+      <button type="submit" class="btn btn--primary" [disabled]="form.invalid || saving">Enregistrer</button>
+    </div>
+  </form>
+
+  <!-- Liste -->
+  <div class="table-wrap" *ngIf="!loading">
+    <table class="table" *ngIf="rows?.length; else empty">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Début</th>
+          <th>Fin</th>
+          <th>Motif</th>
+          <th>Commentaire</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of rows">
+          <td>{{ r.idIndispo }}</td>
+          <td>{{ r.startindispo | date:'yyyy-MM-dd' }}</td>
+          <td>{{ r.endindispo ? (r.endindispo | date:'yyyy-MM-dd') : '—' }}</td>
+          <td>{{ r.motifindispo || '—' }}</td>
+          <td class="ellipsis" [title]="r.commentaire || ''">{{ r.commentaire || '—' }}</td>
+          <td class="actions">
+            <button type="button" class="btn btn--danger" (click)="remove(r.idIndispo)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #empty>
+      <div class="muted">Aucune indisponibilité.</div>
+    </ng-template>
+  </div>
+</section>

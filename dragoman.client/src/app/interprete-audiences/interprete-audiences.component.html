@@ -1,0 +1,44 @@
+
+
+
+
+  <app-navbarinter></app-navbarinter>
+  <div class="card-header">
+    <h2>Audiences compatibles — Tolkcode #{{ tolkcode }}</h2>
+  </div>
+
+  <div *ngIf="error" class="alert alert--error">{{ error }}</div>
+  <div *ngIf="loading">Chargement…</div>
+
+  <div class="table-wrap" *ngIf="!loading">
+    <table class="table" *ngIf="rows.length; else empty">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Heure</th>
+          <th>Proc</th>
+          <th>Nom</th>
+          <th>Salle</th>
+          <th>Rôle (langue)</th>
+          <th>Langue requête</th>
+          <th>Langue Cgra OE </th>
+          <th>Aff #</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of rows">
+          <td>{{ a.dateAudience | date:'yyyy-MM-dd' }}</td>
+          <td>{{ a.heureAudience }}</td>
+          <td>{{ a.proc }}</td>
+          <td>{{ a.nom }}</td>
+          <td>{{ a.salleAudience }}</td>
+          <td>{{ a.langueRole }}</td>
+          <td class="ellipsis">{{ a.langueRequete }}</td>
+          <td class="ellipsis" [title]="a.langueCgoe">{{ a.langueCgoe || '—' }}</td>
+          <td>{{ a.idAffAudience }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #empty><p class="muted">Aucune audience trouvée.</p></ng-template>
+  </div>
+

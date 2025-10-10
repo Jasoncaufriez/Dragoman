@@ -1,0 +1,63 @@
+/* Conteneur principal */
+.tva-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 32px;
+}
+
+  /* Titre de la section */
+  .tva-card h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 24px;
+  }
+
+/* Table responsive */
+.tva-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+  .tva-table th {
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 600;
+    background-color: #f1f5f9;
+    color: #1e3a8a;
+    border-bottom: 2px solid #e2e8f0;
+  }
+
+  .tva-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+  }
+
+  /* Lignes survolées */
+  .tva-table tr:hover {
+    background-color: #f9fafb;
+  }
+
+/* Bouton "Ajouter" */
+.btn-add {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  float: right;
+  margin-bottom: 12px;
+}
+
+  .btn-add:hover {
+    background: #1e3a8a;
+    transform: translateY(-1px);
+  }

@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dragoman.Server", "Dragoman.Server\Dragoman.Server.csproj", "{39C99645-3DEB-4D64-8EA9-D6652261C041}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "dragoman.client", "dragoman.client\dragoman.client.esproj", "{7A1FF044-7640-44B3-A7F1-8785881265F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39C99645-3DEB-4D64-8EA9-D6652261C041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39C99645-3DEB-4D64-8EA9-D6652261C041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39C99645-3DEB-4D64-8EA9-D6652261C041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39C99645-3DEB-4D64-8EA9-D6652261C041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A1FF044-7640-44B3-A7F1-8785881265F2}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{7A1FF044-7640-44B3-A7F1-8785881265F2}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{7A1FF044-7640-44B3-A7F1-8785881265F2}.Debug|Any CPU.Deploy.0 = Release|Any CPU
+		{7A1FF044-7640-44B3-A7F1-8785881265F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A1FF044-7640-44B3-A7F1-8785881265F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A1FF044-7640-44B3-A7F1-8785881265F2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE7004F4-B4C4-4346-8485-AFFB6B042A8E}
+	EndGlobalSection
+EndGlobal

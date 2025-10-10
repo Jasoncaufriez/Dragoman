@@ -1,0 +1,47 @@
+<!-- src/app/reports/presence-interpretes/presence-interpretes.component.html -->
+<div class="card card--panel fade-in">
+  <div class="toolbar" style="display:flex; gap:12px; align-items:center; justify-content:space-between;">
+    <div style="display:flex; gap:10px; align-items:center;">
+      <h3 class="page-title" style="margin:0;">Feuille de présence — Interprètes</h3>
+      <input type="date" [(ngModel)]="date" (change)="reload()" />
+    </div>
+    <div>
+      <button class="btn btn--primary btn--sm" (click)="exportExcel()" [disabled]="loading">Exporter Excel</button>
+      <button class="btn btn--sm" (click)="exportWord()" [disabled]="loading">Exporter Word</button>
+    </div>
+  </div>
+
+  <div class="card--surface">
+    <div class="table-wrap">
+      <table class="table table--compact">
+        <thead>
+          <tr>
+            <th class="center" style="width:90px;">Présent</th>
+            <th>Interprète (#)</th>
+            <th>Téléphone</th>
+            <th>Heure</th>
+            <th>Salle</th>
+            <th>Langue</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="data?.length; else empty">
+            <tr *ngFor="let i of data; trackBy: trackByTolkcode">
+              <td class="center">
+                <input type="checkbox" />
+              </td>
+              <td><strong>{{ i.nom }} {{ i.prenom }}</strong> <span class="muted">#{{ i.tolkcode }}</span></td>
+              <td>{{ i.telephone || '-' }}</td>
+              <td class="ellipsis">{{ joinHeures(i.audiences) }}</td>
+              <td class="ellipsis">{{ joinSalles(i.audiences) }}</td>
+              <td class="ellipsis">{{ joinLangues(i.audiences) }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      <ng-template #empty>
+        <div class="muted" style="padding:12px;">Aucun interprète prévu pour cette date.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

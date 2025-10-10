@@ -1,0 +1,105 @@
+<nav class="navbar--glass" role="navigation" aria-label="Helpdesk navigation">
+  <div class="nav-left">
+    <span class="logo">Helpdesk CCE</span>
+
+    <a routerLink="/hd" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">HD</a>
+    <a routerLink="/hd/fiche-jour" routerLinkActive="active">Prestation journalière</a>
+    <a routerLink="/hd/recap-semaine" routerLinkActive="active">Semaine</a>
+  </div>
+
+  <div class="nav-right">
+    <span>Bienvenue</span>
+  </div>
+</nav>
+
+<div class="hd-carte" *ngIf="formulaire">
+  <h2>Fiche Helpdesk — Jour</h2>
+
+  <div class="hd-meta">
+    Utilisateur: <b>{{ user }}</b>
+  </div>
+
+  <form [formGroup]="formulaire" class="form-grid">
+
+    <!-- MINI-CARDS: Date / Régime / Garde -->
+    <div class="mini-cards">
+      <div class="mini-card">
+        <div class="mini-label">Date</div>
+        <input type="date" formControlName="hdDate" />
+      </div>
+
+      <div class="mini-card">
+        <div class="mini-label">Régime de travail</div>
+        <select formControlName="hdRegimeTravail">
+          <option value="mi-temps">Mi-temps</option>
+          <option value="temps plein">Temps plein</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+
+      <div class="mini-card mini-guard">
+        <label class="inline">
+          <input type="checkbox" formControlName="hdEnGarde" />
+          Je suis de garde
+        </label>
+      </div>
+    </div>
+
+    <!-- TICKETS -->
+    <h3>Tickets</h3>
+    <table class="hd-table">
+      <thead>
+        <tr>
+          <th>Heure</th>
+          <th>N°</th>
+          <th>Description</th>
+          <th>Durée (min)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody formArrayName="hdTickets">
+        <tr *ngFor="let t of tickets.controls; let i = index" [formGroupName]="i">
+          <td><input type="time" formControlName="heure" /></td>
+          <td><input type="text" formControlName="numero" /></td>
+          <td><input type="text" formControlName="type" /></td>
+          <td><input type="number" min="0" formControlName="dureeMin" /></td>
+          <td><button type="button" (click)="supprimerTicket(i)">🗑️</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" (click)="ajouterTicket()">➕ Ajouter un ticket</button>
+
+    <!-- AUTRES TÂCHES -->
+    <h3>Autres tâches</h3>
+    <table class="hd-table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Durée (min)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody formArrayName="hdAutresTaches">
+        <tr *ngFor="let a of autresTaches.controls; let i = index" [formGroupName]="i">
+          <td><input type="text" formControlName="denomination" /></td>
+          <td><input type="number" min="0" formControlName="dureeMin" /></td>
+          <td><button type="button" (click)="supprimerAutreTache(i)">🗑️</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" (click)="ajouterAutreTache()">➕ Ajouter une tâche</button>
+
+    <!-- REMARQUES -->
+    <div class="row">
+      <label>Remarques</label>
+      <textarea formControlName="hdRemarquesCollaborateur" rows="2"></textarea>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="actions">
+      <button type="button" [disabled]="enregistrementEnCours" (click)="enregistrerJour()">💾 Enregistrer</button>
+      <span class="muted">{{ messageSauvegarde }}</span>
+
+    </div>
+  </form>
+</div>

@@ -1,0 +1,84 @@
+/* === NAVBAR INTERPRÈTE (style identique à navbar principale) === */
+.navbarinter {
+  background: linear-gradient(270deg, #1e3a8a, #2563eb, #1d4ed8, #1e3a8a) !important;
+  background-size: 600% 600% !important;
+  animation: gradientShift 12s ease infinite !important;
+  margin: 30px !important;
+  width: calc(100% - 60px) !important;
+  padding: 8px 16px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Animation gradient (comme navbar principale) */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.navbarinter .nav-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  font-size: 1rem !important;
+  color: white !important;
+}
+
+.navbarinter .nav-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+}
+
+  .navbarinter .nav-right a {
+    color: #fff !important;
+    text-decoration: none !important;
+    padding: 6px 12px !important;
+    background: rgba(255,255,255,.1) !important;
+    border: 1px solid rgba(255,255,255,.2) !important;
+    border-radius: 8px !important;
+    transition: .2s ease !important;
+    font-size: .92rem !important;
+  }
+
+    .navbarinter .nav-right a:hover {
+      background: rgba(255,255,255,.25) !important;
+    }
+
+    .navbarinter .nav-right a.active {
+      background: #fff !important;
+      color: #1e3a8a !important;
+      font-weight: 600 !important;
+    }
+
+/* Responsive */
+@media (max-width: 420px) {
+  .navbarinter {
+    margin: 12px !important;
+    width: calc(100% - 24px) !important;
+    padding: 8px 12px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+
+    .navbarinter .nav-right {
+      width: 100% !important;
+      justify-content: flex-start !important;
+    }
+}

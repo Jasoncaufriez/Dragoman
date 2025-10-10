@@ -1,0 +1,76 @@
+<nav class="navbar--glass" role="navigation" aria-label="Helpdesk navigation">
+  <div class="nav-left">
+    <span class="logo">Helpdesk CCE</span>
+    <a routerLink="/hd" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">HD</a>
+    <a routerLink="/hd/fiche-jour" routerLinkActive="active">Prestation journalière</a>
+    <a routerLink="/hd/recap-semaine" routerLinkActive="active">Semaine</a>
+  </div>
+  <div class="nav-right"><span>Bienvenue</span></div>
+</nav>
+
+<div class="hd-carte" *ngIf="formulaire">
+  <h2>Fiche Helpdesk — Récap semaine</h2>
+  <div class="hd-meta">
+    Utilisateur: <b>{{ user }}</b> • Semaine: <b>{{ semaineISO }}</b>
+  </div>
+
+  <form [formGroup]="formulaire" class="hd-barre">
+    <label>Semaine</label>
+    <input type="week" formControlName="hdSemaine" />
+    <div class="hd-actions-droite">
+      <button type="button" (click)="toggleAll(true)">Tout replier</button>
+      <button type="button" (click)="telechargerWord()" [disabled]="!jours.length">Exporter Word</button>
+    </div>
+  </form>
+
+  <!-- KPI horizontal -->
+  <div class="hd-kpis">
+    <div class="kpi"><div class="v">{{ totalMinutesTickets() }}</div><div class="l">Minutes tickets</div></div>
+    <div class="kpi"><div class="v">{{ totalMinutesAutres() }}</div><div class="l">Minutes autres tâches</div></div>
+    <div class="kpi"><div class="v">{{ totalMinutes() }}</div><div class="l">Total minutes</div></div>
+  </div>
+
+  <!-- Jours -->
+  <div *ngFor="let j of jours">
+    <div class="jour-header">
+      <div class="title">{{ j.nom }}</div>
+      <div class="right">
+        <span class="muted">{{ totalJourMinutes(j) }} min</span>
+        <button type="button" (click)="j.ouvert = !j.ouvert">{{ j.ouvert ? '︿' : '﹀' }}</button>
+      </div>
+    </div>
+
+    <div *ngIf="j.ouvert" class="jour-card">
+      <h4>Tickets</h4>
+      <table class="hd-table">
+        <thead><tr><th>Heure</th><th>N°</th><th>Description</th><th>Durée (min)</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let t of (j.data?.hdTickets || [])">
+            <td>{{ t.heure }}</td>
+            <td>{{ t.numero }}</td>
+            <td>{{ t.type }}</td>  <!-- propriété inchangée côté données -->
+            <td>{{ t.dureeMin || 0 }}</td>
+          </tr>
+          <tr *ngIf="!(j.data?.hdTickets?.length)"><td colspan="4" class="muted">—</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Autres tâches</h4>
+      <table class="hd-table">
+        <thead><tr><th>Description</th><th>Durée (min)</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let a of (j.data?.hdAutresTaches || [])">
+            <td>{{ a.denomination }}</td> <!-- propriété inchangée côté données -->
+            <td>{{ a.dureeMin || 0 }}</td>
+          </tr>
+          <tr *ngIf="!(j.data?.hdAutresTaches?.length)"><td colspan="2" class="muted">—</td></tr>
+        </tbody>
+      </table>
+
+      <div class="row">
+        <label>Remarques</label>
+        <div class="ro pre">{{ j.data?.hdRemarquesCollaborateur || '—' }}</div>
+      </div>
+    </div>
+  </div>
+</div>

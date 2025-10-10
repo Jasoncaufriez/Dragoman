@@ -1,0 +1,79 @@
+<!-- Onglets -->
+<nav class="tabs">
+  <a class="active">Identité</a>
+  <a [routerLink]="['/interpretes', tolkcode, 'adresses']">Adresse</a>
+  <a [routerLink]="['/interpretes', tolkcode, 'tva']">TVA / Statut</a>
+  <a [routerLink]="['/interpretes', tolkcode, 'langues']">Langues</a>
+  <a [routerLink]="['/interpretes', tolkcode, 'indispo']">Indispo</a>
+</nav>
+
+<!-- Card compacte -->
+<section class="card">
+  <header class="card-header">
+    <h2>Interprète #{{ tolkcode }}</h2>
+    <div class="card-actions">
+      <button type="button" (click)="saveIdent()" [disabled]="saving || loading">💾 Enregistrer</button>
+    </div>
+  </header>
+
+  <div *ngIf="loading" class="info">Chargement…</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <form [formGroup]="fIdent" (ngSubmit)="saveIdent()" *ngIf="!loading">
+    <div class="grid-2">
+      <!-- Colonne gauche -->
+      <div class="col">
+        <h3>Identité</h3>
+        <label>Nom *<input formControlName="nom" required></label>
+        <label>Prénom *<input formControlName="prenom" required></label>
+        <label>Email<input type="email" formControlName="email"></label>
+        <label>Date de naissance<input type="date" formControlName="dateNaissance"></label>
+        <label>Genre<input formControlName="genre" placeholder="M/F"></label>
+
+        <h3>Langue & Statut</h3>
+        <label>
+          Langue administrative
+          <select formControlName="taalrol">
+            <option [ngValue]="null">— Choisir —</option>
+            <option [ngValue]="1">1 — Français</option>
+            <option [ngValue]="2">2 — Néerlandais</option>
+          </select>
+        </label>
+        <div class="field-group">
+          <span class="label">Assermenté</span>
+          <div class="radio-row">
+            <label><input type="radio" [value]="1" formControlName="beedigd"> Oui</label>
+            <label><input type="radio" [value]="0" formControlName="beedigd"> Non</label>
+          </div>
+        </div>
+        <label>Nationalité<input formControlName="nationaliteit"></label>
+        <label>Registre national<input formControlName="rijksregisternr"></label>
+      </div>
+
+      <!-- Colonne droite -->
+      <div class="col">
+        <h3>Contact</h3>
+        <label>Téléphone 1<input formControlName="telephone1"></label>
+        <label>Téléphone 2<input formControlName="telephone2"></label>
+        <label>Fax<input formControlName="fax"></label>
+
+        <h3>Banque & TVA</h3>
+        <label>IBAN<input formControlName="iban"></label>
+        <label>Compte bancaire<input formControlName="bankrekening"></label>
+        <label>N° TVA (texte)<input formControlName="tva"></label>
+        <label>N° TVA (numérique)<input type="number" formControlName="btwNr"></label>
+
+        <h3>Divers</h3>
+        <label>Origine<input formControlName="herkomst"></label>
+        <label>Code métier<input type="number" formControlName="beroepscode"></label>
+        <label>Remarque<textarea rows="2" formControlName="remarque"></textarea></label>
+      </div>
+    </div>
+
+    <footer class="card-footer">
+      <button type="submit" [disabled]="saving">💾 Enregistrer</button>
+      <span *ngIf="saving" class="info">Enregistrement…</span>
+      <span *ngIf="saved" class="success">Enregistré ✓</span>
+    </footer>
+  </form>
+</section>

@@ -1,0 +1,31 @@
+.table .badge {
+  margin-right: 6px;
+}
+
+.table tr.active {
+  background-color: var(--primary-100, #e0e7ff);
+}
+
+.badge--success {
+  background-color: #10b981;
+  color: white;
+}
+
+.badge--warning {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.form-card {
+  margin-top: 20px;
+  padding: 16px;
+  background: var(--surface, #f9fafb);
+  border-radius: 8px;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}

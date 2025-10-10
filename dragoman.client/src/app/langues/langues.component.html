@@ -1,0 +1,60 @@
+<app-navbarinter></app-navbarinter>
+
+<section class="card">
+  <header class="card-header">
+    <h2>Langues — Interprète #{{ tolkcode }}</h2>
+  </header>
+
+  <div *ngIf="loading" class="alert alert--info">Chargement…</div>
+  <div *ngIf="error" class="alert alert--error">{{ error }}</div>
+
+  <div class="form-grid-2" *ngIf="!loading">
+    <!-- Sources -->
+    <div>
+      <h3>Langues source</h3>
+      <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
+        <select [(ngModel)]="addSrc">
+          <option [ngValue]="null">— Ajouter —</option>
+          <option *ngFor="let l of refForSource" [ngValue]="l.idlangue">
+            {{ l.libelleFr || l.codeIso }} ({{ l.codeIso }})
+          </option>
+        </select>
+        <button type="button" class="btn btn--primary" (click)="addSource()">Ajouter</button>
+      </div>
+
+      <ul style="list-style:none; padding:0; margin:0; display:grid; gap:6px;">
+        <li *ngFor="let s of sources" class="card" style="padding:8px 10px; margin:0;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span>{{ s.libelleFr || s.codeIso }}</span>
+            <button class="btn btn--danger" (click)="removeSource(s.idLangueSource)">Supprimer</button>
+          </div>
+        </li>
+        <li *ngIf="sources.length === 0" class="muted">Aucune langue source.</li>
+      </ul>
+    </div>
+
+    <!-- Destinations -->
+    <div>
+      <h3>Langues destination</h3>
+      <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
+        <select [(ngModel)]="addDst">
+          <option [ngValue]="null">— Ajouter —</option>
+          <option *ngFor="let l of refForDestination" [ngValue]="l.idlangue">
+            {{ l.libelleFr || l.codeIso }} ({{ l.codeIso }})
+          </option>
+        </select>
+        <button type="button" class="btn btn--primary" (click)="addDestination()">Ajouter</button>
+      </div>
+
+      <ul style="list-style:none; padding:0; margin:0; display:grid; gap:6px;">
+        <li *ngFor="let d of dests" class="card" style="padding:8px 10px; margin:0;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span>{{ d.libelleFr || d.codeIso }}</span>
+            <button class="btn btn--danger" (click)="removeDestination(d.idLanguedestination)">Supprimer</button>
+          </div>
+        </li>
+        <li *ngIf="dests.length === 0" class="muted">Aucune langue destination.</li>
+      </ul>
+    </div>
+  </div>
+</section>

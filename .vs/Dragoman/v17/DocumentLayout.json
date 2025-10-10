@@ -1,0 +1,905 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\jason\\source\\repos\\Dragoman\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\angular.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\angular.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\controllers\\hdprestationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\controllers\\hdprestationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\dtos\\tolklinkdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\dtos\\tolklinkdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\models\\tolklink.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\models\\tolklink.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\services\\interpretes.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\services\\interpretes.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\services\\reports.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\services\\reports.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\services\\adresses.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\services\\adresses.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\services\\authentification.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\services\\authentification.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\dragoman.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\dragoman.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\dragoman.client.esproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\dragoman.client.esproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd-prestations.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd-prestations.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd\\hd.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd\\hd.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\navbar\\navbar.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\navbar\\navbar.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd\\hd.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd\\hd.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd\\hd.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd\\hd.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\navbar\\navbar.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\navbar\\navbar.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\app.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\app.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\app.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\app.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\app-routing.module.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\app-routing.module.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.spec.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.spec.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd-prestations.service.spec.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd-prestations.service.spec.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd-prestations.model.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd-prestations.model.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jason\\Downloads\\INTRRDM01_Jason_2025-W40_2025-10-06.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.spec.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.spec.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\app.module.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\app.module.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\interprete-audiences\\interprete-audiences.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\interprete-audiences\\interprete-audiences.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\navbar\\navbar.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\navbar\\navbar.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\calendar\\calendar.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\calendar\\calendar.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\controllers\\prestationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\controllers\\prestationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\controllers\\interpretescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\controllers\\interpretescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\services\\calendar.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\services\\calendar.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\controllers\\valuescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\controllers\\valuescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\models\\paiement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\models\\paiement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\models\\prestation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\models\\prestation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\prestations\\prestations.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\prestations\\prestations.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\prestations\\prestations.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\prestations\\prestations.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\prestations\\prestations.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\prestations\\prestations.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\services\\prestations.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\services\\prestations.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\dtos\\prestationdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\dtos\\prestationdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.server\\models\\reportinterpreterow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39C99645-3DEB-4D64-8EA9-D6652261C041}|Dragoman.Server\\Dragoman.Server.csproj|solutionrelative:dragoman.server\\models\\reportinterpreterow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|c:\\users\\jason\\source\\repos\\dragoman\\dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{7A1FF044-7640-44B3-A7F1-8785881265F2}|dragoman.client\\dragoman.client.esproj|solutionrelative:dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TolklinkDtos.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Dtos\\TolklinkDtos.cs",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Dtos\\TolklinkDtos.cs",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Dtos\\TolklinkDtos.cs",
+              "RelativeToolTip": "Dragoman.Server\\Dtos\\TolklinkDtos.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-09T11:10:03.504Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Tolklink.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Models\\Tolklink.cs",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Models\\Tolklink.cs",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Models\\Tolklink.cs",
+              "RelativeToolTip": "Dragoman.Server\\Models\\Tolklink.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAkwBUAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-09T11:01:28.944Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "interpretes.service.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\services\\interpretes.service.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\services\\interpretes.service.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\services\\interpretes.service.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\services\\interpretes.service.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-09T11:01:02.049Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HdPrestationsController.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Controllers\\HdPrestationsController.cs",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Controllers\\HdPrestationsController.cs",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Controllers\\HdPrestationsController.cs",
+              "RelativeToolTip": "Dragoman.Server\\Controllers\\HdPrestationsController.cs",
+              "ViewState": "AgIAAFYBAAAAAAAAAAAAAFYBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T07:18:00.866Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "angular.json",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\angular.json",
+              "RelativeDocumentMoniker": "dragoman.client\\angular.json",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\angular.json",
+              "RelativeToolTip": "dragoman.client\\angular.json",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAAADsAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-08T08:43:54.646Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "adresses.service.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\services\\adresses.service.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\services\\adresses.service.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\services\\adresses.service.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\services\\adresses.service.ts",
+              "ViewState": "AgIAACkAAAAAAAAAAAAAAAUAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-09T10:56:46.517Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Dragoman.Server.csproj",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Dragoman.Server.csproj",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Dragoman.Server.csproj",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Dragoman.Server.csproj",
+              "RelativeToolTip": "Dragoman.Server\\Dragoman.Server.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-07T08:09:11.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "hd-prestation-jour.component.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.ts",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAEwEoAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-07T07:10:37.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "authentification.service.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\services\\authentification.service.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\services\\authentification.service.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\services\\authentification.service.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\services\\authentification.service.ts",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-07T06:53:32.487Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "reports.service.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\services\\reports.service.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\services\\reports.service.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\services\\reports.service.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\services\\reports.service.ts",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-02T22:46:10.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "hd-prestations.service.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestations.service.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd-prestations.service.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestations.service.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd-prestations.service.ts",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-07T07:10:10.439Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "hd-prestation-jour.component.html",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.html",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.html",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.html",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.html",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAFMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-10-07T07:13:05.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "dragoman.client",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\dragoman.client.esproj",
+              "RelativeDocumentMoniker": "dragoman.client\\dragoman.client.esproj",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\dragoman.client.esproj",
+              "RelativeToolTip": "dragoman.client\\dragoman.client.esproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-10-08T09:45:42.947Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "hd-recap-semaine.component.html",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.html",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.html",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.html",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.html",
+              "ViewState": "AgIAADkAAAAAAAAAAAAIwEgAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-10-07T07:14:42.179Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "hd-recap-semaine.component.css",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.css",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.css",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.css",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.css",
+              "ViewState": "AgIAAKIAAAAAAAAAAAAYwK8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-10-08T09:17:25.58Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "hd-recap-semaine.component.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAI4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-07T07:13:36.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "hd-prestation-jour.component.css",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.css",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.css",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.css",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.css",
+              "ViewState": "AgIAAKwAAAAAAAAAAAAIwL8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-10-07T07:13:20.029Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "styles.css",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\styles.css",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\styles.css",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\styles.css",
+              "RelativeToolTip": "dragoman.client\\src\\styles.css",
+              "ViewState": "AgIAAG8CAAAAAAAAAAAIwIICAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-10-08T09:18:58.001Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "hd.component.css",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd\\hd.component.css",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd\\hd.component.css",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd\\hd.component.css",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd\\hd.component.css",
+              "ViewState": "AgIAAIwAAAAAAAAAAAAIwJ8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-10-08T07:10:06.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "navbar.component.html",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\navbar\\navbar.component.html",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\navbar\\navbar.component.html",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\navbar\\navbar.component.html",
+              "RelativeToolTip": "dragoman.client\\src\\app\\navbar\\navbar.component.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-09-10T20:14:04.326Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "hd.component.html",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd\\hd.component.html",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd\\hd.component.html",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd\\hd.component.html",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd\\hd.component.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-10-08T07:07:11.995Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "hd.component.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd\\hd.component.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd\\hd.component.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd\\hd.component.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd\\hd.component.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-08T07:06:24.132Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "app.component.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\app.component.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\app.component.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\app.component.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\app.component.ts",
+              "ViewState": "AgIAABsAAAAAAAAAAAAIwCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-08T07:22:18.705Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "navbar.component.css",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\navbar\\navbar.component.css",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\navbar\\navbar.component.css",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\navbar\\navbar.component.css",
+              "RelativeToolTip": "dragoman.client\\src\\app\\navbar\\navbar.component.css",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAAADMAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-10-08T07:29:49.036Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "app.component.html",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\app.component.html",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\app.component.html",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\app.component.html",
+              "RelativeToolTip": "dragoman.client\\src\\app\\app.component.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-10-08T07:18:09.488Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\index.html",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\index.html",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\index.html",
+              "RelativeToolTip": "dragoman.client\\src\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-10-08T07:21:59.558Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "INTRRDM01_Jason_2025-W40_2025-10-06.json",
+              "DocumentMoniker": "C:\\Users\\jason\\Downloads\\INTRRDM01_Jason_2025-W40_2025-10-06.json",
+              "RelativeDocumentMoniker": "..\\..\\..\\Downloads\\INTRRDM01_Jason_2025-W40_2025-10-06.json",
+              "ToolTip": "C:\\Users\\jason\\Downloads\\INTRRDM01_Jason_2025-W40_2025-10-06.json",
+              "RelativeToolTip": "..\\..\\..\\Downloads\\INTRRDM01_Jason_2025-W40_2025-10-06.json",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-07T13:26:59.797Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "hd-prestation-jour.component.spec.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.spec.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.spec.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.spec.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd-prestation-jour\\hd-prestation-jour.component.spec.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-07T07:56:43.391Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "hd-recap-semaine.component.spec.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.spec.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.spec.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.spec.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd-recap-semaine\\hd-recap-semaine.component.spec.ts",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAwwBAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-07T07:39:51.245Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "app.module.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\app.module.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\app.module.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\app.module.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\app.module.ts",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-06T07:19:33.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "hd-prestations.service.spec.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestations.service.spec.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd-prestations.service.spec.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestations.service.spec.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd-prestations.service.spec.ts",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAiwA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-07T07:10:09.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "app-routing.module.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\app-routing.module.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\app-routing.module.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\app-routing.module.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\app-routing.module.ts",
+              "ViewState": "AgIAABsAAAAAAAAAAAApwB8AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-03T09:51:48.664Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "interprete-audiences.component.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\interprete-audiences\\interprete-audiences.component.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\interprete-audiences\\interprete-audiences.component.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\interprete-audiences\\interprete-audiences.component.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\interprete-audiences\\interprete-audiences.component.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-07T07:12:07.92Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "hd-prestations.model.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestations.model.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\hd\\hd-prestations.model.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\hd\\hd-prestations.model.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\hd\\hd-prestations.model.ts",
+              "ViewState": "AgIAABoAAAAAAAAAAAAuwCUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-07T07:09:27.389Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "navbar.component.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\navbar\\navbar.component.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\navbar\\navbar.component.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\navbar\\navbar.component.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\navbar\\navbar.component.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-07T06:55:02.868Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "calendar.component.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\calendar\\calendar.component.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\calendar\\calendar.component.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\calendar\\calendar.component.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\calendar\\calendar.component.ts",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAAAAsAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-07T06:54:50.615Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Controllers\\DashboardController.cs",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "Dragoman.Server\\Controllers\\DashboardController.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAADgvxAAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T07:46:11.522Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "PrestationsController.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Controllers\\PrestationsController.cs",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Controllers\\PrestationsController.cs",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Controllers\\PrestationsController.cs",
+              "RelativeToolTip": "Dragoman.Server\\Controllers\\PrestationsController.cs",
+              "ViewState": "AgIAAMwAAAAAAAAAAAAAAMQAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-03T09:50:53.308Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "calendar.service.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\services\\calendar.service.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\services\\calendar.service.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\services\\calendar.service.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\services\\calendar.service.ts",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-06T08:29:54.319Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Paiement.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Models\\Paiement.cs",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Models\\Paiement.cs",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Models\\Paiement.cs",
+              "RelativeToolTip": "Dragoman.Server\\Models\\Paiement.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-03T09:49:14.127Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Dragoman.Server\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAAACsAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T07:04:41.623Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "InterpretesController.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Controllers\\InterpretesController.cs",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Controllers\\InterpretesController.cs",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Controllers\\InterpretesController.cs",
+              "RelativeToolTip": "Dragoman.Server\\Controllers\\InterpretesController.cs",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAuwDkBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T07:46:18.84Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "ValuesController.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Controllers\\ValuesController.cs",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Controllers\\ValuesController.cs",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Controllers\\ValuesController.cs",
+              "RelativeToolTip": "Dragoman.Server\\Controllers\\ValuesController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAArwBoAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T07:46:24.387Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "ReportsController.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Controllers\\ReportsController.cs",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Controllers\\ReportsController.cs",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Controllers\\ReportsController.cs",
+              "RelativeToolTip": "Dragoman.Server\\Controllers\\ReportsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T22:46:38.274Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Prestation.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Models\\Prestation.cs",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Models\\Prestation.cs",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Models\\Prestation.cs",
+              "RelativeToolTip": "Dragoman.Server\\Models\\Prestation.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAAAoAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-03T09:48:47.464Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "prestations.component.css",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\prestations\\prestations.component.css",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\prestations\\prestations.component.css",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\prestations\\prestations.component.css",
+              "RelativeToolTip": "dragoman.client\\src\\app\\prestations\\prestations.component.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-10-03T09:51:42.985Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "prestations.component.html",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\prestations\\prestations.component.html",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\prestations\\prestations.component.html",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\prestations\\prestations.component.html",
+              "RelativeToolTip": "dragoman.client\\src\\app\\prestations\\prestations.component.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-10-03T09:51:33.346Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "prestations.component.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\prestations\\prestations.component.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\prestations\\prestations.component.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\prestations\\prestations.component.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\prestations\\prestations.component.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-03T09:51:20.062Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "prestations.service.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\services\\prestations.service.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\services\\prestations.service.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\services\\prestations.service.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\services\\prestations.service.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-03T09:51:11.372Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "PrestationDtos.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Dtos\\PrestationDtos.cs",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Dtos\\PrestationDtos.cs",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Dtos\\PrestationDtos.cs",
+              "RelativeToolTip": "Dragoman.Server\\Dtos\\PrestationDtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-03T09:50:44.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "ReportInterpreteRow.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Models\\ReportInterpreteRow.cs",
+              "RelativeDocumentMoniker": "Dragoman.Server\\Models\\ReportInterpreteRow.cs",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\Dragoman.Server\\Models\\ReportInterpreteRow.cs",
+              "RelativeToolTip": "Dragoman.Server\\Models\\ReportInterpreteRow.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T22:53:51.114Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "presence-interpretes.component.ts",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.ts",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.ts",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.ts",
+              "RelativeToolTip": "dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-10-02T22:45:12.068Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "presence-interpretes.component.html",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.html",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.html",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.html",
+              "RelativeToolTip": "dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.html",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAABwAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-10-02T22:45:06.356Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "presence-interpretes.component.css",
+              "DocumentMoniker": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.css",
+              "RelativeDocumentMoniker": "dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.css",
+              "ToolTip": "C:\\Users\\jason\\source\\repos\\Dragoman\\dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.css",
+              "RelativeToolTip": "dragoman.client\\src\\app\\presence-interpretes\\presence-interpretes.component.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-10-02T22:44:52.528Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

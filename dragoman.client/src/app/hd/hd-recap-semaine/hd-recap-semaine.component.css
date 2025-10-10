@@ -1,0 +1,182 @@
+/* Carte / wrapper principal */
+.hd-wrap,
+.hd-carte {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+  border: 1px solid #e5e7eb;
+}
+
+/* Titres & méta */
+.hd-title {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+
+.hd-about, .hd-meta {
+  margin: 8px 0 20px;
+  line-height: 1.5;
+  color: #374151;
+  opacity: .9;
+}
+
+  .hd-about code {
+    background: #f3f4f6;
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+
+/* Barre de filtres */
+.hd-barre, .hd-ligne {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+  .hd-barre label, .hd-ligne label {
+    width: 180px;
+    font-weight: 600;
+  }
+
+  .hd-barre input, .hd-barre select, .hd-barre textarea,
+  .hd-ligne input, .hd-ligne select, .hd-ligne textarea {
+    flex: 1;
+    padding: 8px 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    outline: none;
+  }
+
+/* KPI horizontaux */
+.hd-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 8px 0 16px;
+}
+
+.kpi {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+  .kpi .v {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .kpi .l {
+    color: #6b7280;
+    font-size: 12px;
+  }
+
+/* En-tête d’un jour (bleu comme la navbar, texte blanc gras) */
+.jour-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(270deg, #1e3a8a, #2563eb, #1d4ed8);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin: 12px 0 6px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.08);
+}
+
+  .jour-header .title {
+    font-weight: 700;
+    letter-spacing: .2px;
+  }
+
+  .jour-header .right {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .jour-header .muted {
+    color: #eef2ff;
+    opacity: .95;
+  }
+
+  .jour-header button {
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,.35);
+    background: rgba(255,255,255,.18);
+    color: #fff;
+    cursor: pointer;
+  }
+
+/* Carte du contenu d’un jour */
+.jour-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+/* Tableaux */
+.hd-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 14px;
+}
+
+  .hd-table th, .hd-table td {
+    border: 1px solid #e5e7eb;
+    padding: 8px;
+  }
+
+  .hd-table th {
+    background: #f8fafc;
+    text-align: left;
+  }
+
+/* Zone “Remarques” en lecture */
+.ro.pre {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 10px;
+  white-space: pre-wrap;
+}
+
+/* Actions */
+.hd-actions, .hd-actions-droite {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+  .hd-actions button, .hd-actions-droite button {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: none;
+    background: #2563eb;
+    color: #fff;
+    cursor: pointer;
+  }
+
+    .hd-actions button:nth-child(2), .hd-actions-droite button:nth-child(2) {
+      background: #334155;
+    }
+
+    .hd-actions button:disabled, .hd-actions-droite button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+/* Responsive : labels au-dessus <700px */
+@media (max-width: 700px) {
+  .hd-barre label, .hd-ligne label {
+    width: 100%;
+  }
+}

@@ -1,0 +1,64 @@
+<div class="dashboard-container">
+  <div class="cards">
+    <div class="card blue">
+      <h2>Audiences</h2>
+      <p>{{ nbAudiences }}</p>
+    </div>
+    <div class="card green">
+      <h2>Langues demandées</h2>
+      <p>{{ nbLangues }}</p>
+    </div>
+    <div class="card purple">
+      <h2>Interprètes</h2>
+      <p>{{ nbInterpretes }}</p>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- Langues du jour -->
+    <div class="list">
+      <h3>Langues du jour</h3>
+      <table class="table">
+        <thead><tr><th>Langue</th><th class="right">Nb</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let l of languesToday">
+            <td>{{ l.langue }}</td>
+            <td class="right">{{ l.nb }}</td>
+          </tr>
+          <tr *ngIf="!languesToday?.length">
+            <td colspan="2" class="muted">Aucune langue demandée aujourd’hui</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Audiences -->
+    <div class="list">
+      <h3>Audiences (aujourd’hui)</h3>
+      <ul>
+        <li *ngFor="let a of audiencesToday" class="audience-item" tabindex="0">
+          <span class="audience-label">
+            {{ a.heureAudience }} — Salle {{ a.salleAudience }} — {{ a.langueRequete }}
+          </span>
+
+          <!-- Tooltip -->
+          <div class="audience-tooltip">
+            <div class="tooltip-title">Interprètes</div>
+            <ul class="tooltip-list">
+              <li *ngFor="let i of a.interpretes" class="tooltip-row">
+                <span class="name">{{ i.nom }} {{ i.prenom }}</span>
+                <span class="phones">
+                  <a *ngIf="i.gsm" [href]="'tel:' + i.gsm">GSM: {{ i.gsm }}</a>
+                  <a *ngIf="i.tel" [href]="'tel:' + i.tel">TEL: {{ i.tel }}</a>
+                  <a *ngIf="i.telbis" [href]="'tel:' + i.telbis">TEL2: {{ i.telbis }}</a>
+                </span>
+              </li>
+            </ul>
+            <div *ngIf="!a.interpretes?.length" class="muted">Aucun interprète assigné.</div>
+          </div>
+        </li>
+        <li *ngIf="!audiencesToday?.length" class="muted">Aucune audience.</li>
+      </ul>
+    </div>
+  </div>
+</div>

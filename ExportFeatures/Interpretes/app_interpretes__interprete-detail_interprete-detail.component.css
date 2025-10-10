@@ -1,0 +1,141 @@
+:host {
+  display: block;
+}
+
+/* Onglets */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin: 6px 0 12px;
+  flex-wrap: wrap;
+}
+
+  .tabs a,
+  .tabs .active {
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: #f3f3f5;
+    color: #333;
+    font-size: .9rem;
+    border: 1px solid #e5e7eb;
+  }
+
+  .tabs .active {
+    background: #e7f0ff;
+    color: #0f3d8a;
+    font-weight: 600;
+    border-color: #cfe0ff;
+  }
+
+/* Card */
+.card {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  padding: 14px;
+  max-width: 1000px;
+  margin: 0 auto 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+  .card-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+.card-actions {
+  margin-left: auto;
+}
+
+  .card-actions button {
+    background: #0f62fe;
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+
+    .card-actions button[disabled] {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+.card-footer {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #efefef;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Layout 2 colonnes */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+}
+
+.col h3 {
+  margin: 10px 0 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Champs */
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: .9rem;
+  gap: 4px;
+}
+
+input, select, textarea {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: .9rem;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.field-group {
+  margin-top: 6px;
+}
+
+.radio-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.info {
+  color: #555;
+}
+
+.success {
+  color: #1f8f3d;
+  font-weight: 600;
+}
+
+.error {
+  color: #b00020;
+}
+
+@media (max-width: 900px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}

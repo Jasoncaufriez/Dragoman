@@ -1,0 +1,83 @@
+<div class="card card--panel fade-in">
+  <div class="toolbar">
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <h3 class="page-title" style="margin: 0;">Gestion des prestations</h3>
+      <input type="date" [(ngModel)]="date" (change)="load()" />
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert--error">{{ error }}</div>
+  <div *ngIf="loading" class="muted" style="padding: 12px;">Chargement…</div>
+
+  <div class="card--surface" *ngIf="!loading">
+    <div class="table-wrap">
+      <table class="table table--compact">
+        <thead>
+          <tr>
+            <th>Interprète</th>
+            <th>Téléphone</th>
+            <th>Audiences liées</th>
+            <th>Heure suggérée</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of rows; trackBy: trackByTolkcode" 
+              [class.active]="selected?.tolkcode === r.tolkcode">
+            <td>
+              <strong>{{ r.nom }} {{ r.prenom }}</strong>
+              <span class="muted">#{{ r.tolkcode }}</span>
+            </td>
+            <td>{{ r.telephone || '-' }}</td>
+            <td>
+              <span class="badge" *ngFor="let id of r.idAffAudiences">{{ id }}</span>
+            </td>
+            <td>{{ r.heureAudienceSuggee || '-' }}</td>
+            <td>
+              <span *ngIf="r.hasPrestation" class="badge badge--success">✓ Encodé</span>
+              <span *ngIf="!r.hasPrestation" class="badge badge--warning">À encoder</span>
+            </td>
+            <td>
+              <button class="btn btn--sm" (click)="pick(r)" [disabled]="r.hasPrestation">
+                Encoder
+              </button>
+              <button class="btn btn--sm btn--danger" (click)="absent(r)">
+                Absent
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="rows.length === 0" class="muted" style="padding: 12px;">
+        Aucun interprète réservé pour cette date.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card" *ngIf="selected">
+    <h4>Encoder les heures pour <strong>{{ selected.nom }} {{ selected.prenom }}</strong></h4>
+    <form [formGroup]="form">
+      <div class="form-grid-2">
+        <label>
+          Heure d'arrivée
+          <input type="time" formControlName="start" required />
+        </label>
+        <label>
+          Heure de sortie
+          <input type="time" formControlName="end" required />
+        </label>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn--primary" 
+                [disabled]="form.invalid || saving" 
+                (click)="save()">
+          Enregistrer
+        </button>
+        <button class="btn" (click)="selected = undefined; form.reset()">
+          Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

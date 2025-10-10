@@ -1,0 +1,84 @@
+<!-- Onglets globaux -->
+<nav class="tabs">
+  <a [routerLink]="['/interpretes', tolkcode, 'detail']" routerLinkActive="active">Identité</a>
+  <a class="active">Adresse</a>
+  <a [routerLink]="['/interpretes', tolkcode, 'tva']">TVA / Statut</a>
+  <a [routerLink]="['/interpretes', tolkcode, 'langues']">Langues</a>
+  <a [routerLink]="['/interpretes', tolkcode, 'indispo']">Indispos</a>
+</nav>
+
+<section class="card">
+  <header class="card-header">
+    <h2>Adresses — Interprète #{{ tolkcode }}</h2>
+    <div class="card-actions">
+      <label class="chk">
+        <input type="checkbox" [checked]="onlyActive" (change)="toggleActive()"> Uniquement actives
+      </label>
+      <button type="button" (click)="create()">➕ Nouvelle</button>
+    </div>
+  </header>
+
+  <div *ngIf="loading" class="info">Chargement…</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <!-- Liste -->
+  <div class="table-wrap" *ngIf="!loading">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Pays</th>
+          <th>CP</th>
+          <th>Commune</th>
+          <th>Rue</th>
+          <th>N°</th>
+          <th>Boîte</th>
+          <th>Début</th>
+          <th>Fin</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of rows">
+          <td>{{ r.land }}</td>
+          <td>{{ r.cp }}</td>
+          <td>{{ r.commune }}</td>
+          <td>{{ r.rue }}</td>
+          <td>{{ r.numero }}</td>
+          <td>{{ r.boite }}</td>
+          <td>{{ r.startdate | date:'yyyy-MM-dd' }}</td>
+          <td>{{ r.enddate   | date:'yyyy-MM-dd' }}</td>
+          <td class="actions">
+            <button type="button" (click)="edit(r)" title="Modifier">✏️</button>
+            <button type="button" class="danger" (click)="remove(r)" title="Supprimer">🗑️</button>
+          </td>
+        </tr>
+        <tr *ngIf="rows.length === 0">
+          <td colspan="9" class="muted">Aucune adresse</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Formulaire upsert (même entité que l'API) -->
+  <form [formGroup]="f" (ngSubmit)="submit()" class="form-card" *ngIf="formVisible">
+    <h3 *ngIf="editingId; else addTpl">Modifier l’adresse #{{ editingId }}</h3>
+    <ng-template #addTpl><h3>Nouvelle adresse</h3></ng-template>
+
+    <div class="grid-2">
+      <label>Pays *<input formControlName="land" required></label>
+      <label>CP *<input formControlName="cp" required></label>
+      <label>Commune *<input formControlName="commune" required></label>
+      <label>Rue<input formControlName="rue"></label>
+      <label>Numéro<input formControlName="numero"></label>
+      <label>Boîte<input formControlName="boite"></label>
+      <label>Km<input type="number" formControlName="km"></label>
+      <label>Début *<input type="date" formControlName="startdate" required></label>
+      <label>Fin<input type="date" formControlName="enddate"></label>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="saving || f.invalid">💾 Enregistrer</button>
+      <button type="button" class="ghost" (click)="cancel()">Annuler</button>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,55 @@
+/* === ANIMATED ROYAL BLUE NAVBAR (compact + 1cm de marge) === */
+.navbar--glass {
+  background: linear-gradient(270deg, #1e3a8a, #2563eb, #1d4ed8, #1e3a8a);
+  background-size: 600% 600%;
+  animation: gradientShift 12s ease infinite;
+  margin: 30px; /* même retrait que le dashboard */
+  width: calc(100% - 60px); /* 30px à gauche + 30px à droite */
+  padding: 14px 22px; /* garde la compacité */
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+  /* Liens un peu plus serrés */
+  .navbar--glass .nav-left a {
+    padding: 6px 12px;
+  }
+
+@media (max-width: 420px) {
+  .navbar--glass {
+    margin: 12px; /* ~0,42 cm sur écrans très étroits */
+    width: calc(100% - 24px);
+    padding: 8px 12px;
+  }
+}
+.navbar--glass .logo {
+  font-size: 28px; /* ↑ taille du mot "Dragoman" */
+  font-weight: 400; 
+  letter-spacing: .3px; /* légère respiration */
+  margin-right: 18px; /* espace avant les liens */
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35);
+  white-space: nowrap;
+}
+
+
+
+/* Lien/onglets à côté restent compacts et alignés */
+.navbar--glass .nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* petit espace entre logo et premiers liens */
+}
+

@@ -1,0 +1,79 @@
+﻿import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { InterpretesService } from '../../services/interpretes.service';
+import { LanguesService } from '../../services/langues.service';
+import { InterpreteMatchDto } from '../../dtos/interprete-dto.model';
+
+@Component({
+  selector: 'app-interprete-list',
+  templateUrl: './interprete-list.component.html'
+})
+export class InterpreteListComponent {
+  advForm: FormGroup;
+
+  langues: { id: number; libelle: string }[] = [];
+  rows: InterpreteMatchDto[] = [];
+  loading = false;
+  error?: string;
+
+  constructor(
+    private api: InterpretesService,
+    private languesSvc: LanguesService,
+    private router: Router,
+    fb: FormBuilder
+  ) {
+    const todayISO = new Date().toISOString().slice(0, 10);
+    this.advForm = fb.group({
+      langSrc: [null],
+      langDst: [null],
+      date: [todayISO]
+    });
+
+    this.loadLangues();
+  }
+
+  private loadLangues() {
+    // Récupère le référentiel des langues depuis /api/langues
+    this.languesSvc.listRef(/* destOnly */ false).subscribe({
+      next: (ls) => {
+        this.langues = (ls || []).map(l => ({
+          id: l.idlangue,
+          libelle: l.libelleFr ?? l.libelleNl ?? l.codeIso ?? `#${l.idlangue}`
+        }));
+      },
+      error: () => {
+        this.langues = [];
+      }
+    });
+  }
+
+  resetAdvanced() {
+    this.error = undefined;
+    this.advForm.reset({ langSrc: null, langDst: null, date: new Date().toISOString().slice(0, 10) });
+  }
+
+  runAdvanced() {
+    const v = this.advForm.value;
+    if (!v.langSrc || !v.langDst || !v.date) {
+      this.error = 'Langue source, langue destination et date sont requis.';
+      return;
+    }
+    this.loading = true; this.error = undefined;
+
+    this.api.match({
+      langSrc: v.langSrc,
+      langDst: v.langDst,
+      date: v.date
+    }).subscribe({
+      next: (r: InterpreteMatchDto[]) => { this.rows = r; this.loading = false; },
+      error: (_err: any) => { this.error = 'Erreur de recherche.'; this.loading = false; }
+    });
+  }
+
+  openDetail(tolkcode: number) {
+    // Redirection vers la fiche détail
+    this.router.navigate(['/interpretes', tolkcode]);
+  }
+}
+  

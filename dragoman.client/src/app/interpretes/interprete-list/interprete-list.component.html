@@ -1,0 +1,81 @@
+<div class="interprete-container">
+  <!-- RETIRÉ: card--accent pour enlever le trait bleu -->
+  <div class="card card--panel">
+    <div class="toolbar">
+      <h2 class="page-title">Recherche d’interprètes</h2>
+    </div>
+
+    <form [formGroup]="advForm" class="card card--surface search-card">
+      <div class="advanced-grid">
+        <label>
+          Langue source
+          <select formControlName="langSrc">
+            <option [ngValue]="null">—</option>
+            <option *ngFor="let l of langues" [ngValue]="l.id">{{ l.libelle }}</option>
+          </select>
+        </label>
+
+        <label>
+          Langue destination
+          <select formControlName="langDst">
+            <option [ngValue]="null">—</option>
+            <option *ngFor="let l of langues" [ngValue]="l.id">{{ l.libelle }}</option>
+          </select>
+        </label>
+
+        <label class="date-cell">
+          Date
+          <input type="date" formControlName="date" />
+        </label>
+
+        <div class="actions">
+          <button type="button" class="btn btn--sm" (click)="resetAdvanced()">Effacer</button>
+          <button type="button" class="btn btn--primary btn--sm" (click)="runAdvanced()">Rechercher</button>
+        </div>
+      </div>
+    </form>
+
+    <div *ngIf="error" class="alert alert--error">{{ error }}</div>
+    <div *ngIf="loading" class="muted">Chargement…</div>
+
+    <div class="table-wrap" *ngIf="!loading">
+      <table class="table table--compact" *ngIf="rows.length; else empty">
+        <thead>
+          <tr class="thead-head">
+            <th>Code</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Téléphone</th>
+            <th>Langues dest.</th>
+            <th class="right">Distance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of rows" (click)="openDetail(r.tolkcode)" class="clickable">
+            <td class="center">{{ r.tolkcode }}</td>
+            <td class="ellipsis">{{ r.nom || '—' }}</td>
+            <td class="ellipsis">{{ r.prenom || '—' }}</td>
+            <td>
+              <ng-container *ngIf="(r.gsm || r.tel || r.telbis); else noTel">
+                <div *ngIf="r.gsm">📱 {{ r.gsm }}</div>
+                <div *ngIf="r.tel">☎️ {{ r.tel }}</div>
+                <div *ngIf="r.telbis">☎️ {{ r.telbis }}</div>
+              </ng-container>
+              <ng-template #noTel>—</ng-template>
+            </td>
+            <td class="langs">
+              <span class="badge" *ngFor="let l of r.languesDestination">{{ l }}</span>
+            </td>
+            <td class="right">
+              <ng-container *ngIf="r.distanceKm != null; else na">
+                {{ r.distanceKm | number:'1.0-1' }} km
+              </ng-container>
+              <ng-template #na>—</ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #empty><p class="muted">Aucun résultat.</p></ng-template>
+    </div>
+  </div>
+</div>

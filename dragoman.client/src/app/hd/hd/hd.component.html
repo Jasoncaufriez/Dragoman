@@ -1,0 +1,34 @@
+<nav class="navbar--glass" role="navigation" aria-label="Helpdesk navigation">
+  <div class="nav-left">
+    <span class="logo">Helpdesk CCE</span>
+
+    <a routerLink="/hd" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">HD</a>
+    <a routerLink="/hd/fiche-jour" routerLinkActive="active">Prestation journalière</a>
+    <a routerLink="/hd/recap-semaine" routerLinkActive="active">Semaine</a>
+  </div>
+
+  <div class="nav-right">
+   
+   <span>Bienvenue</span> 
+  </div>
+</nav>
+
+<section class="hd-wrap">
+  <h2 class="hd-title">Helpdesk </h2>
+
+
+
+  <div class="hd-cards">
+    <a class="hd-card" routerLink="/hd/fiche-jour">
+      <div class="hd-card-icon">📝</div>
+      <div class="hd-card-title">Fiche du jour</div>
+      <div class="hd-card-text">Encoder les tickets et autres tâches du jour.</div>
+    </a>
+
+    <a class="hd-card" routerLink="/hd/recap-semaine">
+      <div class="hd-card-icon">📦</div>
+      <div class="hd-card-title">Récap semaine</div>
+      <div class="hd-card-text">Consulter et exporter la semaine en Word.</div>
+    </a>
+  </div>
+</section>

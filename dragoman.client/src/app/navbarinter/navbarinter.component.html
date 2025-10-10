@@ -1,0 +1,13 @@
+<nav class="navbarinter">
+  <div class="nav-left">
+    👤 Interprète <strong>#{{ tolkcode }}</strong>
+  </div>
+  <div class="nav-right">
+    <a [routerLink]="['/interpretes', tolkcode, 'detail']" routerLinkActive="active">Identité</a>
+    <a [routerLink]="['/interpretes', tolkcode, 'adresses']" routerLinkActive="active">Adresse</a>
+    <a [routerLink]="['/interpretes', tolkcode, 'tva']" routerLinkActive="active">TVA / Statut</a>
+    <a [routerLink]="['/interpretes', tolkcode, 'langues']" routerLinkActive="active">Langues</a>
+    <a [routerLink]="['/interpretes', tolkcode, 'indispo']" routerLinkActive="active">Indispos</a>
+    <a [routerLink]="['/interpretes', tolkcode, 'audiences']" routerLinkActive="active">Audiences</a>
+  </div>
+</nav>

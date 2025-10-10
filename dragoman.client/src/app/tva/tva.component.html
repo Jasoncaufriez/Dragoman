@@ -1,0 +1,52 @@
+<app-navbarinter></app-navbarinter>
+
+<section class="card">
+  <div class="card-header">
+    <h2>Statuts TVA — Interprète #{{ tolkcode }}</h2>
+
+    <div class="card-actions">
+      <button class="btn" (click)="showForm = !showForm">{{ showForm ? 'Annuler' : 'Ajouter' }}</button>
+    </div>
+  </div>
+
+  <div class="alert alert--info" *ngIf="loading">Chargement…</div>
+  <div class="alert alert--error" *ngIf="!loading && error">{{ error }}</div>
+
+  <div class="table-wrap" *ngIf="!loading">
+    <table class="table" *ngIf="tvas?.length; else empty">
+      <thead>
+        <tr><th>Statut</th><th>Début</th><th>Fin</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of tvas">
+          <td>{{ r.statut }}</td>
+          <td>{{ r.startdate | date:'yyyy-MM-dd' }}</td>
+          <td>{{ r.enddate   | date:'yyyy-MM-dd' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #empty>
+      <div class="muted">Aucun statut TVA enregistré.</div>
+    </ng-template>
+  </div>
+
+  <form class="form-card" *ngIf="showForm" [formGroup]="form" (ngSubmit)="addTva()">
+    <div class="form-grid-2">
+      <label>
+        Statut
+        <select formControlName="idStatut">
+          <option [ngValue]="null" disabled>— Choisir —</option>
+          <option *ngFor="let s of statuts" [ngValue]="s.idStatut">{{ s.libelle }}</option>
+        </select>
+      </label>
+      <label>
+        Date de début
+        <input type="date" formControlName="startdate" />
+      </label>
+    </div>
+    <div class="card-actions">
+      <button type="submit" class="btn btn--primary" [disabled]="form.invalid || saving">Enregistrer</button>
+      <button type="button" class="btn" (click)="showForm=false">Annuler</button>
+    </div>
+  </form>
+</section>

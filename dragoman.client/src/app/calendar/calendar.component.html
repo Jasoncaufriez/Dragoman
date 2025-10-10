@@ -1,0 +1,93 @@
+<div class="calendar-container">
+  <h2 class="page-title">Audiences</h2>
+
+  <!-- Carte principale : header bleu fin + corps clair -->
+  <div class="card card--surface">
+    <div class="card-header card--glass">
+      <button class="btn btn--primary" (click)="showSearchCard = !showSearchCard">
+        {{ showSearchCard ? 'Fermer la recherche avancée' : 'Rechercher par N° audience / N° affaire' }}
+      </button>
+    </div>
+
+    <div class="card-body">
+      <!-- Carte recherche (neutre, compacte) -->
+      <form *ngIf="showSearchCard" [formGroup]="searchForm" class="search-card">
+        <div class="form-grid-2">
+          <label>
+            N° affaire (nroRoleGen)
+            <input type="text" formControlName="nroRoleGen" placeholder="ex: 2025/12345" />
+          </label>
+          <label>
+            N° audience (idAffAudience)
+            <input type="text" formControlName="idAffAudience" placeholder="ex: 987654" />
+          </label>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="btn" (click)="clearSearch()">Effacer</button>
+          <button type="button" class="btn btn--primary" (click)="runSearch()">Rechercher</button>
+        </div>
+      </form>
+
+      <!-- Tableau -->
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr class="thead-head">
+              <th>Date</th>
+              <th>Heure</th>
+              <th>Langue rôle</th>
+              <th>Langue requête</th>
+              <th>Langue CGOE</th>
+              <th>Salle</th>
+              <th class="col-nom">Nom</th>
+              <th>Proc</th>
+              <th>Tolkcode</th>
+              <th class="center">Actions</th>
+            </tr>
+
+            <tr class="thead-filters" [formGroup]="filterForm">
+              <th class="filter-date">
+                <div class="date-range">
+                  <input type="date" formControlName="dateFrom" />
+                  <span>→</span>
+                  <input type="date" formControlName="dateTo" />
+                </div>
+              </th>
+              <th><input type="text" placeholder="HH:mm" formControlName="heure" /></th>
+              <th><input type="text" placeholder="FR / NL" formControlName="langueRole" /></th>
+              <th><input type="text" placeholder="Requête" formControlName="langueRequete" /></th>
+              <th><input type="text" placeholder="CGOE" formControlName="langueCgoe" /></th>
+              <th><input type="text" placeholder="Salle" formControlName="salle" /></th>
+              <th><input type="text" placeholder="Nom" formControlName="nom" /></th>
+              <th><input type="text" placeholder="Proc" formControlName="proc" /></th>
+              <th><input type="text" placeholder="Tolkcode" formControlName="tolkcode" /></th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let r of (filteredRows$ | async)">
+              <td>{{ r.dateAudience | date:'yyyy-MM-dd' }}</td>
+              <td>{{ r.heureAudience }}</td>
+              <td>{{ r.langueRole }}</td>
+              <td>{{ r.langueRequete }}</td>
+              <td>{{ r.langueCgoe }}</td>
+              <td class="center">{{ r.salleAudience }}</td>
+              <td class="ellipsis col-nom" [title]="r.nom">{{ r.nom }}</td>
+              <td>{{ r.proc }}</td>
+              <td class="center">{{ r.tolkcode ?? '' }}</td>
+              <td class="center nowrap">
+                <button class="btn btn--primary" (click)="goToSearch(r)">Ajouter</button>
+                <button class="btn btn--danger" (click)="removeAssignment(r)" [disabled]="!r.tolkcode">Supprimer</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="filters-actions">
+        <button type="button" class="btn" (click)="resetFilters()">Réinitialiser les filtres</button>
+      </div>
+    </div>
+  </div>
+</div>

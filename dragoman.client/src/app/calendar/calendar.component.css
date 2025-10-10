@@ -1,0 +1,294 @@
+/* ================= Alignement global ================= */
+.calendar-container {
+  padding: var(--page-pad, 30px); /* aligne avec navbar & dashboard */
+  background: #f5f7fb; /* léger gris → moins d’effet “blanc partout” */
+  min-height: calc(100vh - 120px);
+}
+
+/* ================= Cartes ================= */
+.card {
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(2, 6, 23, 0.06);
+  background: #fff;
+  overflow: hidden;
+}
+
+.card--surface {
+  background: #fff;
+}
+
+.card-header {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(2, 6, 23, 0.06);
+}
+
+/* Bandeau bleu (style navbar) limité au header, pas toute la carte */
+.card--glass {
+  background: linear-gradient(270deg, #1e3a8a, #2563eb, #1d4ed8);
+  color: #fff;
+}
+
+/* Corps de carte légèrement nuancé pour éviter le blanc uniforme */
+.card-body {
+  padding: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+}
+
+/* ================= Titre ================= */
+.page-title {
+  margin: 4px 0 14px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* ================= Boutons ================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #f8fafc;
+  color: #0f172a;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform .02s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  user-select: none;
+}
+
+  .btn + .btn {
+    margin-left: 8px;
+  }
+
+  .btn:hover {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    background: #f3f4f6;
+  }
+
+  .btn:active {
+    transform: translateY(1px);
+  }
+
+  .btn[disabled] {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+.btn--primary {
+  background: linear-gradient(270deg, #1e3a8a, #2563eb, #1d4ed8);
+  color: #fff;
+  border-color: transparent;
+}
+
+  .btn--primary:hover {
+    filter: brightness(1.06);
+  }
+
+.btn--danger {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
+
+  .btn--danger:hover {
+    background: #fecaca;
+  }
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* ================= Formulaire de recherche ================= */
+.search-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 10px 0 2px;
+}
+
+  .search-card .form-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .search-card label {
+    display: grid;
+    gap: 6px;
+    font-size: .92rem;
+    color: #0f172a;
+  }
+
+  .search-card input[type="text"] {
+    height: 34px;
+    padding: 6px 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+    background: #ffffff;
+    color: #0f172a;
+  }
+
+    .search-card input[type="text"]::placeholder {
+      color: #9ca3af;
+    }
+
+    .search-card input[type="text"]:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,.18);
+    }
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* ================= Table + Sticky ================= */
+.table-wrap {
+  max-height: 68vh;
+  overflow: auto;
+  position: relative;
+  margin-top: 10px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+}
+
+:root {
+  --thead-height: 40px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+  /* Contraste explicite (évite “blanc sur blanc” hérité du header bleu) */
+  .table thead th,
+  .table tbody td {
+    color: #0f172a;
+    font-size: 0.93rem;
+  }
+
+  /* En-têtes plus lisibles */
+  .table thead th {
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background: #eaf1ff; /* bleu très clair → contraste net */
+    font-weight: 700;
+    text-align: left;
+    border-bottom: 1px solid #dbe5ff;
+  }
+
+  .table thead .thead-head th {
+    height: var(--thead-height);
+    vertical-align: middle;
+    padding: 8px 10px;
+  }
+
+  /* Ligne des filtres, sous les têtes */
+  .table thead .thead-filters th {
+    top: var(--thead-height);
+    background: #f8fbff;
+    z-index: 2;
+    border-bottom: 1px solid #e6eefc;
+    padding: 6px 8px;
+  }
+
+  /* Lignes données */
+  .table tbody td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .table tbody tr:nth-child(even) {
+    background: #fcfdff;
+  }
+
+  .table tbody tr:hover {
+    background: #f3f7ff;
+  }
+
+.center {
+  text-align: center;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.col-nom {
+  max-width: 240px;
+}
+
+/* ====== Filtres compacts ====== */
+.thead-filters input {
+  width: 100%;
+  height: 30px;
+  padding: 4px 8px;
+  font-size: .88rem;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+  .thead-filters input::placeholder {
+    color: #9ca3af;
+  }
+
+/* Dates réduites (moins large) */
+.filter-date .date-range {
+  display: grid;
+  grid-template-columns: 120px auto 120px; /* ← largeur compactée */
+  gap: 6px;
+  align-items: center;
+}
+
+  .filter-date .date-range input[type="date"] {
+    height: 30px;
+    padding: 2px 6px;
+    font-size: .88rem;
+  }
+
+/* Actions sous le tableau */
+.filters-actions {
+  margin-top: 10px;
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 1024px) {
+  .filter-date .date-range {
+    grid-template-columns: 110px auto 110px;
+  }
+
+  .col-nom {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 860px) {
+  .search-card .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-date .date-range {
+    grid-template-columns: 100px auto 100px;
+  }
+
+  .col-nom {
+    max-width: 160px;
+  }
+}

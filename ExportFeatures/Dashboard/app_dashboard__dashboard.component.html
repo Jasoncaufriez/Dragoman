@@ -1,0 +1,63 @@
+
+<!-- Contenu principal -->
+<div class="dashboard-container">
+  <!-- Résumé du jour -->
+  <div class="cards">
+    <div class="card blue">
+      <h2>Audiences</h2>
+      <p>{{ nbAudiences }}</p>
+    </div>
+    <div class="card green">
+      <h2>Langues demandées</h2>
+      <p>{{ nbLangues }}</p>
+    </div>
+    <div class="card purple">
+      <h2>Interprètes</h2>
+      <p>{{ nbInterpretes }}</p>
+    </div>
+
+    <a [routerLink]="['/interpretes', 1]">Interprète de test Jason</a>
+  </div>
+
+  <!-- Langues du jour -->
+  <div class="list">
+    <h3>Langues du jour</h3>
+    <table class="table">
+      <thead><tr><th>Langue</th><th>Nb</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let l of languesToday">
+          <td>{{ l.langue }}</td>
+          <td class="right">{{ l.nb }}</td>
+        </tr>
+        <tr *ngIf="!languesToday?.length">
+          <td colspan="2" class="muted">Aucune langue demandée aujourd’hui</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lists">
+    <!-- Audiences (distinct jour) -->
+    <div class="list">
+      <h3>Audiences (aujourd’hui)</h3>
+      <ul>
+        <li *ngFor="let a of audiencesToday">
+          <span>{{ a.heureAudience }} — Salle {{ a.salleAudience }}</span>
+        </li>
+        <li *ngIf="!audiencesToday?.length" class="muted">Aucune audience.</li>
+      </ul>
+    </div>
+
+    <!-- Audiences supprimées -->
+    <div class="list">
+      <h3>Audiences supprimées</h3>
+      <ul>
+        <li *ngFor="let a of audiencesSupprimees">
+          <span>{{ a.dateAudience | date:'shortDate' }} — {{ a.heureAudience }}</span>
+          <span class="badge danger">Supprimée</span>
+        </li>
+        <li *ngIf="!audiencesSupprimees?.length" class="muted">Aucune aujourd’hui.</li>
+      </ul>
+    </div>
+  </div>
+</div>

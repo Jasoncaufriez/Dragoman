@@ -1,0 +1,52 @@
+<nav class="tabs">
+  <a class="active">Interprètes</a>
+  <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+</nav>
+
+<div class="card">
+  <div class="card-header">
+    <h2>Recherche d’interprètes</h2>
+    <div class="card-actions">
+      <select [(ngModel)]="mode">
+        <option value="tolkcode">Numéro</option>
+        <option value="nom">Nom</option>
+        <option value="prenom">Prénom</option>
+        <option value="langue">Langue</option>
+      </select>
+      <input [(ngModel)]="q" (keyup.enter)="run()" placeholder="Tape et Entrée…" />
+      <button class="btn btn--primary" (click)="run()">Rechercher</button>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert--error">{{ error }}</div>
+  <div *ngIf="loading">Chargement…</div>
+
+  <div class="table-wrap" *ngIf="!loading">
+    <table class="table" *ngIf="rows.length; else empty">
+      <thead>
+        <tr>
+          <th>Tolkcode</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Langues dest.</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of rows">
+          <td>{{ r.tolkcode }}</td>
+          <td>{{ r.nom || '—' }}</td>
+          <td>{{ r.prenom || '—' }}</td>
+          <td>
+            <span class="badge" *ngFor="let l of r.languesDestination">{{ l }}</span>
+          </td>
+          <td class="actions">
+            <button class="btn" (click)="openDetail(r.tolkcode)">Détails</button>
+            <button class="btn" (click)="openAudiences(r.tolkcode)">Audiences (exact)</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #empty><p class="muted">Aucun résultat.</p></ng-template>
+  </div>
+</div>

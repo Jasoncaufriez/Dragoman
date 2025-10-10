@@ -1,0 +1,191 @@
+/* Carte & en-têtes */
+.hd-carte {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  border: 1px solid #e5e7eb;
+}
+
+  .hd-carte h2 {
+    margin: 0 0 6px 0;
+    font-size: 22px;
+  }
+
+.hd-meta {
+  margin-bottom: 16px;
+  opacity: .85;
+  color: #374151;
+}
+
+/* Mini-cards (Date / Régime / Garde) */
+.mini-cards {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+}
+
+.mini-card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 8px;
+}
+
+  .mini-card .mini-label {
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+  }
+
+  .mini-card input, .mini-card select {
+    padding: 8px 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    outline: none;
+    background: #fff;
+    width: 100%;
+  }
+
+  .mini-card.mini-guard {
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+
+.inline {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center
+}
+
+/* Formulaire (reste) */
+.form-grid {
+  display: grid;
+  gap: 12px;
+}
+
+  .form-grid .row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .form-grid label {
+    font-weight: 600;
+  }
+
+  .form-grid input[type="date"],
+  .form-grid input[type="time"],
+  .form-grid input[type="text"],
+  .form-grid input[type="number"],
+  .form-grid select,
+  .form-grid textarea {
+    padding: 8px 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    outline: none;
+    background: #fff;
+  }
+
+  .form-grid textarea {
+    resize: vertical
+  }
+
+/* Tableaux */
+.hd-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 14px;
+}
+
+  .hd-table th, .hd-table td {
+    border: 1px solid #e5e7eb;
+    padding: 8px;
+  }
+
+  .hd-table th {
+    background: #f8fafc;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  .hd-table td input {
+    width: 100%;
+    box-sizing: border-box
+  }
+
+/* Boutons */
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  background: #2563eb;
+  color: #fff;
+  transition: filter .12s ease,transform .06s ease;
+}
+
+  button:hover {
+    filter: brightness(1.05)
+  }
+
+  button:active {
+    transform: translateY(1px)
+  }
+
+  button:disabled {
+    opacity: .6;
+    cursor: not-allowed
+  }
+
+.hd-table td button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #ef4444;
+}
+
+  .hd-table td button:hover {
+    filter: brightness(1.05)
+  }
+
+.form-grid > button[type="button"] {
+  margin: 2px 0 12px;
+  background: #334155;
+}
+
+  .form-grid > button[type="button"]:hover {
+    filter: brightness(1.05)
+  }
+
+/* Actions bas de formulaire */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+  .actions .muted {
+    opacity: .8;
+    color: #6b7280
+  }
+
+/* Accessibilité focus */
+:where(input,select,textarea,button):focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 1px;
+}
+
+/* Responsive */
+@media (max-width:700px) {
+  .form-grid .row {
+    grid-template-columns: 1fr;
+    align-items: start
+  }
+}
