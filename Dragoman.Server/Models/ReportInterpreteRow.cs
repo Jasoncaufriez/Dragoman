@@ -8,7 +8,6 @@ public class ReportInterpreteRow
     [Column("NOM")] public string? Nom { get; set; }
 
     [Column("PRENOM")] public string? Prenom { get; set; }
-
     [Column("JOUR")] public DateTime? Jour { get; set; }
 
     [Column("HEURE_AUDIENCE")] public string? HeureAudience { get; set; }
