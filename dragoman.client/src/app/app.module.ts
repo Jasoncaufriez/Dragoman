@@ -16,12 +16,15 @@ import { LanguesComponent } from './langues/langues.component';
 import { TvaComponent } from './tva/tva.component';
 import { IndispoComponent } from './indispo/indispo.component';
 import { InterpreteAudiencesComponent } from './interprete-audiences/interprete-audiences.component';
+import { ConvocationComponent } from './convocation/convocation.component';
 import { NavbarInterComponent } from './navbarinter/navbarinter.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PresenceInterpretesComponent } from './presence-interpretes/presence-interpretes.component';
 import { PrestationsComponent } from './prestations/prestations.component';
-
-
+import { InventoryComponent } from './inventory/inventory.component';
+import { AdStatusDashboardComponent } from './ad-status/ad-status-dashboard/ad-status-dashboard.component';
+import { FacturesComponent } from './factures/factures.component';
+import { GenerationFacturesComponent } from './generation-factures/generation-factures.component';
 
 @NgModule({
   declarations: [
@@ -35,11 +38,15 @@ import { PrestationsComponent } from './prestations/prestations.component';
     TvaComponent,
     IndispoComponent,
     InterpreteAudiencesComponent,
+    ConvocationComponent,
     NavbarInterComponent,
     NavbarComponent,
     PresenceInterpretesComponent,
-    PrestationsComponent
-    
+    PrestationsComponent,
+    InventoryComponent,
+    AdStatusDashboardComponent,
+    FacturesComponent,
+    GenerationFacturesComponent
   ],
   imports: [
     BrowserModule,

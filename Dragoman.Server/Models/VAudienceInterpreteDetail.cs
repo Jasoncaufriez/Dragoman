@@ -1,4 +1,4 @@
-﻿namespace Dragoman.Server.Models
+namespace Dragoman.Server.Models
 {
     public class VAudienceInterpreteDetail
     {
@@ -15,6 +15,7 @@
         public string? Gsm { get; set; }
         public string? Tel { get; set; }
         public string? Telbis { get; set; }
+        
+        public int? Taalrol { get; set; }  // 1 = NL, 2 = FR
     }
-
 }

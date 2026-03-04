@@ -1,0 +1,155 @@
+<div class="ad-status-page">
+  <h2>Suivi AD </h2>
+
+  <div *ngIf="isLoading" class="info">
+    Chargement des données en cours...
+  </div>
+
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <div class="tiles" *ngIf="!isLoading && !errorMessage">
+    <div class="tile tile-red"
+         (click)="setCategory('pwdExpired')"
+         [class.active]="selectedCategory === 'pwdExpired'">
+      <div class="tile-title">MDP Expirés</div>
+      <div class="tile-count">{{ counts.pwdExpired }}</div>
+    </div>
+
+    <div class="tile tile-warning"
+         (click)="setCategory('pwdExpiringSoon')"
+         [class.active]="selectedCategory === 'pwdExpiringSoon'">
+      <div class="tile-title">Expire bientôt (≤ 15j)</div>
+      <div class="tile-count">{{ counts.pwdExpiringSoon }}</div>
+    </div>
+
+    <div class="tile tile-info"
+         (click)="setCategory('pwdNeverExpires')"
+         [class.active]="selectedCategory === 'pwdNeverExpires'">
+      <div class="tile-title">Never Expires</div>
+      <div class="tile-count">{{ counts.pwdNeverExpires }}</div>
+    </div>
+
+    <div class="tile tile-grey"
+         (click)="setCategory('inactive90Plus')"
+         [class.active]="selectedCategory === 'inactive90Plus'">
+      <div class="tile-title">Inactifs > 3 mois</div>
+      <div class="tile-count">{{ counts.inactive90Plus }}</div>
+    </div>
+
+    <div class="tile tile-light-grey"
+         (click)="setCategory('inactiveSoon')"
+         [class.active]="selectedCategory === 'inactiveSoon'">
+      <div class="tile-title">Bientôt inactifs</div>
+      <div class="tile-count">{{ counts.inactiveSoon }}</div>
+    </div>
+  </div>
+
+  <div class="details-card" *ngIf="!isLoading && !errorMessage">
+
+    <div class="details-header-row">
+      <h3>{{ getCategoryLabel() }} <span class="badge">{{ filteredUsers.length }}</span></h3>
+
+      <div class="toggle-container">
+        <label class="switch-label">
+          <input type="checkbox" [(ngModel)]="showNormal" (change)="toggleShowNormal()">
+          Afficher situations **"Normales"**
+        </label>
+      </div>
+    </div>
+
+    <div class="table-wrapper" *ngIf="filteredUsers.length > 0; else noData">
+      <table class="ad-table">
+        <thead>
+          <tr>
+            <th (click)="sortUsers('samAccountName')" [class.sorted]="sortKey === 'samAccountName'">
+              Compte <span class="sort-icon" *ngIf="sortKey === 'samAccountName'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+            </th>
+
+            <th (click)="sortUsers('isNormal')" [class.sorted]="sortKey === 'isNormal'">
+              Normal ? <span class="sort-icon" *ngIf="sortKey === 'isNormal'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+            </th>
+
+            <th (click)="sortUsers('displayName')" [class.sorted]="sortKey === 'displayName'">
+              Nom Complet <span class="sort-icon" *ngIf="sortKey === 'displayName'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+            </th>
+
+            <th (click)="sortUsers('ou')" [class.sorted]="sortKey === 'ou'">
+              OU <span class="sort-icon" *ngIf="sortKey === 'ou'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+            </th>
+
+            <th (click)="sortUsers('lastLogonDate')" [class.sorted]="sortKey === 'lastLogonDate'">
+              Dernier logon <span class="sort-icon" *ngIf="sortKey === 'lastLogonDate'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+            </th>
+            <th (click)="sortUsers('passwordStatus')" [class.sorted]="sortKey === 'passwordStatus'">
+              Statut MDP <span class="sort-icon" *ngIf="sortKey === 'passwordStatus'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+            </th>
+            <th (click)="sortUsers('passwordExpiresOn')" [class.sorted]="sortKey === 'passwordExpiresOn'">
+              Date Expiration <span class="sort-icon" *ngIf="sortKey === 'passwordExpiresOn'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+            </th>
+            <th (click)="sortUsers('inactivityStatus')" [class.sorted]="sortKey === 'inactivityStatus'">
+              Activité <span class="sort-icon" *ngIf="sortKey === 'inactivityStatus'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+            </th>
+            <th>Commentaire</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of filteredUsers"
+              [ngClass]="{
+                'row-red': u.passwordStatus === 'Expired_Red' || u.passwordStatus === 'Expired',
+                'row-orange': u.passwordStatus === 'Expired_Orange',
+                'row-yellow': u.passwordStatus === 'Expired_Yellow',
+                'row-normal': u.isNormal
+              }">
+            <td><strong>{{ u.samAccountName }}</strong></td>
+
+            <td class="center-content">
+              <input type="checkbox" [(ngModel)]="u.isNormal" (change)="toggleNormal(u)">
+              <span class="save-indicator success" *ngIf="saveState[u.samAccountName] === 'saved'">✓</span>
+              <span class="save-indicator error" *ngIf="saveState[u.samAccountName] === 'error'">!</span>
+            </td>
+
+            <td class="clickable" (click)="openTeamsChat(u)" title="Ouvrir Teams">
+              {{ u.displayName }} 🔗
+            </td>
+            <td>{{ u.ou }}</td>
+            <td>{{ u.lastLogonDate || '-' }}</td>
+
+            <td>
+              <span class="status-pill" [ngClass]="u.passwordStatus">
+                {{ getPasswordStatusLabel(u.passwordStatus) }}
+              </span>
+            </td>
+
+            <td>
+              {{ u.passwordExpiresOn || '-' }}
+              <small *ngIf="u.daysUntilExpiration !== null && u.daysUntilExpiration > 0">
+                (dans {{ u.daysUntilExpiration }}j)
+              </small>
+            </td>
+            <td>{{ u.inactivityStatus }}</td>
+
+            <td class="comment-cell">
+              <div class="input-group">
+                <textarea [(ngModel)]="u.comment"
+                          (blur)="saveComment(u)"
+                          rows="1"
+                          placeholder="...">
+                </textarea>
+                <span class="save-indicator success" *ngIf="saveState[u.samAccountName] === 'saved'">✓</span>
+                <span class="save-indicator error" *ngIf="saveState[u.samAccountName] === 'error'">!</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #noData>
+      <div class="info-box">
+        Aucun utilisateur ne correspond aux critères sélectionnés.
+      </div>
+    </ng-template>
+  </div>
+</div>

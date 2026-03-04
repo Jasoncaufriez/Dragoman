@@ -16,7 +16,7 @@
           <tr>
             <th>Interprète</th>
             <th>Téléphone</th>
-            <th>Audiences liées</th>
+            <th>Affaires liées</th>
             <th>Heure suggérée</th>
             <th>Statut</th>
             <th>Actions</th>
@@ -24,7 +24,8 @@
         </thead>
         <tbody>
           <tr *ngFor="let r of rows; trackBy: trackByTolkcode" 
-              [class.active]="selected?.tolkcode === r.tolkcode">
+              [class.active]="selected?.tolkcode === r.tolkcode"
+              [class.row--absent]="r.isAbsent">
             <td>
               <strong>{{ r.nom }} {{ r.prenom }}</strong>
               <span class="muted">#{{ r.tolkcode }}</span>
@@ -35,14 +36,15 @@
             </td>
             <td>{{ r.heureAudienceSuggee || '-' }}</td>
             <td>
-              <span *ngIf="r.hasPrestation" class="badge badge--success">✓ Encodé</span>
-              <span *ngIf="!r.hasPrestation" class="badge badge--warning">À encoder</span>
+              <span *ngIf="r.isAbsent" class="badge badge--red">❌ Absent</span>
+              <span *ngIf="!r.isAbsent && r.hasPrestation" class="badge badge--success">✓ Encodé</span>
+              <span *ngIf="!r.isAbsent && !r.hasPrestation" class="badge badge--warning">À encoder</span>
             </td>
             <td>
-              <button class="btn btn--sm" (click)="pick(r)" [disabled]="r.hasPrestation">
+              <button class="btn btn--sm" (click)="pick(r)" [disabled]="r.hasPrestation || r.isAbsent">
                 Encoder
               </button>
-              <button class="btn btn--sm btn--danger" (click)="absent(r)">
+              <button class="btn btn--sm btn--danger" (click)="absent(r)" [disabled]="r.hasPrestation || r.isAbsent || r.idAffAudiences.length === 0">
                 Absent
               </button>
             </td>
@@ -55,7 +57,7 @@
     </div>
   </div>
 
-  <div class="form-card" *ngIf="selected">
+  <div class="form-card" *ngIf="selected" #formCard>
     <h4>Encoder les heures pour <strong>{{ selected.nom }} {{ selected.prenom }}</strong></h4>
     <form [formGroup]="form">
       <div class="form-grid-2">

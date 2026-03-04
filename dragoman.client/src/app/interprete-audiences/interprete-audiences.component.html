@@ -1,44 +1,185 @@
+<app-navbarinter></app-navbarinter>
 
+<div class="audiences-container fade-in">
 
-
-
-  <app-navbarinter></app-navbarinter>
-  <div class="card-header">
-    <h2>Audiences compatibles — Tolkcode #{{ tolkcode }}</h2>
+  <!-- Alerts -->
+  <div *ngIf="error" class="toast toast--error" (click)="dismissError()">
+    <span class="toast-icon">⚠️</span>
+    <span class="toast-text">{{ error }}</span>
+    <button class="toast-close" type="button">&times;</button>
+  </div>
+  <div *ngIf="info" class="toast toast--success" (click)="dismissInfo()">
+    <span class="toast-icon">✅</span>
+    <span class="toast-text">{{ info }}</span>
+    <button class="toast-close" type="button">&times;</button>
   </div>
 
-  <div *ngIf="error" class="alert alert--error">{{ error }}</div>
-  <div *ngIf="loading">Chargement…</div>
+  <!-- Main card -->
+  <div class="card card--surface">
+    <div class="card-header card--glass-blue">
+      <div class="header-left">
+        <span class="header-icon">📅</span>
+        <span>Audiences compatibles</span>
+      </div>
+      <div class="header-right">
+        <div class="source-filter">
+          <button class="filter-btn" [class.filter-btn--active]="sourceFilter === 'ALL'" (click)="sourceFilter = 'ALL'">Tout</button>
+          <button class="filter-btn" [class.filter-btn--active]="sourceFilter === 'VRM'" (click)="sourceFilter = 'VRM'">VRM/PC</button>
+          <button class="filter-btn" [class.filter-btn--active]="sourceFilter === 'ANN'" (click)="sourceFilter = 'ANN'">Annulation</button>
+        </div>
+        <span class="header-count" *ngIf="!loading && filteredRows.length">
+          {{ filteredRows.length }} audience(s)
+        </span>
+      </div>
+    </div>
 
-  <div class="table-wrap" *ngIf="!loading">
-    <table class="table" *ngIf="rows.length; else empty">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Heure</th>
-          <th>Proc</th>
-          <th>Nom</th>
-          <th>Salle</th>
-          <th>Rôle (langue)</th>
-          <th>Langue requête</th>
-          <th>Langue Cgra OE </th>
-          <th>Aff #</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let a of rows">
-          <td>{{ a.dateAudience | date:'yyyy-MM-dd' }}</td>
-          <td>{{ a.heureAudience }}</td>
-          <td>{{ a.proc }}</td>
-          <td>{{ a.nom }}</td>
-          <td>{{ a.salleAudience }}</td>
-          <td>{{ a.langueRole }}</td>
-          <td class="ellipsis">{{ a.langueRequete }}</td>
-          <td class="ellipsis" [title]="a.langueCgoe">{{ a.langueCgoe || '—' }}</td>
-          <td>{{ a.idAffAudience }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <ng-template #empty><p class="muted">Aucune audience trouvée.</p></ng-template>
+    <div class="card-body">
+      <!-- Loading -->
+      <div *ngIf="loading" class="loading-state">
+        <span class="spinner"></span> Chargement des audiences...
+      </div>
+
+      <!-- Table -->
+      <div class="table-wrap" *ngIf="!loading">
+        <table class="table" *ngIf="filteredRows.length; else emptyTpl">
+          <thead>
+            <tr class="thead-head">
+              <th>Date</th>
+              <th>Heure</th>
+              <th>Proc</th>
+              <th>Magistrat</th>
+              <th class="center">Salle</th>
+              <th class="center">Langue</th>
+              <th class="center">Source</th>
+              <th class="center">Aff #</th>
+              <th class="center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of filteredRows" class="row-audience">
+              <td>
+                <span class="date-chip">{{ a.dateAudience | date:'dd/MM/yyyy' }}</span>
+              </td>
+              <td>
+                <span class="time-chip">{{ a.heureAudience }}</span>
+              </td>
+              <td>
+                <span class="proc-badge" [class.proc-badge--ann]="a.proc === 'ANNUL'">{{ a.proc }}</span>
+              </td>
+              <td class="ellipsis col-nom" [title]="a.nom">{{ a.nom }}</td>
+              <td class="center">
+                <span class="salle-badge">{{ a.salleAudience }}</span>
+              </td>
+              <td class="center">
+                <span class="lang-badge">{{ a.langueRequete }}</span>
+              </td>
+              <td class="center">
+                <span class="source-badge" [class.source-badge--ann]="a.source === 'ANN'">{{ a.source }}</span>
+              </td>
+              <td class="center">
+                <span class="id-chip">{{ a.idAffAudience }}</span>
+              </td>
+              <td class="center">
+                <button class="btn-assign" (click)="add(a)" [disabled]="saving"
+                        title="Assigner l'interprete a cette audience">
+                  <span class="btn-assign-icon">+</span>
+                  Assigner
+                  <span class="sibling-count" *ngIf="siblingCountOf(a) > 1"
+                        title="Audiences similaires detectees">
+                    {{ siblingCountOf(a) }}
+                  </span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #emptyTpl>
+          <div class="empty-state">
+            <div class="empty-illustration">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                <rect x="8" y="12" width="48" height="40" rx="6" stroke="#dbe3ef" stroke-width="2"/>
+                <line x1="8" y1="24" x2="56" y2="24" stroke="#dbe3ef" stroke-width="2"/>
+                <circle cx="20" cy="18" r="2" fill="#dbe3ef"/>
+                <circle cx="28" cy="18" r="2" fill="#dbe3ef"/>
+                <rect x="16" y="30" width="12" height="4" rx="1" fill="#eef2f8"/>
+                <rect x="16" y="38" width="20" height="4" rx="1" fill="#eef2f8"/>
+                <rect x="36" y="30" width="12" height="4" rx="1" fill="#eef2f8"/>
+              </svg>
+            </div>
+            <p class="empty-title">Aucune audience compatible</p>
+            <p class="empty-sub">Aucune audience non assignee ne correspond aux langues de cet interprete.</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
   </div>
+</div>
 
+<!-- ══════════ MODAL : confirmation simple ══════════ -->
+<div class="modal-overlay" *ngIf="modal === 'confirm'" (click)="cancelModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span class="modal-header-icon">📌</span>
+      Confirmer l'assignation
+    </div>
+    <div class="modal-body">
+      <p>Assigner l'interprete <strong>#{{ tolkcode }}</strong> a l'audience :</p>
+      <div class="modal-audience-card" *ngIf="pendingAudience">
+        <div class="mac-row">
+          <span class="mac-label">Date</span>
+          <span class="mac-value">{{ pendingAudience.dateAudience | date:'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="mac-row">
+          <span class="mac-label">Heure</span>
+          <span class="mac-value">{{ pendingAudience.heureAudience }}</span>
+        </div>
+        <div class="mac-row">
+          <span class="mac-label">Magistrat</span>
+          <span class="mac-value">{{ pendingAudience.nom }}</span>
+        </div>
+        <div class="mac-row">
+          <span class="mac-label">Salle</span>
+          <span class="mac-value">{{ pendingAudience.salleAudience }}</span>
+        </div>
+        <div class="mac-row">
+          <span class="mac-label">Langue</span>
+          <span class="mac-value"><span class="lang-badge">{{ pendingAudience.langueRequete }}</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn--ghost" type="button" (click)="cancelModal()">Annuler</button>
+      <button class="btn btn--primary" type="button" (click)="confirmSingle()">
+        ✓ Confirmer
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODAL : proposition bulk ══════════ -->
+<div class="modal-overlay" *ngIf="modal === 'bulk'" (click)="cancelModal()">
+  <div class="modal modal--wide" (click)="$event.stopPropagation()">
+    <div class="modal-header modal-header--accent">
+      <span class="modal-header-icon">⚡</span>
+      Audiences similaires detectees
+    </div>
+    <div class="modal-body">
+      <div class="bulk-banner">
+        <span class="bulk-count">{{ pendingSiblings.length }}</span>
+        <div>
+          <p class="bulk-title">audiences similaires trouvees</p>
+          <p class="bulk-sub">Meme jour, meme heure, meme langue. Souhaitez-vous assigner l'interprete a toutes ces audiences en une seule fois ?</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn--ghost" type="button" (click)="cancelModal()">Annuler</button>
+      <button class="btn btn--outline" type="button" (click)="confirmBulk(false)">
+        Celle-ci uniquement
+      </button>
+      <button class="btn btn--primary" type="button" (click)="confirmBulk(true)">
+        ⚡ Assigner les {{ pendingSiblings.length }} audiences
+      </button>
+    </div>
+  </div>
+</div>

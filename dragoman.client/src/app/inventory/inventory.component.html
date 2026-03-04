@@ -1,0 +1,184 @@
+<div class="inventory-container">
+
+  <h2 class="page-title">Suivi déploiement GlobalProtect</h2>
+
+  <!-- Bandeau résumé -->
+  <div class="summary-grid" *ngIf="!loading">
+    <div class="summary-card">
+      <div class="summary-label">Postes (filtrés)</div>
+      <div class="summary-value">{{ totalFiltered }}</div>
+      <div class="summary-sub">
+        {{ filteredOffice }} bureau · {{ filteredTT }} télétravail · {{ filteredInjoignable }} injoignables
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-label">GlobalProtect installé</div>
+      <div class="summary-value">{{ filteredWithGP }}</div>
+      <div class="summary-sub">
+        {{ filteredWithoutGP }} sans GlobalProtect
+      </div>
+    </div>
+
+    <div class="summary-card" *ngIf="latestVersion">
+      <div class="summary-label">Dernière version détectée</div>
+      <div class="summary-value">{{ latestVersion }}</div>
+      <div class="summary-sub">
+        {{ filteredUpToDateCount }} postes à jour ({{ filteredUpToDatePercent }}%)
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="card">
+    <div class="card-body actions">
+      <div class="left-actions">
+        <input type="file"
+               #fileInput
+               (change)="onFileChange($event)"
+               accept=".csv"
+               hidden />
+
+        <button class="btn primary"
+                (click)="fileInput.click()"
+                [disabled]="loading">
+          Importer le CSV
+        </button>
+
+        <button class="btn"
+                (click)="load()"
+                [disabled]="loading">
+          Recharger
+        </button>
+      </div>
+
+      <div class="right-actions">
+        <button class="btn outline"
+                (click)="exportCsv()"
+                [disabled]="loading || filteredMachines.length === 0">
+          Exporter (Excel / CSV)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="status">
+    Chargement en cours…
+  </div>
+
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <!-- TABLEAU LARGE -->
+  <div *ngIf="!loading && filteredMachines.length > 0" class="table-section">
+    <div class="card table-card">
+      <div class="card-header">
+        Détail des postes
+      </div>
+
+      <div class="card-body">
+
+        <div class="table-wrapper">
+          <!-- Filtres juste au-dessus du header -->
+          <div class="table-filters">
+            <input type="text"
+                   [(ngModel)]="filterText"
+                   (ngModelChange)="onFiltersChanged()"
+                   placeholder="Recherche (PC, utilisateur, IP, version...)"
+                   class="filter-input" />
+
+            <select [(ngModel)]="filterLocalisation"
+                    (ngModelChange)="onFiltersChanged()"
+                    class="filter-select">
+              <option value="all">Toutes localisations</option>
+              <option value="bureau">Bureau</option>
+              <option value="tt">Télétravail (VPN)</option>
+              <option value="injoignable">Injoignable</option>
+              <option value="autre">Autres</option>
+            </select>
+
+            <select [(ngModel)]="filterVersion"
+                    (ngModelChange)="onFiltersChanged()"
+                    class="filter-select">
+              <option value="all">Toutes versions</option>
+              <option value="none">Sans GlobalProtect</option>
+              <option *ngFor="let v of versionOptions" [value]="v">
+                {{ v }}
+              </option>
+            </select>
+
+            <select [(ngModel)]="filterVerified"
+                    (ngModelChange)="onFiltersChanged()"
+                    class="filter-select">
+              <option value="all">Tous (vérifié / non)</option>
+              <option value="yes">Vérifié uniquement</option>
+              <option value="no">Non vérifié uniquement</option>
+            </select>
+          </div>
+
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>PC</th>
+                <th>Utilisateur</th>
+                <th>Loc.</th>
+                <th>En ligne</th>
+                <th>IP</th>
+                <th>Version GP</th>
+                <th>Statut GP</th>
+                <th>Dernier scan</th>
+                <th>Vérifié</th>
+                <th>Remarque</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let m of filteredMachines"
+                  [class.office]="isOffice(m)">
+                <td>{{ m.computerName }}</td>
+
+                <!-- Nom cliquable pour ouvrir Teams -->
+                <td>
+                  <button type="button"
+                          class="link-like"
+                          (click)="openTeamsChat(m)">
+                    {{ m.description }}
+                  </button>
+                </td>
+
+                <td>{{ m.lastLocalisation }}</td>
+                <td>
+                  <span class="badge"
+                        [class.badge-online]="m.lastEnLigne"
+                        [class.badge-offline]="!m.lastEnLigne">
+                    {{ m.lastEnLigne ? 'Oui' : 'Non' }}
+                  </span>
+                </td>
+                <td>{{ m.lastIPAddress }}</td>
+                <td>{{ m.globalProtectVersion }}</td>
+                <td>{{ m.globalProtectStatus }}</td>
+                <td>{{ m.lastScanDateUtc | date:'short' }}</td>
+                <td class="center-cell">
+                  <input type="checkbox"
+                         [(ngModel)]="m.verifiedByTeam"
+                         (change)="onToggleVerified(m)" />
+                </td>
+                <td>
+                  <input type="text"
+                         [(ngModel)]="m.remark"
+                         (blur)="onRemarkBlur(m)"
+                         class="remark-input" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && filteredMachines.length === 0" class="status">
+    Aucun enregistrement ne correspond aux filtres.
+  </div>
+</div>

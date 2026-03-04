@@ -1,52 +1,80 @@
 <app-navbarinter></app-navbarinter>
 
-<section class="card">
-  <div class="card-header">
-    <h2>Statuts TVA — Interprète #{{ tolkcode }}</h2>
+<div class="tva-container">
+  <h2 class="page-title">TVA / Statut — Interprète #{{ tolkcode }}</h2>
 
-    <div class="card-actions">
-      <button class="btn" (click)="showForm = !showForm">{{ showForm ? 'Annuler' : 'Ajouter' }}</button>
+  <div *ngIf="error" class="alert alert--error">{{ error }}</div>
+
+  <!-- Carte : liste des statuts -->
+  <div class="card card--surface">
+    <div class="card-header card--glass-blue">
+      <span>Statuts TVA enregistrés</span>
+      <button class="btn btn--light" type="button" (click)="showForm = !showForm">
+        {{ showForm ? '✕ Fermer' : '➕ Ajouter un statut' }}
+      </button>
+    </div>
+
+    <!-- Formulaire d'ajout -->
+    <div class="form-panel" *ngIf="showForm">
+      <form [formGroup]="form" (ngSubmit)="addTva()">
+        <div class="form-grid">
+          <label class="form-field">
+            Statut
+            <select formControlName="idStatut">
+              <option [ngValue]="null" disabled>— Choisir —</option>
+              <option *ngFor="let s of statuts" [ngValue]="s.idStatut">
+                {{ s.typeStatut?.trim() }}
+              </option>
+            </select>
+          </label>
+          <label class="form-field">
+            Date de début
+            <input type="date" formControlName="startdate" />
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn--primary" [disabled]="form.invalid || saving">
+            💾 Enregistrer
+          </button>
+          <button type="button" class="btn btn--ghost" (click)="showForm = false">Annuler</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card-body">
+      <div *ngIf="loading" class="loading-state">
+        <span class="spinner"></span> Chargement…
+      </div>
+
+      <div class="table-wrap" *ngIf="!loading">
+        <table class="table" *ngIf="tvas?.length; else emptyTpl">
+          <thead>
+            <tr class="thead-head">
+              <th>Statut</th>
+              <th>Date de début</th>
+              <th>Date de fin</th>
+              <th class="center">En cours</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of tvas">
+              <td><span class="statut-badge">{{ r.statut }}</span></td>
+              <td>{{ r.startdate | date:'dd/MM/yyyy' }}</td>
+              <td>{{ r.enddate ? (r.enddate | date:'dd/MM/yyyy') : '—' }}</td>
+              <td class="center">
+                <span *ngIf="!r.enddate" class="badge badge--active">✓ Actif</span>
+                <span *ngIf="r.enddate"  class="badge badge--closed">Clôturé</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #emptyTpl>
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <p>Aucun statut TVA enregistré.</p>
+          </div>
+        </ng-template>
+      </div>
     </div>
   </div>
-
-  <div class="alert alert--info" *ngIf="loading">Chargement…</div>
-  <div class="alert alert--error" *ngIf="!loading && error">{{ error }}</div>
-
-  <div class="table-wrap" *ngIf="!loading">
-    <table class="table" *ngIf="tvas?.length; else empty">
-      <thead>
-        <tr><th>Statut</th><th>Début</th><th>Fin</th></tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let r of tvas">
-          <td>{{ r.statut }}</td>
-          <td>{{ r.startdate | date:'yyyy-MM-dd' }}</td>
-          <td>{{ r.enddate   | date:'yyyy-MM-dd' }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <ng-template #empty>
-      <div class="muted">Aucun statut TVA enregistré.</div>
-    </ng-template>
-  </div>
-
-  <form class="form-card" *ngIf="showForm" [formGroup]="form" (ngSubmit)="addTva()">
-    <div class="form-grid-2">
-      <label>
-        Statut
-        <select formControlName="idStatut">
-          <option [ngValue]="null" disabled>— Choisir —</option>
-          <option *ngFor="let s of statuts" [ngValue]="s.idStatut">{{ s.libelle }}</option>
-        </select>
-      </label>
-      <label>
-        Date de début
-        <input type="date" formControlName="startdate" />
-      </label>
-    </div>
-    <div class="card-actions">
-      <button type="submit" class="btn btn--primary" [disabled]="form.invalid || saving">Enregistrer</button>
-      <button type="button" class="btn" (click)="showForm=false">Annuler</button>
-    </div>
-  </form>
-</section>
+</div>

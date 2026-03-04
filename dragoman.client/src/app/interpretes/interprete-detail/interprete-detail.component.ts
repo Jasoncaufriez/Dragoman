@@ -68,7 +68,7 @@ export class InterpreteDetailComponent implements OnInit {
       fax: ['', [Validators.maxLength(40)]],
 
       // --- Langue & Statut
-      // taalrol: 1=Français, 2=Néerlandais
+      // taalrol: 1=Néerlandais, 2=Français
       taalrol: [null, []],
       // beedigd: 1=assermenté, 0=non
       beedigd: [0, []],

@@ -1,5 +1,5 @@
 // src/app/services/dashboard.service.ts
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, forkJoin } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -42,10 +42,11 @@ interface InterpretesCountDto { nbInterpretes: number; }
 // Service
 @Injectable({ providedIn: 'root' })
 export class DashboardService {
-  private http = inject(HttpClient);
 
-  /**
-   * Base API :
+constructor(private http: HttpClient) {}
+
+/**
+ * Base API :
    * - en prod derrière Apache reverse proxy : garder l'URL relative '/api'
    * - en dev sans proxy : remplace par `environment.apiBaseUrl` (ex: 'http://rvv-ccesrv21/api')
    */

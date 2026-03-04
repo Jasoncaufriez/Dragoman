@@ -15,5 +15,6 @@ public partial class Prestation
 
     public virtual Paiement? IdPaiementNavigation { get; set; }
 
+
     public virtual ICollection<Tolklink> Tolklinks { get; set; } = new List<Tolklink>();
 }

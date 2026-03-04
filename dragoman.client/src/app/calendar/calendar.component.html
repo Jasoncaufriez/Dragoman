@@ -1,16 +1,28 @@
 <div class="calendar-container">
   <h2 class="page-title">Audiences</h2>
 
-  <!-- Carte principale : header bleu fin + corps clair -->
+  <!-- Carte principale -->
   <div class="card card--surface">
     <div class="card-header card--glass">
-      <button class="btn btn--primary" (click)="showSearchCard = !showSearchCard">
-        {{ showSearchCard ? 'Fermer la recherche avancée' : 'Rechercher par N° audience / N° affaire' }}
-      </button>
+      <div class="header-bar">
+        <div class="header-filters">
+          <label class="filter-toggle">
+            <input type="checkbox" [checked]="filterEmpty" (change)="toggleFilterEmpty()" />
+            <span>Sans interprète uniquement</span>
+          </label>
+          <label class="filter-toggle">
+            <input type="checkbox" [checked]="excludeNoInterp" (change)="toggleExcludeNoInterp()" />
+            <span>Masquer « Aucun interprète demandé »</span>
+          </label>
+        </div>
+        <button class="btn btn--primary" (click)="showSearchCard = !showSearchCard">
+          {{ showSearchCard ? 'Fermer la recherche avancée' : 'Rechercher par N° audience / N° affaire' }}
+        </button>
+      </div>
     </div>
 
-    <div class="card-body">
-      <!-- Carte recherche (neutre, compacte) -->
+    <div class="card-body card-body--no-scroll">
+      <!-- Carte recherche -->
       <form *ngIf="showSearchCard" [formGroup]="searchForm" class="search-card">
         <div class="form-grid-2">
           <label>
@@ -28,8 +40,8 @@
         </div>
       </form>
 
-      <!-- Tableau -->
-      <div class="table-wrap">
+      <!-- Tableau (pas de max-height, scroll géré par la page) -->
+      <div class="table-wrap table-wrap--full">
         <table class="table">
           <thead>
             <tr class="thead-head">
@@ -75,10 +87,14 @@
               <td class="center">{{ r.salleAudience }}</td>
               <td class="ellipsis col-nom" [title]="r.nom">{{ r.nom }}</td>
               <td>{{ r.proc }}</td>
-              <td class="center">{{ r.tolkcode ?? '' }}</td>
+              <td class="center">
+                <a *ngIf="r.tolkcode" class="tolkcode-link" (click)="goToInterprete(r.tolkcode)">{{ r.tolkcode }}</a>
+                <span *ngIf="!r.tolkcode"></span>
+              </td>
               <td class="center nowrap">
                 <button class="btn btn--primary" (click)="goToSearch(r)">Ajouter</button>
                 <button class="btn btn--danger" (click)="removeAssignment(r)" [disabled]="!r.tolkcode">Supprimer</button>
+                <button class="btn btn--assign" (click)="openAssignModal(r)" title="Affecter un interprète">+</button>
               </td>
             </tr>
           </tbody>
@@ -87,6 +103,33 @@
 
       <div class="filters-actions">
         <button type="button" class="btn" (click)="resetFilters()">Réinitialiser les filtres</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal d'affectation -->
+<div class="modal-overlay" *ngIf="showAssignModal" (click)="closeAssignModal()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      Affecter un interprète
+      <span *ngIf="assignRow"> — Audience #{{ assignRow.idAffAudience }}</span>
+      <button class="modal-close" (click)="closeAssignModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="text" class="modal-search" [(ngModel)]="tolkSearchQuery"
+             placeholder="Rechercher par tolkcode, nom ou prénom…" />
+
+      <div *ngIf="assignError" class="alert alert--error" style="margin:8px 0;">{{ assignError }}</div>
+
+      <div class="modal-list">
+        <div class="modal-list-item" *ngFor="let t of filteredTolkList" (click)="assignTolk(t.tolkcode)">
+          <strong>{{ t.tolkcode }}</strong>
+          <span>{{ t.nom }} {{ t.prenom }}</span>
+        </div>
+        <div *ngIf="filteredTolkList.length === 0" class="muted" style="padding:12px;text-align:center;">
+          Aucun résultat.
+        </div>
       </div>
     </div>
   </div>

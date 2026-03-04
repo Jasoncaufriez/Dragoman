@@ -12,7 +12,7 @@ public partial class Tolkidentity
     public int Tolkcode { get; set; }
 
     [Column("TAALROL")]
-    public int? Taalrol { get; set; } // 1=FR, 2=NL
+    public int? Taalrol { get; set; } // 1=NL, 2=FR
 
     [Column("NOM"), StringLength(50)]
     public string? Nom { get; set; }

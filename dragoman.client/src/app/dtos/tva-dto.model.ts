@@ -9,7 +9,7 @@ export interface TvaRowDto {
 
 export interface StatutDto {
   idStatut: number;
-  libelle: string;
+  typeStatut: string;
 }
 
 export interface NewTvaDto {

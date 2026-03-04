@@ -1,4 +1,3 @@
-<!-- src/app/reports/presence-interpretes/presence-interpretes.component.html -->
 <div class="card card--panel fade-in">
   <div class="toolbar" style="display:flex; gap:12px; align-items:center; justify-content:space-between;">
     <div style="display:flex; gap:10px; align-items:center;">
@@ -6,7 +5,6 @@
       <input type="date" [(ngModel)]="date" (change)="reload()" />
     </div>
     <div>
-      <button class="btn btn--primary btn--sm" (click)="exportExcel()" [disabled]="loading">Exporter Excel</button>
       <button class="btn btn--sm" (click)="exportWord()" [disabled]="loading">Exporter Word</button>
     </div>
   </div>
@@ -19,22 +17,38 @@
             <th class="center" style="width:90px;">Présent</th>
             <th>Interprète (#)</th>
             <th>Téléphone</th>
+            <th>Magistrat</th>
             <th>Heure</th>
             <th>Salle</th>
             <th>Langue</th>
+            <th class="center" style="width:60px;">Aff.</th>
+            <th style="width:80px;">FR/NL</th>
           </tr>
         </thead>
         <tbody>
           <ng-container *ngIf="data?.length; else empty">
-            <tr *ngFor="let i of data; trackBy: trackByTolkcode">
+            <tr *ngFor="let row of flatRows; trackBy: trackByRow">
               <td class="center">
                 <input type="checkbox" />
               </td>
-              <td><strong>{{ i.nom }} {{ i.prenom }}</strong> <span class="muted">#{{ i.tolkcode }}</span></td>
-              <td>{{ i.telephone || '-' }}</td>
-              <td class="ellipsis">{{ joinHeures(i.audiences) }}</td>
-              <td class="ellipsis">{{ joinSalles(i.audiences) }}</td>
-              <td class="ellipsis">{{ joinLangues(i.audiences) }}</td>
+              <td><strong>{{ row.interprete.nom }} {{ row.interprete.prenom }}</strong> <span class="muted">#{{ row.interprete.tolkcode }}</span></td>
+              <td>
+                <ng-container *ngIf="row.interprete.telephones?.length; else noPhone">
+                  <ng-container *ngFor="let phone of row.interprete.telephones; let last = last">
+                    <a [href]="'tel:' + formatPhone(phone)" class="phone-link" title="Appeler via Teams">
+                      📞 {{ phone }}
+                    </a>
+                    <span *ngIf="!last"> / </span>
+                  </ng-container>
+                </ng-container>
+                <ng-template #noPhone>-</ng-template>
+              </td>
+              <td class="ellipsis">{{ row.audience?.magistrat || '-' }}</td>
+              <td class="ellipsis">{{ row.audience?.heure || '' }}</td>
+              <td class="ellipsis">{{ row.audience?.salle || '' }}</td>
+              <td class="ellipsis">{{ row.audience?.langue || '' }}</td>
+              <td class="center"><strong>{{ row.audience?.nbAffaires ?? 0 }}</strong></td>
+              <td class="center">{{ row.interprete.frNl || '-' }}</td>
             </tr>
           </ng-container>
         </tbody>

@@ -20,4 +20,9 @@ export class ReportsService {
     const params = new HttpParams().set('date', dateISO);
     return this.http.get('/api/reports/interpretes/word', { params, responseType: 'blob' });
   }
+
+  downloadPdf(dateISO: string) {
+    const params = new HttpParams().set('date', dateISO);
+    return this.http.get('/api/reports/interpretes/pdf', { params, responseType: 'blob' });
+  }
 }

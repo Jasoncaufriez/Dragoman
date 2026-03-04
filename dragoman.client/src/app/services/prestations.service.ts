@@ -10,6 +10,7 @@ export interface PrestationJourRowDto {
   idAffAudiences: number[];
   heureAudienceSuggee?: string | null;
   hasPrestation: boolean;
+  isAbsent: boolean;
 }
 
 export interface NewPrestationDto {
@@ -26,8 +27,9 @@ export class PrestationsService {
 
   constructor(private http: HttpClient) {}
 
-  liste(dateISO: string): Observable<PrestationJourRowDto[]> {
-    const params = new HttpParams().set('date', dateISO);
+  liste(dateISO: string, includeAbsents: boolean = false): Observable<PrestationJourRowDto[]> {
+    let params = new HttpParams().set('date', dateISO);
+    if (includeAbsents) params = params.set('includeAbsents', 'true');
     return this.http.get<PrestationJourRowDto[]>(`${this.base}/jour`, { params });
   }
 
@@ -35,7 +37,7 @@ export class PrestationsService {
     return this.http.post<void>(this.base, dto);
   }
 
-  absence(payload: { tolkcode: string; idAffAudience: number; datePrestation: string }): Observable<void> {
+  absence(payload: { tolkcode: string; idAffAudiences: number[]; datePrestation: string }): Observable<void> {
     return this.http.post<void>(`${this.base}/absence`, payload);
   }
 

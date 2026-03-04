@@ -1,0 +1,128 @@
+<app-navbarinter></app-navbarinter>
+
+<div class="convocation-container">
+  <h2 class="page-title">Convocation — Tolkcode #{{ tolkcode }}</h2>
+
+  <div *ngIf="error" class="alert alert--error">{{ error }}</div>
+  <div *ngIf="info" class="alert alert--success">{{ info }}</div>
+  <div *ngIf="loading">Chargement…</div>
+
+  <!-- Section 1 : Audiences validées (planifiées) -->
+  <div class="card card--surface" *ngIf="!loading">
+    <div class="card-header card--glass-red">
+      {{ isNL ? 'Bevestigde zittingen' : 'Audiences confirmées' }}
+    </div>
+    <div class="card-body">
+      <div class="table-wrap">
+        <table class="table" *ngIf="validatedRows.length; else emptyValidated">
+          <thead>
+            <tr class="thead-head">
+              <th>Date</th>
+              <th>Heure</th>
+              <th>Magistrat</th>
+              <th>Salle</th>
+              <th>Langue requête</th>
+              <th>Procédure</th>
+              <th>Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of validatedRows">
+              <td>{{ r.dateAudience | date:'dd/MM/yyyy' }}</td>
+              <td>{{ r.heureAudience }}</td>
+              <td class="ellipsis col-nom" [title]="r.nom">{{ r.nom }}</td>
+              <td class="center">{{ r.salleAudience }}</td>
+              <td>{{ r.langueRequete }}</td>
+              <td class="center"><span class="source-badge" [class.source-badge--ann]="r.source === 'ANN'">{{ r.source }}</span></td>
+              <td><span class="badge badge--confirmed">{{ isNL ? 'Bevestigd' : 'Confirmé' }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #emptyValidated>
+          <p class="muted">{{ isNL ? 'Geen bevestigde zitting gevonden.' : 'Aucune audience confirmée trouvée.' }}</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 : Audiences disponibles (sélection pour convocation) -->
+  <div class="card card--surface section-available" *ngIf="!loading">
+    <div class="card-header card--glass-green">
+      <span>{{ isNL ? 'Beschikbare zittingen' : 'Audiences disponibles' }}</span>
+      <div class="source-filter">
+        <button class="filter-btn" [class.filter-btn--active]="sourceFilter === 'ALL'" (click)="sourceFilter = 'ALL'">Tout</button>
+        <button class="filter-btn" [class.filter-btn--active]="sourceFilter === 'VRM'" (click)="sourceFilter = 'VRM'">VRM/PC</button>
+        <button class="filter-btn" [class.filter-btn--active]="sourceFilter === 'ANN'" (click)="sourceFilter = 'ANN'">Annulation</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap">
+        <table class="table" *ngIf="filteredAvailableRows.length; else emptyAvail">
+          <thead>
+            <tr class="thead-head">
+              <th class="center">
+                <span title="Sélection">☑</span>
+              </th>
+              <th>Date</th>
+              <th>Heure</th>
+              <th>Nom</th>
+              <th>Salle</th>
+              <th>Langue requête</th>
+              <th>Procédure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of filteredAvailableRows" [class.selected]="isGroupSelected(a)">
+              <td class="center">
+                <input type="checkbox"
+                       [checked]="isGroupSelected(a)"
+                       (change)="toggleGroupSelection(a)" />
+              </td>
+              <td>{{ a.dateAudience | date:'dd/MM/yyyy' }}</td>
+              <td>{{ a.heureAudience }}</td>
+              <td class="ellipsis col-nom" [title]="a.nom">{{ a.nom }}</td>
+              <td class="center">{{ a.salleAudience }}</td>
+              <td class="ellipsis">{{ a.langueRequete }}</td>
+              <td class="center">
+                <span class="source-badge" [class.source-badge--ann]="a.source === 'ANN'">{{ a.source }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #emptyAvail>
+          <p class="muted">{{ isNL ? 'Geen beschikbare zitting gevonden.' : 'Aucune audience disponible trouvée.' }}</p>
+        </ng-template>
+      </div>
+
+      <div class="bulk-actions" *ngIf="!loading">
+        <button class="btn btn--mail"
+                [disabled]="validatedRows.length === 0 && selectedIds.size === 0"
+                (click)="generatePreview()">
+          👁 {{ isNL ? 'Voorbeeld e-mail bekijken' : 'Aperçu de l\'e-mail' }}
+          <span *ngIf="selectedIds.size > 0">(+ {{ selectedIds.size }})</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3 : Aperçu du mail -->
+  <div class="card card--surface section-preview" *ngIf="showPreview">
+    <div class="card-header card--glass-green">
+      📧 {{ isNL ? 'Voorbeeld e-mail' : 'Aperçu e-mail' }}
+    </div>
+    <div class="card-body">
+      <div class="preview-info">
+        <strong>{{ isNL ? 'Aan' : 'À' }}:</strong> {{ interpreteEmail }}
+      </div>
+      <div class="mail-preview" [innerHTML]="previewHtml"></div>
+      <div class="bulk-actions">
+        <button class="btn" (click)="showPreview = false">
+          {{ isNL ? 'Sluiten' : 'Fermer' }}
+        </button>
+        <button class="btn btn--mail" (click)="copyAndOpenMail()">
+          📧 {{ isNL ? 'Kopiëren & Outlook openen' : 'Copier & ouvrir Outlook' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

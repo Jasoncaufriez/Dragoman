@@ -1,159 +1,58 @@
+/* HD Main · IBZ Civic Light */
 .hd-wrap {
-  background: #fff;
-  border-radius: 14px;
-  padding: 22px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+  background: #fff; border-radius: 14px; padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05); border: 1px solid #dbe3ef;
 }
 
-.hd-title {
-  margin: 0 0 10px 0;
-  font-size: 22px;
-}
+.hd-title { margin: 0 0 10px 0; font-size: 22px; font-weight: 700; color: #1f2937; }
 
-.hd-about {
-  margin: 8px 0 20px;
-  line-height: 1.5;
-  color: #374151;
-}
+.hd-about { margin: 8px 0 20px; line-height: 1.6; color: #4b5563; }
+.hd-about code { background: #edf1f7; padding: 2px 8px; border-radius: 5px; font-size: .84rem; }
 
-  .hd-about code {
-    background: #f3f4f6;
-    padding: 2px 6px;
-    border-radius: 6px;
-  }
-
-.hd-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
-  gap: 14px;
-}
+.hd-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
 
 .hd-card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 16px;
-  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-  background: #f9fafb;
+  display: block; text-decoration: none; color: inherit;
+  border: 1px solid #dbe3ef; border-radius: 10px; padding: 18px;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  background: #fff;
 }
 
-  .hd-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,.08);
-    border-color: #c7d2fe;
-    background: #ffffff;
-  }
+.hd-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.07); border-color: #93c5fd; background: #f9fbfd; }
 
-.hd-card-icon {
-  font-size: 28px;
-  margin-bottom: 8px;
-}
+.hd-card-icon  { font-size: 28px; margin-bottom: 8px; }
+.hd-card-title { font-weight: 700; margin-bottom: 4px; color: #1f2937; }
+.hd-card-text  { color: #6b7280; font-size: .84rem; }
 
-.hd-card-title {
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.hd-card-text {
-  color: #6b7280;
-  font-size: 14px;
-}
-/* === ANIMATED ROYAL BLUE NAVBAR (compact + 1cm de marge) === */
+/* Navbar HD — même style institutionnel */
 .navbar--glass {
-  background: linear-gradient(270deg, #1e3a8a, #2563eb, #1d4ed8, #1e3a8a);
-  background-size: 600% 600%;
-  animation: gradientShift 12s ease infinite;
-  margin: 30px; /* même retrait que le dashboard */
-  width: calc(100% - 60px); /* 30px à gauche + 30px à droite */
-  padding: 14px 22px; /* compact */
-  border-radius: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  color: #fff;
-  transition: all 0.3s ease;
+  background: #fff;
+  margin: 28px 28px 20px; width: calc(100% - 56px);
+  padding: 0 16px; height: 54px;
+  border-radius: 14px; display: flex; justify-content: space-between; align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05); border: 1px solid #dbe3ef;
+  color: #1f2937; transition: box-shadow .18s ease; position: sticky; top: 12px; z-index: 100;
 }
 
-  .navbar--glass .logo {
-    font-size: 28px;
-    font-weight: 400;
-    letter-spacing: .3px;
-    margin-right: 18px;
-    line-height: 1;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    text-shadow: 0 1px 2px rgba(0,0,0,.35);
-    white-space: nowrap;
-  }
+.navbar--glass .logo {
+  font-size: 19px; font-weight: 800; letter-spacing: -0.02em;
+  margin-right: 20px; line-height: 1; display: inline-flex; align-items: center;
+  gap: 8px; white-space: nowrap; color: #2f80ed;
+}
 
-  /* Liens compacts */
-  .navbar--glass .nav-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+.navbar--glass .nav-left { display: flex; align-items: center; gap: 2px; }
 
-    .navbar--glass .nav-left a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 6px 12px;
-      border-radius: 10px;
-      opacity: .95;
-      transition: background .2s ease, opacity .15s ease, transform .08s ease;
-    }
+.navbar--glass .nav-left a {
+  color: #4b5563; text-decoration: none; font-weight: 500; font-size: .84rem;
+  padding: 7px 12px; border-radius: 7px; transition: all .18s ease;
+}
 
-      .navbar--glass .nav-left a:hover {
-        opacity: 1;
-        background: rgba(255,255,255,.12);
-      }
+.navbar--glass .nav-left a:hover   { color: #2f80ed; background: #eaf2fd; }
+.navbar--glass .nav-left a.active  { color: #2f80ed; background: #eaf2fd; font-weight: 600; }
+.navbar--glass .nav-right          { display: flex; align-items: center; gap: 6px; font-size: .84rem; color: #4b5563; }
 
-      .navbar--glass .nav-left a.active {
-        background: rgba(255,255,255,.20);
-        box-shadow: inset 0 0 0 1px rgba(255,255,255,.25);
-      }
-
-  /* Côté droit (optionnel) */
-  .navbar--glass .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    opacity: .95;
-  }
-
-/* Responsive */
 @media (max-width: 420px) {
-  .navbar--glass {
-    margin: 12px;
-    width: calc(100% - 24px);
-    padding: 8px 12px;
-  }
-
-    .navbar--glass .logo {
-      font-size: 22px;
-      margin-right: 8px;
-    }
-
-    .navbar--glass .nav-left a {
-      padding: 6px 10px;
-    }
-}
-
-/* Animation du gradient */
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+  .navbar--glass { margin: 12px; width: calc(100% - 24px); padding: 8px 12px; height: auto; }
+  .navbar--glass .logo { font-size: 17px; margin-right: 8px; }
+  .navbar--glass .nav-left a { padding: 5px 9px; }
 }

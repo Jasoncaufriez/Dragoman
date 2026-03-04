@@ -97,6 +97,9 @@ public partial class ModelContext : DbContext
 
     public virtual DbSet<VueTva> VueTvas { get; set; }
 
+    // ===== AJOUT TABLE FACTURE =====
+    public virtual DbSet<Facture> Factures { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseOracle("Data Source=LAURENTIDE;User ID=DRAGOMAN;Password=InterTolk;");
 
@@ -453,6 +456,7 @@ public partial class ModelContext : DbContext
             entity.Property(e => e.Transport).HasColumnName("TRANSPORT").HasColumnType("NUMBER(10,2)");
             entity.Property(e => e.Total).HasColumnName("TOTAL").HasColumnType("NUMBER(10,2)");
             entity.Property(e => e.MontantTva).HasColumnName("MONTANT_TVA").HasColumnType("NUMBER(10,2)");
+            entity.Property(e => e.IdFacture).HasColumnName("ID_FACTURE");
         });
 
         modelBuilder.Entity<Planning>(entity =>
@@ -1006,10 +1010,6 @@ public partial class ModelContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("USERCREATE");
-
-            entity.HasOne(d => d.IdPrestationNavigation).WithMany(p => p.Tolklinks)
-                .HasForeignKey(d => d.IdPrestation)
-                .HasConstraintName("FK_TOLKLINK_PRESTATION");
         });
 
         modelBuilder.Entity<ToutLesTolk>(entity =>
@@ -1249,23 +1249,36 @@ public partial class ModelContext : DbContext
                 .HasColumnName("TYPE_STATUT");
         });
 
+        // =========================
         // Séquences Oracle
+        // =========================
         modelBuilder.HasSequence<int>("ID_PRESTATION_AUTO");
         modelBuilder.HasSequence<int>("NR_AUTO_PAIEMENT");
+        modelBuilder.HasSequence<int>("NR_AUTO_FACTURE");
 
-        // TOLKLINK
-        modelBuilder.Entity<Tolklink>(entity =>
+        // =========================
+        // PAIEMENT (config unique — avec IdFacture + relation Facture)
+        // =========================
+        modelBuilder.Entity<Paiement>(entity =>
         {
-            entity.ToTable("TOLKLINK");
-            entity.HasKey(e => e.IdTolklink);
-            entity.Property(e => e.IdTolklink).HasColumnName("ID_TOLKLINK");
-            entity.Property(e => e.NrAffAudience).HasColumnName("NR_AFF_AUDIENCE");
+            entity.ToTable("PAIEMENT");
+            entity.HasKey(e => e.IdPaiement);
+            entity.Property(e => e.IdPaiement)
+                .HasColumnName("ID_PAIEMENT")
+                .ValueGeneratedOnAdd()
+                .HasDefaultValueSql("NR_AUTO_PAIEMENT.NEXTVAL");
             entity.Property(e => e.Tolkcode).HasColumnName("TOLKCODE").HasMaxLength(5).IsRequired();
-            entity.Property(e => e.Datesupp).HasColumnName("DATESUPP").HasColumnType("DATE");
-            entity.Property(e => e.IdPrestation).HasColumnName("ID_PRESTATION");
+            entity.Property(e => e.DatePrestation).HasColumnName("DATE_PRESTATION").HasColumnType("DATE");
+            entity.Property(e => e.Montant).HasColumnName("MONTANT").HasColumnType("NUMBER(10,2)");
+            entity.Property(e => e.Transport).HasColumnName("TRANSPORT").HasColumnType("NUMBER(10,2)");
+            entity.Property(e => e.Total).HasColumnName("TOTAL").HasColumnType("NUMBER(10,2)");
+            entity.Property(e => e.MontantTva).HasColumnName("MONTANT_TVA").HasColumnType("NUMBER(10,2)");
+            entity.Property(e => e.IdFacture).HasColumnName("ID_FACTURE");
         });
 
-        // PRESTATION
+        // =========================
+        // PRESTATION (config unique)
+        // =========================
         modelBuilder.Entity<Prestation>(entity =>
         {
             entity.ToTable("PRESTATION");
@@ -1282,21 +1295,67 @@ public partial class ModelContext : DbContext
             entity.Property(e => e.IdPaiement).HasColumnName("ID_PAIEMENT");
         });
 
-        // PAIEMENT
-        modelBuilder.Entity<Paiement>(entity =>
+        // =========================
+        // TOLKLINK (config unique)
+        // =========================
+        modelBuilder.Entity<Tolklink>(entity =>
         {
-            entity.ToTable("PAIEMENT");
-            entity.HasKey(e => e.IdPaiement);
-            entity.Property(e => e.IdPaiement)
-                .HasColumnName("ID_PAIEMENT")
-                .ValueGeneratedOnAdd()
-                .HasDefaultValueSql("NR_AUTO_PAIEMENT.NEXTVAL");
+            entity.ToTable("TOLKLINK");
+            entity.HasKey(e => e.IdTolklink);
+            entity.Property(e => e.IdTolklink).HasColumnName("ID_TOLKLINK");
+            entity.Property(e => e.NrAffAudience).HasColumnName("NR_AFF_AUDIENCE");
             entity.Property(e => e.Tolkcode).HasColumnName("TOLKCODE").HasMaxLength(5).IsRequired();
-            entity.Property(e => e.DatePrestation).HasColumnName("DATE_PRESTATION").HasColumnType("DATE");
-            entity.Property(e => e.Montant).HasColumnName("MONTANT").HasColumnType("NUMBER(10,2)");
-            entity.Property(e => e.Transport).HasColumnName("TRANSPORT").HasColumnType("NUMBER(10,2)");
-            entity.Property(e => e.Total).HasColumnName("TOTAL").HasColumnType("NUMBER(10,2)");
-            entity.Property(e => e.MontantTva).HasColumnName("MONTANT_TVA").HasColumnType("NUMBER(10,2)");
+            entity.Property(e => e.Datesupp).HasColumnName("DATESUPP").HasColumnType("DATE");
+            entity.Property(e => e.IdPrestation).HasColumnName("ID_PRESTATION");
+        });
+
+        // =========================
+        // FACTURE (nouvelle table)
+        // =========================
+        modelBuilder.Entity<Facture>(entity =>
+        {
+            entity.ToTable("FACTURE");
+
+            entity.HasKey(e => e.IdFacture)
+                  .HasName("PK_FACTURE");
+
+            entity.Property(e => e.IdFacture)
+                  .HasColumnName("ID_FACTURE")
+                  .ValueGeneratedOnAdd()
+                  .HasDefaultValueSql("NR_AUTO_FACTURE.NEXTVAL");
+
+            entity.Property(e => e.Tolkcode)
+                  .HasColumnName("TOLKCODE")
+                  .IsRequired();
+
+            entity.Property(e => e.DateGeneration)
+                  .HasColumnName("DATE_GENERATION")
+                  .HasColumnType("DATE")
+                  .HasDefaultValueSql("SYSDATE")
+                  .IsRequired();
+
+            entity.Property(e => e.DateValidationFedcom)
+                  .HasColumnName("DATE_VALIDATION_FEDCOM")
+                  .HasColumnType("DATE");
+
+            entity.Property(e => e.StatutFacture)
+                  .HasColumnName("STATUT_FACTURE")
+                  .HasMaxLength(20)
+                  .IsUnicode(false)
+                  .HasDefaultValue("GENEREE")
+                  .IsRequired();
+
+            entity.Property(e => e.TotalTtc)
+                  .HasColumnName("TOTAL_TTC")
+                  .HasColumnType("NUMBER(12,2)")
+                  .HasDefaultValue(0m)
+                  .IsRequired();
+
+            entity.HasMany(e => e.Paiements)
+                  .WithOne(p => p.Facture)
+                  .HasForeignKey(p => p.IdFacture)
+                  .OnDelete(DeleteBehavior.NoAction)
+                  .HasConstraintName("FK_PAIEMENT_FACTURE");
         });
 
         OnModelCreatingPartial(modelBuilder);

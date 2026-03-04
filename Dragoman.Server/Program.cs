@@ -2,8 +2,11 @@
 using Dragoman.Server.Mapping;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Server.IISIntegration; // ⬅️
+using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+QuestPDF.Settings.License = LicenseType.Community;
 
 // DB Oracle
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

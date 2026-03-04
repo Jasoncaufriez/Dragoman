@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
@@ -20,8 +21,16 @@
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",
+      "ES2017",
       "dom"
-    ]
+    ],
+    "types": ["jasmine"],
+    "paths": {
+      "@angular/*": ["./node_modules/@angular/*"],
+      "rxjs": ["./node_modules/rxjs"],
+      "rxjs/*": ["./node_modules/rxjs/*"],
+      "tslib": ["./node_modules/tslib"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -30,3 +39,4 @@
     "strictTemplates": true
   }
 }
+

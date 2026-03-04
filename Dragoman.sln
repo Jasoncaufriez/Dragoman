@@ -7,6 +7,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dragoman.Server", "Dragoman
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "dragoman.client", "dragoman.client\dragoman.client.esproj", "{7A1FF044-7640-44B3-A7F1-8785881265F2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{9C8CB701-102D-CF49-A3E0-89AC09D42C2C}"
+	ProjectSection(SolutionItems) = preProject
+		Dragoman.Docs\applicationdbcontext-mapping.md = Dragoman.Docs\applicationdbcontext-mapping.md
+		Dragoman.Docs\architecture-backend.md = Dragoman.Docs\architecture-backend.md
+		Dragoman.Docs\architecture-diagrams-prompt.json = Dragoman.Docs\architecture-diagrams-prompt.json
+		Dragoman.Docs\architecture-frontend.md = Dragoman.Docs\architecture-frontend.md
+		Dragoman.Docs\deploiement.md = Dragoman.Docs\deploiement.md
+		Dragoman.Docs\description-technique-metier.md = Dragoman.Docs\description-technique-metier.md
+		Dragoman.Docs\maintenance-erreurs-risques.md = Dragoman.Docs\maintenance-erreurs-risques.md
+		Dragoman.Docs\regles-metier.md = Dragoman.Docs\regles-metier.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -19,6 +19,7 @@ export interface AudienceDto {
   langueCgoe: string;
   idAffAudience: number;
   tolkcode?: number | null;
+  source?: string;
 }
 
 // Utilisé par /api/interpretes/match

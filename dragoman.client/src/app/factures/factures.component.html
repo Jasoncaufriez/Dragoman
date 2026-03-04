@@ -1,0 +1,117 @@
+<section class="card card--panel fade-in">
+  <div class="toolbar">
+    <div style="display:flex; gap:12px; align-items:center;">
+      <h3 class="page-title" style="margin:0;">Factures / Paiements</h3>
+      <input type="month" [(ngModel)]="month" (change)="loadMonth()" />
+      <button class="btn" (click)="downloadPdfMonth()" [disabled]="downloading || loading">
+        {{ downloading ? 'Génération…' : 'Télécharger PDF (mois)' }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert--error">{{ error }}</div>
+  <div *ngIf="loading" class="muted" style="padding:12px;">Chargement…</div>
+
+  <div class="factures-grid" *ngIf="!loading">
+    <!-- Colonne gauche -->
+    <div class="card--surface">
+      <div class="table-wrap">
+        <table class="table table--compact">
+          <thead>
+            <tr>
+              <th>Interprète</th>
+              <th class="right">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of interpretes; trackBy: trackByTolkcode"
+                (click)="pick(r)"
+                [class.active]="selected?.tolkcode === r.tolkcode"
+                style="cursor:pointer;">
+              <td>
+                <strong>{{ r.nom }} {{ r.prenom }}</strong>
+                <span class="muted">#{{ r.tolkcode }}</span><br />
+                <span class="muted">{{ r.nbPrestations }} prestation(s)</span>
+              </td>
+              <td class="right">
+                <strong>{{ r.total | number:'1.2-2' }}</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="interpretes.length === 0" class="muted" style="padding:12px;">
+          Aucun paiement sur ce mois.
+        </div>
+      </div>
+    </div>
+
+    <!-- Détail droite -->
+    <div class="card--surface">
+      <div *ngIf="!selected" class="muted" style="padding:12px;">
+        Sélectionne un interprète à gauche.
+      </div>
+
+      <div *ngIf="selected">
+        <div style="padding:12px; border-bottom:1px solid #e6e9ee;">
+          <strong>{{ selected.nom }} {{ selected.prenom }}</strong>
+          <span class="muted">#{{ selected.tolkcode }}</span>
+        </div>
+
+        <div *ngIf="detailLoading" class="muted" style="padding:12px;">Chargement…</div>
+
+        <div class="table-wrap" *ngIf="detail && !detailLoading">
+          <table class="table table--compact">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th class="right">Durée</th>
+                <th class="right">Km</th>
+                <th class="right">€ prestation</th>
+                <th class="right">€ déplacement</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let x of detail.rows">
+                <td>{{ x.date | date:'dd/MM/yyyy' }}</td>
+                <td>{{ x.debut }}</td>
+                <td>{{ x.fin }}</td>
+                <td class="right">{{ x.duree }}</td>
+                <td class="right">{{ x.km }}</td>
+                <td class="right">{{ x.montant | number:'1.2-2' }}</td>
+                <td class="right">{{ x.transport | number:'1.2-2' }}</td>
+                <td>
+                  <button *ngIf="x.idFacture == null"
+                          class="btn btn--danger btn--sm"
+                          [disabled]="deleting"
+                          (click)="deletePaiement(x)"
+                          title="Supprimer ce paiement">
+                    ✕
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="factures-totaux">
+            <div class="line"><span>Total prestation</span><strong>{{ detail.totaux.montant | number:'1.2-2' }}</strong></div>
+            <div class="line"><span>Total déplacement</span><strong>{{ detail.totaux.transport | number:'1.2-2' }}</strong></div>
+            <div class="line"><span>Total excl. TVA</span><strong>{{ detail.totaux.baseHt | number:'1.2-2' }}</strong></div>
+
+            <div class="line" *ngIf="detail.totaux.montantTva > 0">
+              <span>TVA</span><strong>{{ detail.totaux.montantTva | number:'1.2-2' }}</strong>
+            </div>
+
+            <div class="line total">
+              <span>Total</span><strong>{{ detail.totaux.total | number:'1.2-2' }}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

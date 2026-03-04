@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrestationsService, PrestationJourRowDto, NewPrestationDto } from '../services/prestations.service';
 
@@ -16,6 +16,8 @@ export class PrestationsComponent implements OnInit {
 
   form!: FormGroup;
   selected?: PrestationJourRowDto;
+
+  @ViewChild('formCard') formCard!: ElementRef<HTMLElement>;
 
   constructor(
     private api: PrestationsService,
@@ -40,7 +42,7 @@ export class PrestationsComponent implements OnInit {
   load(): void {
     this.loading = true;
     this.error = undefined;
-    this.api.liste(this.date).subscribe({
+    this.api.liste(this.date, true).subscribe({
       next: r => {
         this.rows = r;
         this.loading = false;
@@ -59,6 +61,10 @@ export class PrestationsComponent implements OnInit {
       const suggested = this.subtractMinutes(row.heureAudienceSuggee, 15);
       this.form.patchValue({ start: suggested });
     }
+    // Scroll vers le formulaire d'encodage des heures
+    setTimeout(() => {
+      this.formCard?.nativeElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 
   save(): void {
@@ -95,7 +101,7 @@ export class PrestationsComponent implements OnInit {
 
     const payload = {
       tolkcode: row.tolkcode,
-      idAffAudience: row.idAffAudiences[0],
+      idAffAudiences: row.idAffAudiences,
       datePrestation: this.date
     };
 

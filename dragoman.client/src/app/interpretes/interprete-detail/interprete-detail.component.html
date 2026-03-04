@@ -1,72 +1,246 @@
 <app-navbarinter></app-navbarinter>
 
-<!-- Card compacte -->
-<section class="card">
-  <header class="card-header">
-    <h2>Interprète #{{ tolkcode }}</h2>
-    <div class="card-actions">
-      <button type="button" (click)="saveIdent()" [disabled]="saving || loading">💾 Enregistrer</button>
+<section class="detail-wrap fade-in">
+
+  <!-- Hero header -->
+  <div class="hero-card">
+    <div class="hero-avatar">
+      {{ (fIdent?.get('prenom')?.value?.[0] ?? '') + (fIdent?.get('nom')?.value?.[0] ?? '') || '#' }}
     </div>
-  </header>
+    <div class="hero-info">
+      <div class="hero-name">
+        {{ fIdent?.get('prenom')?.value }} {{ fIdent?.get('nom')?.value }}
+        <span class="hero-pill">#{{ tolkcode }}</span>
+        <span class="hero-pill hero-pill--accent" *ngIf="fIdent?.get('beedigd')?.value === 1">⚖️ Assermenté</span>
+        <span class="hero-pill hero-pill--lang" *ngIf="fIdent?.get('taalrol')?.value === 1">NL</span>
+        <span class="hero-pill hero-pill--lang" *ngIf="fIdent?.get('taalrol')?.value === 2">FR</span>
+      </div>
+      <div class="hero-sub" *ngIf="fIdent?.get('email')?.value">
+        ✉️ {{ fIdent?.get('email')?.value }}
+      </div>
+    </div>
+    <div class="hero-actions">
+      <button class="btn btn--primary" type="button" (click)="saveIdent()" [disabled]="saving || loading">
+        <span *ngIf="!saving">💾 Enregistrer</span>
+        <span *ngIf="saving">Enregistrement…</span>
+      </button>
+    </div>
+  </div>
 
-  <div *ngIf="loading" class="info">Chargement…</div>
-  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="loading" class="state-msg">⏳ Chargement…</div>
+  <div *ngIf="error" class="alert alert--error">{{ error }}</div>
+  <div *ngIf="saved" class="alert alert--success">✓ Modifications enregistrées</div>
 
-  <form [formGroup]="fIdent" (ngSubmit)="saveIdent()" *ngIf="!loading">
-    <div class="grid-2">
-      <!-- Colonne gauche -->
-      <div class="col">
-        <h3>Identité</h3>
-        <label>Nom *<input formControlName="nom" required></label>
-        <label>Prénom *<input formControlName="prenom" required></label>
-        <label>Email<input type="email" formControlName="email"></label>
-        <label>Date de naissance<input type="date" formControlName="dateNaissance"></label>
-        <label>Genre<input formControlName="genre" placeholder="M/F"></label>
+  <form [formGroup]="fIdent" (ngSubmit)="saveIdent()" *ngIf="!loading" class="sections">
 
-        <h3>Langue & Statut</h3>
-        <label>
-          Langue administrative
-          <select formControlName="taalrol">
-            <option [ngValue]="null">— Choisir —</option>
-            <option [ngValue]="1">1 — Français</option>
-            <option [ngValue]="2">2 — Néerlandais</option>
-          </select>
-        </label>
-        <div class="field-group">
-          <span class="label">Assermenté</span>
-          <div class="radio-row">
-            <label><input type="radio" [value]="1" formControlName="beedigd"> Oui</label>
-            <label><input type="radio" [value]="0" formControlName="beedigd"> Non</label>
-          </div>
+    <!-- ── Section Identité ── -->
+    <div class="section" [class.section--open]="open.identite">
+      <button type="button" class="section-header" (click)="toggleSection('identite')">
+        <span class="section-icon">👤</span>
+        <span class="section-title">Identité</span>
+        <span class="section-badge" *ngIf="invalidCount(['nom','prenom','email','dateNaissance','genre']) > 0">
+          {{ invalidCount(['nom','prenom','email','dateNaissance','genre']) }} erreur(s)
+        </span>
+        <span class="section-chevron">{{ open.identite ? '▲' : '▼' }}</span>
+      </button>
+      <div class="section-body" *ngIf="open.identite">
+        <div class="form-grid">
+          <label class="form-field required">
+            Nom *
+            <input formControlName="nom" type="text" placeholder="NOM" [class.invalid]="fIdent.get('nom')?.invalid && fIdent.get('nom')?.touched" />
+            <span class="field-error" *ngIf="fIdent.get('nom')?.touched && fIdent.get('nom')?.errors?.['required']">Requis</span>
+          </label>
+          <label class="form-field required">
+            Prénom *
+            <input formControlName="prenom" type="text" placeholder="Prénom" [class.invalid]="fIdent.get('prenom')?.invalid && fIdent.get('prenom')?.touched" />
+            <span class="field-error" *ngIf="fIdent.get('prenom')?.touched && fIdent.get('prenom')?.errors?.['required']">Requis</span>
+          </label>
+          <label class="form-field">
+            Email
+            <input formControlName="email" type="email" placeholder="email@exemple.be" />
+            <span class="field-error" *ngIf="fIdent.get('email')?.touched && fIdent.get('email')?.errors?.['email']">Email invalide</span>
+          </label>
+          <label class="form-field">
+            Date de naissance
+            <input formControlName="dateNaissance" type="date" />
+          </label>
+          <label class="form-field">
+            Genre
+            <select formControlName="genre">
+              <option value="">—</option>
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </select>
+          </label>
+          <label class="form-field">
+            Nationalité
+            <input formControlName="nationaliteit" type="text" />
+          </label>
+          <label class="form-field">
+            Registre national
+            <input formControlName="rijksregisternr" type="text" />
+          </label>
         </div>
-        <label>Nationalité<input formControlName="nationaliteit"></label>
-        <label>Registre national<input formControlName="rijksregisternr"></label>
-      </div>
-
-      <!-- Colonne droite -->
-      <div class="col">
-        <h3>Contact</h3>
-        <label>Téléphone 1<input formControlName="telephone1"></label>
-        <label>Téléphone 2<input formControlName="telephone2"></label>
-        <label>Fax<input formControlName="fax"></label>
-
-        <h3>Banque & TVA</h3>
-        <label>IBAN<input formControlName="iban"></label>
-        <label>Compte bancaire<input formControlName="bankrekening"></label>
-        <label>N° TVA (texte)<input formControlName="tva"></label>
-        <label>N° TVA (numérique)<input type="number" formControlName="btwNr"></label>
-
-        <h3>Divers</h3>
-        <label>Origine<input formControlName="herkomst"></label>
-        <label>Code métier<input type="number" formControlName="beroepscode"></label>
-        <label>Remarque<textarea rows="2" formControlName="remarque"></textarea></label>
       </div>
     </div>
 
-    <footer class="card-footer">
-      <button type="submit" [disabled]="saving">💾 Enregistrer</button>
-      <span *ngIf="saving" class="info">Enregistrement…</span>
-      <span *ngIf="saved" class="success">Enregistré ✓</span>
-    </footer>
+    <!-- ── Section Contact ── -->
+    <div class="section" [class.section--open]="open.contact">
+      <button type="button" class="section-header" (click)="toggleSection('contact')">
+        <span class="section-icon">📞</span>
+        <span class="section-title">Contact</span>
+        <span class="section-chevron">{{ open.contact ? '▲' : '▼' }}</span>
+      </button>
+      <div class="section-body" *ngIf="open.contact">
+        <div class="form-grid">
+          <label class="form-field">
+            Téléphone 1
+            <input formControlName="telephone1" type="text" placeholder="+32XXXXXXXXX" />
+          </label>
+          <label class="form-field">
+            Téléphone 2
+            <input formControlName="telephone2" type="text" placeholder="+32XXXXXXXXX" />
+          </label>
+          <label class="form-field">
+            Fax
+            <input formControlName="fax" type="text" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Section Langue & Statut ── -->
+    <div class="section" [class.section--open]="open.langueStatut">
+      <button type="button" class="section-header" (click)="toggleSection('langueStatut')">
+        <span class="section-icon">🌐</span>
+        <span class="section-title">Langue & Statut</span>
+        <span class="section-chevron">{{ open.langueStatut ? '▲' : '▼' }}</span>
+      </button>
+      <div class="section-body" *ngIf="open.langueStatut">
+        <div class="form-grid">
+          <label class="form-field">
+            Langue administrative
+            <select formControlName="taalrol">
+              <option [ngValue]="null">— Choisir —</option>
+              <option [ngValue]="1">NL — Néerlandais</option>
+              <option [ngValue]="2">FR — Français</option>
+            </select>
+          </label>
+          <div class="form-field">
+            <span class="form-label">Assermenté</span>
+            <div class="radio-row">
+              <label class="radio-label"><input type="radio" [value]="1" formControlName="beedigd" /> Oui</label>
+              <label class="radio-label"><input type="radio" [value]="0" formControlName="beedigd" /> Non</label>
+            </div>
+          </div>
+          <label class="form-field">
+            Origine
+            <input formControlName="herkomst" type="text" />
+          </label>
+          <label class="form-field">
+            Code métier
+            <input formControlName="beroepscode" type="number" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Section Banque & TVA ── -->
+    <div class="section" [class.section--open]="open.banqueTva">
+      <button type="button" class="section-header" (click)="toggleSection('banqueTva')">
+        <span class="section-icon">🏦</span>
+        <span class="section-title">Banque & TVA</span>
+        <span class="section-chevron">{{ open.banqueTva ? '▲' : '▼' }}</span>
+      </button>
+      <div class="section-body" *ngIf="open.banqueTva">
+        <div class="form-grid">
+          <label class="form-field">
+            IBAN
+            <input formControlName="iban" type="text" placeholder="BE68 XXXX XXXX XXXX" />
+          </label>
+          <label class="form-field">
+            Compte bancaire
+            <input formControlName="bankrekening" type="text" placeholder="xxx-xxxxxxx-xx" />
+          </label>
+          <label class="form-field">
+            N° TVA
+            <input formControlName="tva" type="text" placeholder="BE0XXXXXXXXX" />
+          </label>
+          <label class="form-field">
+            N° TVA (numérique)
+            <input formControlName="btwNr" type="number" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Section Entreprise ── -->
+    <div class="section" [class.section--open]="open.entreprise">
+      <button type="button" class="section-header" (click)="toggleSection('entreprise')">
+        <span class="section-icon">🏢</span>
+        <span class="section-title">Entreprise</span>
+        <span class="section-chevron">{{ open.entreprise ? '▲' : '▼' }}</span>
+      </button>
+      <div class="section-body" *ngIf="open.entreprise">
+        <div class="form-grid">
+          <label class="form-field">
+            Fedcom
+            <input formControlName="fedcom" type="number" />
+          </label>
+          <label class="form-field">
+            N° entreprise
+            <input formControlName="ondernemingsnummer" type="number" />
+          </label>
+          <label class="form-field">
+            N° vestiging
+            <input formControlName="vestigingsnummer" type="text" />
+          </label>
+          <label class="form-field">
+            N° Fedcom
+            <input formControlName="fedcomnummer" type="number" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Section Divers ── -->
+    <div class="section" [class.section--open]="open.divers">
+      <button type="button" class="section-header" (click)="toggleSection('divers')">
+        <span class="section-icon">📋</span>
+        <span class="section-title">Divers</span>
+        <span class="section-chevron">{{ open.divers ? '▲' : '▼' }}</span>
+      </button>
+      <div class="section-body" *ngIf="open.divers">
+        <div class="form-grid">
+          <label class="form-field">
+            Code évaluation
+            <input formControlName="evaluatiecode" type="number" />
+          </label>
+          <label class="form-field">
+            BA
+            <input formControlName="ba" type="text" />
+          </label>
+          <label class="form-field">
+            CCE
+            <input formControlName="iscce" type="text" />
+          </label>
+          <label class="form-field form-field--full">
+            Remarque
+            <textarea formControlName="remarque" rows="3"></textarea>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-footer">
+      <button type="submit" class="btn btn--primary" [disabled]="saving">
+        <span *ngIf="!saving">💾 Enregistrer</span>
+        <span *ngIf="saving">Enregistrement…</span>
+      </button>
+      <button type="button" class="btn btn--ghost" (click)="toggleAdvanced()">
+        {{ showAdvanced ? '▲ Réduire les sections avancées' : '▼ Afficher les sections avancées' }}
+      </button>
+    </div>
+
   </form>
 </section>

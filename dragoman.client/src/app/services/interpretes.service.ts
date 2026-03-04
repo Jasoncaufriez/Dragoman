@@ -42,6 +42,10 @@ export class InterpretesService {
     return this.http.get<AudienceDto[]>(`${this.base}/${tolkcode}/audiences-exact`);
   }
 
+  convocations(tolkcode: string): Observable<AudienceDto[]> {
+    return this.http.get<AudienceDto[]>(`${this.base}/${tolkcode}/convocations`);
+  }
+
   // GET /api/interpretes/match?langSrc=1&langDst=2&date=YYYY-MM-DD
   match(args: { langSrc: number; langDst: number; date: string }): Observable<InterpreteMatchDto[]> {
     const params = new HttpParams()
@@ -49,5 +53,26 @@ export class InterpretesService {
       .set('langDst', String(args.langDst))
       .set('date', args.date);
     return this.http.get<InterpreteMatchDto[]>(`${this.base}/match`, { params });
+  }
+
+  addTolklink(tolkcode: number, nrAffAudience: number): Observable<any> {
+    return this.http.post(`${this.base}/${tolkcode}/tolklink`, { nrAffAudience });
+  }
+
+  removeTolklink(tolkcode: number, idAffAudience: number): Observable<any> {
+    return this.http.delete(`${this.base}/${tolkcode}/tolklink/${idAffAudience}`);
+  }
+
+  listAllTolkcodes(): Observable<{ tolkcode: number; nom: string; prenom: string }[]> {
+    return this.http.get<{ tolkcode: number; nom: string; prenom: string }[]>(`${this.base}/tolkcodes`);
+  }
+
+  create(payload: {
+    nom: string; prenom?: string; email?: string;
+    tel?: string; telbis?: string; gsm?: string;
+    tva?: string; iban?: string; bankrekening?: string;
+    taalrol?: number | null; beedigd?: number; genre?: string;
+  }): Observable<{ tolkcode: number; nom: string; prenom: string }> {
+    return this.http.post<{ tolkcode: number; nom: string; prenom: string }>(this.base, payload);
   }
 }

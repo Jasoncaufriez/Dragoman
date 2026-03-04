@@ -1,65 +1,98 @@
 <app-navbarinter></app-navbarinter>
 
-<section class="card">
-  <header class="card-header">
-    <h2>Indisponibilités — Interprète #{{ tolkcode }}</h2>
-    <div class="card-actions">
-      <button type="button" class="btn" (click)="showForm = !showForm">
-        {{ showForm ? 'Fermer le formulaire' : 'Nouvelle indisponibilité' }}
-      </button>
-    </div>
-  </header>
+<div class="indispo-container">
+  <h2 class="page-title">Indisponibilités — Interprète #{{ tolkcode }}</h2>
 
   <div *ngIf="error" class="alert alert--error">{{ error }}</div>
-  <div *ngIf="loading" class="alert alert--info">Chargement…</div>
 
-  <!-- Formulaire création (réactif) -->
-  <form *ngIf="showForm" [formGroup]="form" class="form-card" (ngSubmit)="add()">
-    <div class="form-grid-2">
-      <label>Début *<input type="date" formControlName="startindispo" /></label>
-      <label>Fin (optionnel)<input type="date" formControlName="endindispo" /></label>
-      <label>
-        Motif (max 5)
-        <input type="text" maxlength="5" formControlName="motifindispo" />
-      </label>
-      <label>
-        Commentaire
-        <textarea rows="2" formControlName="commentaire"></textarea>
-      </label>
+  <!-- Carte principale -->
+  <div class="card card--surface">
+    <div class="card-header card--glass-red">
+      <span>Périodes d'indisponibilité</span>
+      <button class="btn btn--light" type="button" (click)="showForm = !showForm">
+        {{ showForm ? '✕ Fermer' : '➕ Nouvelle indisponibilité' }}
+      </button>
     </div>
-    <div class="card-actions">
-      <button type="submit" class="btn btn--primary" [disabled]="form.invalid || saving">Enregistrer</button>
-    </div>
-  </form>
 
-  <!-- Liste -->
-  <div class="table-wrap" *ngIf="!loading">
-    <table class="table" *ngIf="rows?.length; else empty">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Début</th>
-          <th>Fin</th>
-          <th>Motif</th>
-          <th>Commentaire</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let r of rows">
-          <td>{{ r.idIndispo }}</td>
-          <td>{{ r.startindispo | date:'yyyy-MM-dd' }}</td>
-          <td>{{ r.endindispo ? (r.endindispo | date:'yyyy-MM-dd') : '—' }}</td>
-          <td>{{ r.motifindispo || '—' }}</td>
-          <td class="ellipsis" [title]="r.commentaire || ''">{{ r.commentaire || '—' }}</td>
-          <td class="actions">
-            <button type="button" class="btn btn--danger" (click)="remove(r.idIndispo)">Supprimer</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <ng-template #empty>
-      <div class="muted">Aucune indisponibilité.</div>
-    </ng-template>
+    <!-- Formulaire d'ajout -->
+    <div class="form-panel" *ngIf="showForm">
+      <form [formGroup]="form" (ngSubmit)="add()">
+        <div class="form-grid">
+          <label class="form-field">
+            Date de début *
+            <input type="date" formControlName="startindispo" />
+          </label>
+          <label class="form-field">
+            Date de fin (optionnel)
+            <input type="date" formControlName="endindispo" />
+          </label>
+          <label class="form-field">
+            Motif (max 5 car.)
+            <input type="text" maxlength="5" formControlName="motifindispo" placeholder="ex: CONGÉ" />
+          </label>
+          <label class="form-field">
+            Commentaire
+            <textarea rows="2" formControlName="commentaire" placeholder="Remarque éventuelle…"></textarea>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn--primary" [disabled]="form.invalid || saving">
+            💾 Enregistrer
+          </button>
+          <button type="button" class="btn btn--ghost" (click)="showForm = false">Annuler</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card-body">
+      <div *ngIf="loading" class="loading-state">
+        <span class="spinner"></span> Chargement…
+      </div>
+
+      <div class="table-wrap" *ngIf="!loading">
+        <table class="table" *ngIf="rows?.length; else emptyTpl">
+          <thead>
+            <tr class="thead-head">
+              <th>Début</th>
+              <th>Fin</th>
+              <th>Motif</th>
+              <th>Commentaire</th>
+              <th class="center">Durée</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of rows">
+              <td><span class="date-chip">{{ r.startindispo | date:'dd/MM/yyyy' }}</span></td>
+              <td>
+                <span *ngIf="r.endindispo" class="date-chip">{{ r.endindispo | date:'dd/MM/yyyy' }}</span>
+                <span *ngIf="!r.endindispo" class="badge badge--open">Indéfinie</span>
+              </td>
+              <td>
+                <span *ngIf="r.motifindispo" class="motif-chip">{{ r.motifindispo }}</span>
+                <span *ngIf="!r.motifindispo" class="muted-inline">—</span>
+              </td>
+              <td class="ellipsis" [title]="r.commentaire || ''">{{ r.commentaire || '—' }}</td>
+              <td class="center">
+                <span *ngIf="r.endindispo" class="badge badge--days">
+                  {{ daysDiff(r.startindispo, r.endindispo) }} j
+                </span>
+                <span *ngIf="!r.endindispo" class="muted-inline">—</span>
+              </td>
+              <td class="td-actions">
+                <button class="btn-icon btn-icon--danger" type="button"
+                        (click)="remove(r.idIndispo)" title="Supprimer">🗑️</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #emptyTpl>
+          <div class="empty-state">
+            <div class="empty-icon">📆</div>
+            <p>Aucune indisponibilité enregistrée.</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
   </div>
-</section>
+</div>

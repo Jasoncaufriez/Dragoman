@@ -1,77 +1,95 @@
 <!-- Onglets globaux -->
 <app-navbarinter></app-navbarinter>
-<section class="card">
-  <header class="card-header">
-    <h2>Adresses — Interprète #{{ tolkcode }}</h2>
-    <div class="card-actions">
-      <label class="chk">
-        <input type="checkbox" [checked]="onlyActive" (change)="toggleActive()"> Uniquement actives
-      </label>
-      <button type="button" (click)="create()">➕ Nouvelle</button>
+
+<div class="adresses-container">
+  <h2 class="page-title">Adresses — Interprète #{{ tolkcode }}</h2>
+
+  <div *ngIf="error" class="alert alert--error">{{ error }}</div>
+
+  <!-- Carte : liste -->
+  <div class="card card--surface" *ngIf="!formVisible">
+    <div class="card-header card--glass-blue">
+      <span>Adresses enregistrées</span>
+      <div class="header-actions">
+        <label class="chk">
+          <input type="checkbox" [checked]="onlyActive" (change)="toggleActive()" />
+          Uniquement actives
+        </label>
+        <button class="btn btn--light" type="button" (click)="create()">➕ Nouvelle adresse</button>
+      </div>
     </div>
-  </header>
 
-  <div *ngIf="loading" class="info">Chargement…</div>
-  <div *ngIf="error" class="error">{{ error }}</div>
+    <div class="card-body">
+      <div *ngIf="loading" class="muted">Chargement…</div>
 
-  <!-- Liste -->
-  <div class="table-wrap" *ngIf="!loading">
-    <table class="tbl">
-      <thead>
-        <tr>
-          <th>Pays</th>
-          <th>CP</th>
-          <th>Commune</th>
-          <th>Rue</th>
-          <th>N°</th>
-          <th>Boîte</th>
-          <th>Début</th>
-          <th>Fin</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let r of rows">
-          <td>{{ r.land }}</td>
-          <td>{{ r.cp }}</td>
-          <td>{{ r.commune }}</td>
-          <td>{{ r.rue }}</td>
-          <td>{{ r.numero }}</td>
-          <td>{{ r.boite }}</td>
-          <td>{{ r.startdate | date:'yyyy-MM-dd' }}</td>
-          <td>{{ r.enddate   | date:'yyyy-MM-dd' }}</td>
-          <td class="actions">
-            <button type="button" (click)="edit(r)" title="Modifier">✏️</button>
-            <button type="button" class="danger" (click)="remove(r)" title="Supprimer">🗑️</button>
-          </td>
-        </tr>
-        <tr *ngIf="rows.length === 0">
-          <td colspan="9" class="muted">Aucune adresse</td>
-        </tr>
-      </tbody>
-    </table>
+      <div class="table-wrap" *ngIf="!loading">
+        <table class="table" *ngIf="rows.length; else emptyTpl">
+          <thead>
+            <tr class="thead-head">
+              <th>Pays</th>
+              <th>CP</th>
+              <th>Commune</th>
+              <th>Rue</th>
+              <th>N°</th>
+              <th>Boîte</th>
+              <th>Km</th>
+              <th>Début</th>
+              <th>Fin</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of rows">
+              <td><span class="badge badge--neutral">{{ r.land }}</span></td>
+              <td>{{ r.cp }}</td>
+              <td>{{ r.commune }}</td>
+              <td>{{ r.rue || '—' }}</td>
+              <td>{{ r.numero || '—' }}</td>
+              <td>{{ r.boite || '—' }}</td>
+              <td>{{ r.km != null ? r.km + ' km' : '—' }}</td>
+              <td>{{ r.startdate | date:'dd/MM/yyyy' }}</td>
+              <td>
+                <span *ngIf="r.enddate">{{ r.enddate | date:'dd/MM/yyyy' }}</span>
+                <span *ngIf="!r.enddate" class="badge badge--active">Active</span>
+              </td>
+              <td class="td-actions">
+                <button class="btn-icon" type="button" (click)="edit(r)" title="Modifier">✏️</button>
+                <button class="btn-icon btn-icon--danger" type="button" (click)="remove(r)" title="Supprimer">🗑️</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #emptyTpl>
+          <p class="muted">Aucune adresse enregistrée.</p>
+        </ng-template>
+      </div>
+    </div>
   </div>
 
-  <!-- Formulaire upsert (même entité que l'API) -->
-  <form [formGroup]="f" (ngSubmit)="submit()" class="form-card" *ngIf="formVisible">
-    <h3 *ngIf="editingId; else addTpl">Modifier l’adresse #{{ editingId }}</h3>
-    <ng-template #addTpl><h3>Nouvelle adresse</h3></ng-template>
-
-    <div class="grid-2">
-      <label>Pays *<input formControlName="land" required></label>
-      <label>CP *<input formControlName="cp" required></label>
-      <label>Commune *<input formControlName="commune" required></label>
-      <label>Rue<input formControlName="rue"></label>
-      <label>Numéro<input formControlName="numero"></label>
-      <label>Boîte<input formControlName="boite"></label>
-      <label>Km<input type="number" formControlName="km"></label>
-      <label>Début *<input type="date" formControlName="startdate" required></label>
-      <label>Fin<input type="date" formControlName="enddate"></label>
+  <!-- Carte : formulaire -->
+  <div class="card card--surface" *ngIf="formVisible">
+    <div class="card-header card--glass-green">
+      <span *ngIf="editingId">Modifier l'adresse #{{ editingId }}</span>
+      <span *ngIf="!editingId">Nouvelle adresse</span>
     </div>
-
-    <div class="form-actions">
-      <button type="submit" [disabled]="saving || f.invalid">💾 Enregistrer</button>
-      <button type="button" class="ghost" (click)="cancel()">Annuler</button>
+    <div class="card-body">
+      <form [formGroup]="f" (ngSubmit)="submit()">
+        <div class="form-grid">
+          <label class="form-field">Pays *<input formControlName="land" type="text" placeholder="BE" /></label>
+          <label class="form-field">Code postal *<input formControlName="cp" type="text" placeholder="1000" /></label>
+          <label class="form-field">Commune *<input formControlName="commune" type="text" /></label>
+          <label class="form-field">Rue<input formControlName="rue" type="text" /></label>
+          <label class="form-field">Numéro<input formControlName="numero" type="text" /></label>
+          <label class="form-field">Boîte<input formControlName="boite" type="text" /></label>
+          <label class="form-field">Km<input formControlName="km" type="number" min="0" /></label>
+          <label class="form-field">Date de début *<input formControlName="startdate" type="date" /></label>
+          <label class="form-field">Date de fin<input formControlName="enddate" type="date" /></label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn--primary" [disabled]="saving || f.invalid">💾 Enregistrer</button>
+          <button type="button" class="btn btn--ghost" (click)="cancel()">Annuler</button>
+        </div>
+      </form>
     </div>
-  </form>
-</section>
+  </div>
+</div>

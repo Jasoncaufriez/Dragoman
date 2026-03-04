@@ -48,17 +48,73 @@ public class InterpretesController : ControllerBase
 
     // POST /api/interpretes
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Tolkidentity input)
+    public async Task<IActionResult> Post([FromBody] NewInterpreteDto input)
     {
         if (input is null) return BadRequest("Payload manquant.");
 
-        // Normalisations basiques
-        input.Beedigd = Normalize01(input.Beedigd);         // 0/1
-        input.Taalrol = NormalizeTaalrol(input.Taalrol);    // 1=FR,2=NL sinon null
+        // --- Validation téléphone (format belge accepté : +32..., 0..., vide) ---
+        static bool IsValidPhone(string? phone)
+        {
+            if (string.IsNullOrWhiteSpace(phone)) return true;
+            var p = phone.Trim().Replace(" ", "").Replace(".", "").Replace("-", "").Replace("/", "");
+            // +32XXXXXXXXX ou 0XXXXXXXXX (9-12 chiffres après nettoyage)
+            return System.Text.RegularExpressions.Regex.IsMatch(p, @"^(\+32|0)[1-9]\d{7,9}$");
+        }
 
-        _db.Tolkidentities.Add(input);
+        // --- Validation TVA belge (BE + 10 chiffres, ou vide) ---
+        static bool IsValidTva(string? tva)
+        {
+            if (string.IsNullOrWhiteSpace(tva)) return true;
+            var t = tva.Trim().Replace(" ", "").Replace(".", "").ToUpperInvariant();
+            return System.Text.RegularExpressions.Regex.IsMatch(t, @"^BE\d{10}$");
+        }
+
+        var errors = new List<string>();
+        if (!IsValidPhone(input.Tel))   errors.Add("Téléphone (Tel) invalide. Format attendu : +32XXXXXXXXX ou 0XXXXXXXXX.");
+        if (!IsValidPhone(input.Telbis)) errors.Add("Téléphone bis (Telbis) invalide. Format attendu : +32XXXXXXXXX ou 0XXXXXXXXX.");
+        if (!IsValidPhone(input.Gsm))   errors.Add("GSM invalide. Format attendu : +32XXXXXXXXX ou 0XXXXXXXXX.");
+        if (!IsValidTva(input.Tva))     errors.Add("N° TVA invalide. Format attendu : BE0XXXXXXXXX (BE + 10 chiffres).");
+        if (errors.Count > 0) return BadRequest(new { errors });
+
+        if (string.IsNullOrWhiteSpace(input.Nom)) return BadRequest("Le nom est requis.");
+
+        // Récupération du prochain tolkcode via la séquence Oracle NR_TOLK
+        var conn = _db.Database.GetDbConnection();
+        var wasClosed = conn.State != System.Data.ConnectionState.Open;
+        if (wasClosed) await conn.OpenAsync();
+        int newTolkcode;
+        try
+        {
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT NR_TOLK.NEXTVAL FROM DUAL";
+            var obj = await cmd.ExecuteScalarAsync();
+            newTolkcode = Convert.ToInt32(obj);
+        }
+        finally
+        {
+            if (wasClosed) await conn.CloseAsync();
+        }
+
+        var entity = new Tolkidentity
+        {
+            Tolkcode   = newTolkcode,
+            Nom        = input.Nom?.Trim().ToUpperInvariant(),
+            Prenom     = input.Prenom?.Trim(),
+            Email      = input.Email?.Trim(),
+            Tel        = input.Tel?.Trim(),
+            Telbis     = input.Telbis?.Trim(),
+            Gsm        = input.Gsm?.Trim(),
+            Tva        = input.Tva?.Trim().Replace(" ", "").ToUpperInvariant(),
+            Iban       = input.Iban?.Trim(),
+            Bankrekening = input.Bankrekening?.Trim(),
+            Taalrol    = NormalizeTaalrol(input.Taalrol),
+            Beedigd    = Normalize01(input.Beedigd),
+            Genre      = input.Genre?.Trim()
+        };
+
+        _db.Tolkidentities.Add(entity);
         await _db.SaveChangesAsync();
-        return CreatedAtAction(nameof(Get), new { tolkcode = input.Tolkcode }, input);
+        return CreatedAtAction(nameof(Get), new { tolkcode = entity.Tolkcode }, new { entity.Tolkcode, entity.Nom, entity.Prenom });
     }
 
     // PUT /api/interpretes/{tolkcode}
@@ -119,6 +175,63 @@ public class InterpretesController : ControllerBase
         _db.Tolkidentities.Remove(ent);
         await _db.SaveChangesAsync();
         return NoContent();
+    }
+
+    // GET /api/interpretes/search?mode=tolkcode|nom&q=...
+    [HttpGet("search")]
+    public async Task<ActionResult<IEnumerable<InterpreteSearchDto>>> Search(
+        [FromQuery] string mode, [FromQuery] string q)
+    {
+        if (string.IsNullOrWhiteSpace(mode) || string.IsNullOrWhiteSpace(q))
+            return BadRequest("Paramètres mode et q requis.");
+
+        var s = q.Trim().ToUpperInvariant();
+        var baseQ = _db.Tolkidentities.AsNoTracking();
+
+        if (mode == "tolkcode")
+            baseQ = baseQ.Where(t => t.Tolkcode.ToString().Contains(s));
+        else if (mode == "nom")
+            baseQ = baseQ.Where(t => (t.Nom ?? "").ToUpper().Contains(s));
+        else
+            return BadRequest("mode invalide (tolkcode ou nom).");
+
+        var tolks = await baseQ
+            .OrderBy(t => t.Tolkcode)
+            .Take(200)
+            .Select(t => new { t.Tolkcode, t.Nom, t.Prenom })
+            .ToListAsync();
+
+        var tolkCodes = tolks.Select(t => t.Tolkcode).ToList();
+
+        var destMap = await _db.LangueDestinations.AsNoTracking()
+            .Where(ld => tolkCodes.Contains(ld.Tolkcode ?? 0))
+            .Join(_db.Langues.AsNoTracking(),
+                  ld => (int)ld.NrLangue, l => (int)l.Idlangue,
+                  (ld, l) => new { Tolkcode = ld.Tolkcode ?? 0, Lib = l.LibelleFr })
+            .ToListAsync();
+
+        var srcMap = await _db.LangueSources.AsNoTracking()
+            .Where(ls => tolkCodes.Contains(ls.Tolkcode))
+            .Join(_db.Langues.AsNoTracking(),
+                  ls => (int)ls.NrLangue, l => (int)l.Idlangue,
+                  (ls, l) => new { ls.Tolkcode, Lib = l.LibelleFr })
+            .ToListAsync();
+
+        var destDict = destMap.GroupBy(x => x.Tolkcode)
+            .ToDictionary(g => g.Key, g => g.Select(x => x.Lib).Distinct().ToList());
+        var srcDict = srcMap.GroupBy(x => x.Tolkcode)
+            .ToDictionary(g => g.Key, g => g.Select(x => x.Lib).Distinct().ToList());
+
+        var rows = tolks.Select(t => new InterpreteSearchDto
+        {
+            Tolkcode = t.Tolkcode.ToString(),
+            Nom = t.Nom,
+            Prenom = t.Prenom,
+            LanguesDestination = destDict.TryGetValue(t.Tolkcode, out var dl) ? dl : new(),
+            LanguesSource = srcDict.TryGetValue(t.Tolkcode, out var sl) ? sl : new()
+        }).ToList();
+
+        return Ok(rows);
     }
 
     // GET /api/interpretes/match?langSrc=6&langDst=36&date=2025-09-19
@@ -209,7 +322,7 @@ public class InterpretesController : ControllerBase
     {
         var today = DateTime.Today;
         const int FR = 36, NL = 77;
-        
+
         var vrm = _db.VueCalendarVrmPcs
             .Where(v => v.DateAudience.HasValue && v.DateAudience.Value >= today && v.Tolkcode == null)
             .Select(v => new
@@ -225,7 +338,8 @@ public class InterpretesController : ControllerBase
                 v.LibelleFr,
                 v.LangueCgoe,
                 v.IdAffAudience,
-                v.Tolkcode
+                v.Tolkcode,
+                Source = "VRM"
             });
 
         var ann = _db.VueCalendarAnns
@@ -243,10 +357,11 @@ public class InterpretesController : ControllerBase
                 v.LibelleFr,
                 v.LangueCgoe,
                 v.IdAffAudience,
-                v.Tolkcode
+                v.Tolkcode,
+                Source = "ANN"
             });
 
-        var aud = vrm;
+        var aud = vrm.Concat(ann);
 
         // Joindre la langue source exacte (depuis libellé -> IDLANGUE)
         var audWithSrcId =
@@ -266,10 +381,11 @@ public class InterpretesController : ControllerBase
                 a.LangueCgoe,
                 a.IdAffAudience,
                 a.Tolkcode,
+                a.Source,
                 SrcId = (int)lsrc.Idlangue
             };
 
-        var rows = await (
+        var all = await (
             from a in audWithSrcId
             let roleId = (a.LangueRole == "F" ? FR : (a.LangueRole == "N" ? NL : 33))
             join ls in _db.LangueSources on tolkcode equals ls.Tolkcode
@@ -294,12 +410,83 @@ public class InterpretesController : ControllerBase
                 LibelleFr = a.LibelleFr,
                 LangueCgoe = a.LangueCgoe,
                 IdAffAudience = a.IdAffAudience,
-                Tolkcode = a.Tolkcode
+                Tolkcode = a.Tolkcode,
+                Source = a.Source
             }
         )
         .OrderBy(r => r.DateAudience)
         .ThenBy(r => r.HeureAudience)
         .ToListAsync();
+
+        var rows = all
+            .GroupBy(r => r.IdAffAudience)
+            .Select(g => g.First())
+            .OrderBy(r => r.DateAudience)
+            .ThenBy(r => r.HeureAudience)
+            .ToList();
+
+        return Ok(rows);
+    }
+
+    // GET /api/interpretes/{tolkcode}/convocations
+    // Audiences assignées à cet interprète à partir d'aujourd'hui (distinct)
+    [HttpGet("{tolkcode:int}/convocations")]
+    public async Task<ActionResult<IEnumerable<AudienceDto>>> Convocations(int tolkcode)
+    {
+        var today = DateTime.Today;
+
+        var vrmRows = await _db.VueCalendarVrmPcs
+            .Where(v => v.Tolkcode == tolkcode
+                     && v.DateAudience.HasValue
+                     && v.DateAudience.Value >= today)
+            .Select(v => new AudienceDto
+            {
+                LangueRole = v.LangueRole,
+                Proc = v.Proc,
+                DateAudience = v.DateAudience!.Value,
+                Nom = v.Nom,
+                SalleAudience = v.SalleAudience,
+                HeureAudience = v.HeureAudience,
+                LangueRequete = v.LangueRequete,
+                LibelleFr = v.LibelleFr,
+                LangueCgoe = v.LangueCgoe,
+                NroRoleGen = v.NroRoleGen,
+                IdAffAudience = v.IdAffAudience,
+                Tolkcode = v.Tolkcode,
+                Source = "VRM"
+            })
+            .ToListAsync();
+
+        var annRows = await _db.VueCalendarAnns
+            .Where(v => v.Tolkcode == tolkcode
+                     && v.DateAudience.HasValue
+                     && v.DateAudience.Value >= today)
+            .Select(v => new AudienceDto
+            {
+                LangueRole = v.LangueRole,
+                Proc = v.Proc,
+                DateAudience = v.DateAudience!.Value,
+                Nom = v.Nom,
+                SalleAudience = v.SalleAudience,
+                HeureAudience = v.HeureAudience,
+                LangueRequete = v.LangueRequete,
+                LibelleFr = v.LibelleFr,
+                LangueCgoe = v.LangueCgoe,
+                NroRoleGen = v.NroRoleGen,
+                IdAffAudience = v.IdAffAudience,
+                Tolkcode = v.Tolkcode,
+                Source = "ANN"
+            })
+            .ToListAsync();
+
+        var all = vrmRows.Concat(annRows).ToList();
+
+        var rows = all
+            .GroupBy(r => new { r.DateAudience, r.Nom, r.LangueRequete })
+            .Select(g => g.First())
+            .OrderBy(r => r.DateAudience)
+            .ThenBy(r => r.HeureAudience)
+            .ToList();
 
         return Ok(rows);
     }
@@ -310,5 +497,17 @@ public class InterpretesController : ControllerBase
     private static int ConvertTolkcode(string tolkcode)
     {
         return int.TryParse(tolkcode, out var code) ? code : 0;
+    }
+
+    // GET /api/interpretes/tolkcodes
+    [HttpGet("tolkcodes")]
+    public async Task<IActionResult> ListAllTolkcodes(CancellationToken ct)
+    {
+        var list = await _db.Tolkidentities.AsNoTracking()
+            .OrderBy(t => t.Tolkcode)
+            .Select(t => new { t.Tolkcode, t.Nom, t.Prenom })
+            .ToListAsync(ct);
+
+        return Ok(list);
     }
 }

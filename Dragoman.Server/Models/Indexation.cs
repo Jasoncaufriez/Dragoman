@@ -5,7 +5,7 @@ namespace Dragoman.Server.Models;
 
 public partial class Indexation
 {
-    public byte IdIndex { get; set; }
+    public int IdIndex { get; set; }
 
     public DateTime Startdate { get; set; }
 

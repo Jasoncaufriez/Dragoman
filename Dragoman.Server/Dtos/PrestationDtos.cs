@@ -5,10 +5,12 @@ public class PrestationJourRowDto
     public string Tolkcode { get; set; } = "";
     public string Nom { get; set; } = "";
     public string Prenom { get; set; } = "";
-    public string? Telephone { get; set; }
+    public string Telephone { get; set; } = "";
     public int[] IdAffAudiences { get; set; } = Array.Empty<int>();
     public string? HeureAudienceSuggee { get; set; }
     public bool HasPrestation { get; set; }
+    public bool IsAbsent { get; set; }
+    public int[] Prestations { get; set; } = Array.Empty<int>(); // Ajout pour la liste des prestations
 }
 
 public class NewPrestationDto
@@ -23,7 +25,7 @@ public class NewPrestationDto
 public class AbsenceDto
 {
     public string Tolkcode { get; set; } = "";
-    public int IdAffAudience { get; set; }
+    public int[] IdAffAudiences { get; set; } = Array.Empty<int>();
     public DateTime DatePrestation { get; set; }
 }
 

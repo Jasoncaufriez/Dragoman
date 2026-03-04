@@ -98,4 +98,10 @@ export class IndispoComponent implements OnInit {
       error: () => this.error = 'Suppression impossible.'
     });
   }
+
+  daysDiff(start: string | Date, end: string | Date): number {
+    const s = new Date(start);
+    const e = new Date(end);
+    return Math.round((e.getTime() - s.getTime()) / 86400000);
+  }
 }

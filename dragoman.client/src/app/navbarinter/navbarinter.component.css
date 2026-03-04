@@ -1,84 +1,176 @@
-/* === NAVBAR INTERPRÈTE (style identique à navbar principale) === */
+/* ================================================================
+   Navbar Interprète · IBZ Civic Light
+   ================================================================ */
 .navbarinter {
-  background: linear-gradient(270deg, #1e3a8a, #2563eb, #1d4ed8, #1e3a8a) !important;
-  background-size: 600% 600% !important;
-  animation: gradientShift 12s ease infinite !important;
-  margin: 30px !important;
-  width: calc(100% - 60px) !important;
-  padding: 8px 16px !important;
-  border-radius: 16px !important;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3) !important;
+  background: var(--color-surface, #ffffff) !important;
+  border: 1px solid var(--color-border, #dbe3ef) !important;
+  margin: var(--layout-padding, 28px) var(--layout-padding, 28px) var(--navbar-gap, 20px) !important;
+  width: calc(100% - (2 * var(--layout-padding, 28px))) !important;
+  padding: 0 16px !important;
+  min-height: var(--navbar-height, 54px) !important;
+  height: auto !important;
+  border-radius: var(--radius-lg, 14px) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05) !important;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-  color: white !important;
-  transition: all 0.3s ease !important;
+  gap: 12px !important;
+  color: var(--color-text-main, #1f2937) !important;
+  transition: box-shadow .18s ease !important;
+  position: sticky !important;
+  top: 12px !important;
+  z-index: 100 !important;
+  animation: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
-/* Animation gradient (comme navbar principale) */
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
+/* ── Partie gauche : avatar + info ── */
 .navbarinter .nav-left {
   display: flex !important;
   align-items: center !important;
-  gap: 14px !important;
-  font-size: 1rem !important;
-  color: white !important;
+  gap: 10px !important;
+  min-width: 0 !important;
+  padding: 8px 0 !important;
 }
 
+/* Avatar rond avec initiales */
+.ni-avatar {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-primary-soft, #eaf2fd);
+  color: var(--color-primary, #2f80ed);
+  font-weight: 700;
+  font-size: .82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--color-primary-soft, #eaf2fd);
+}
+
+/* Bloc texte */
+.ni-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* Ligne 1 : nom + code */
+.ni-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.ni-fullname {
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--color-text-main, #1f2937);
+}
+
+.ni-code {
+  font-size: .74rem;
+  font-weight: 500;
+  color: var(--color-text-muted, #6b7280);
+  background: var(--color-background, #f7f9fc);
+  border: 1px solid var(--color-border, #dbe3ef);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* Ligne 2 : email, téléphone, langues */
+.ni-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ni-link {
+  font-size: .74rem;
+  color: var(--color-text-muted, #6b7280);
+  text-decoration: none;
+  transition: color .15s ease;
+  white-space: nowrap;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+.ni-link:hover          { color: var(--color-primary, #2f80ed); }
+.ni-link--phone:hover   { color: #059669; }
+
+/* Séparateur langues */
+.ni-sep {
+  font-size: .72rem;
+  color: var(--color-text-muted, #9ca3af);
+}
+
+/* Badges de langue */
+.ni-langs {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.ni-lang-badge {
+  font-size: .68rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.ni-lang-badge--src { background: var(--color-primary-soft, #eaf2fd); color: var(--color-primary, #2f80ed); }
+.ni-lang-badge--dst { background: #dcfce7; color: #15803d; }
+
+/* ── Partie droite : liens nav ── */
 .navbarinter .nav-right {
   display: flex !important;
   align-items: center !important;
-  gap: 8px !important;
+  gap: 2px !important;
   flex-wrap: wrap !important;
+  flex-shrink: 0 !important;
 }
 
-  .navbarinter .nav-right a {
-    color: #fff !important;
-    text-decoration: none !important;
-    padding: 6px 12px !important;
-    background: rgba(255,255,255,.1) !important;
-    border: 1px solid rgba(255,255,255,.2) !important;
-    border-radius: 8px !important;
-    transition: .2s ease !important;
-    font-size: .92rem !important;
-  }
+.navbarinter .nav-right a {
+  color: var(--color-text-secondary, #4b5563) !important;
+  text-decoration: none !important;
+  padding: 7px 11px !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: var(--radius-sm, 7px) !important;
+  transition: all .18s ease !important;
+  font-size: .82rem !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+}
 
-    .navbarinter .nav-right a:hover {
-      background: rgba(255,255,255,.25) !important;
-    }
+.navbarinter .nav-right a:hover {
+  background: var(--color-primary-soft, #eaf2fd) !important;
+  color: var(--color-primary, #2f80ed) !important;
+}
 
-    .navbarinter .nav-right a.active {
-      background: #fff !important;
-      color: #1e3a8a !important;
-      font-weight: 600 !important;
-    }
+.navbarinter .nav-right a.active {
+  background: var(--color-primary-soft, #eaf2fd) !important;
+  color: var(--color-primary, #2f80ed) !important;
+  font-weight: 600 !important;
+}
 
-/* Responsive */
-@media (max-width: 420px) {
+@media (max-width: 900px) {
   .navbarinter {
-    margin: 12px !important;
-    width: calc(100% - 24px) !important;
-    padding: 8px 12px !important;
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 10px !important;
+    padding: 10px 14px !important;
   }
-
-    .navbarinter .nav-right {
-      width: 100% !important;
-      justify-content: flex-start !important;
-    }
+  .navbarinter .nav-right { width: 100% !important; }
+  .ni-link { max-width: 140px; }
 }
+

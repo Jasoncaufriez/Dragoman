@@ -1,6 +1,7 @@
 ﻿using Dragoman.Server.Models;   // Tolkadresse, Tolkidentity
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Dragoman.Server.Controllers;
 
@@ -12,20 +13,30 @@ public class AdressesController : ControllerBase
     private readonly ApplicationDbContext _db;
     public AdressesController(ApplicationDbContext db) => _db = db;
 
-    // ---------------- Par interprète ----------------
+    // Oracle: si pas de trigger/identity sur ID_ADRESSE, on prend la séquence à la main.
+    private async Task<decimal> NextIdAdresseAsync()
+    {
+        var conn = _db.Database.GetDbConnection();
+        if (conn.State != ConnectionState.Open)
+            await conn.OpenAsync();
+
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = "SELECT NR_AUTO_ADRESSE.NEXTVAL FROM DUAL";
+        var val = await cmd.ExecuteScalarAsync();
+        return Convert.ToDecimal(val);
+    }
 
     // GET /api/interpretes/{tolkcode}/adresses?onlyActive=true
     [HttpGet("interpretes/{tolkcode:int}/adresses")]
     public async Task<IActionResult> ListByTolk(int tolkcode, [FromQuery] bool onlyActive = false)
     {
-        // Dans TOLKADRESSE, TOLKCODE est stocké en VARCHAR2 => on compare en string
         string sCode = tolkcode.ToString();
 
         var q = _db.Tolkadresses.AsNoTracking()
-                .Where(a => a.Tolkcode == sCode);
+            .Where(a => a.Tolkcode == sCode);
 
         if (onlyActive)
-            q = q.Where(a => a.Enddate == null); // adresse “active” = ENDDATE NULL
+            q = q.Where(a => a.Enddate == null);
 
         var rows = await q
             .OrderByDescending(a => a.Startdate)
@@ -35,25 +46,24 @@ public class AdressesController : ControllerBase
     }
 
     // POST /api/interpretes/{tolkcode}/adresses
-    // Corps = entité Tolkadresse (pas de DTO)
     [HttpPost("interpretes/{tolkcode:int}/adresses")]
     public async Task<IActionResult> Create(int tolkcode, [FromBody] Tolkadresse body)
     {
         if (body is null) return BadRequest("Payload manquant.");
 
-        // L’interprète existe ?
-        bool exists = await _db.Tolkidentities.AsNoTracking()
-                            .AnyAsync(t => t.Tolkcode == tolkcode);
+        // Oracle: éviter AnyAsync() -> TRUE/FALSE
+        bool exists = (await _db.Tolkidentities.AsNoTracking()
+            .CountAsync(t => t.Tolkcode == tolkcode)) > 0;
+
         if (!exists) return NotFound($"Interprète {tolkcode} introuvable.");
 
-        // Forcer le rattachement
         body.Tolkcode = tolkcode.ToString();
 
-        // Petites validations côté serveur (Oracle a LAND=2 chars)
-        if (string.IsNullOrWhiteSpace(body.Land) || body.Land.Length > 2)
+        // LAND = 2 chars (normalise)
+        body.Land = (body.Land ?? "").Trim().ToUpperInvariant();
+        if (body.Land.Length != 2)
             return BadRequest("Le code pays (LAND) est requis et doit faire 2 caractères.");
 
-        // Champs d’audit + défauts utiles
         var now = DateTime.UtcNow;
         if (body.Startdate == default) body.Startdate = now.Date;
         body.Datecreate = now;
@@ -61,7 +71,11 @@ public class AdressesController : ControllerBase
         body.Datemodif = null;
         body.Usermodif = null;
 
-        // Ne PAS affecter IdAdresse : la séquence Oracle (NR_AUTO_ADRESSE.NEXTVAL) s’en charge
+        // IMPORTANT: générer ID_ADRESSE si DB ne le fait pas
+        // (adapte le test selon le type réel : decimal/int)
+        if (body.IdAdresse == null || Convert.ToDecimal(body.IdAdresse) == 0)
+            body.IdAdresse = (int)await NextIdAdresseAsync();
+
         _db.Tolkadresses.Add(body);
         await _db.SaveChangesAsync();
 
@@ -69,20 +83,20 @@ public class AdressesController : ControllerBase
     }
 
     // POST /api/interpretes/{tolkcode}/adresses/replace
-    // Clôture l’adresse active (ENDDATE) puis crée la nouvelle (ENDDATE NULL)
     [HttpPost("interpretes/{tolkcode:int}/adresses/replace")]
     public async Task<IActionResult> ReplaceOrCreate(int tolkcode, [FromBody] Tolkadresse body)
     {
         if (body is null) return BadRequest("Payload manquant.");
         if (body.Startdate == default) return BadRequest("StartDate est requis.");
 
-        // L’interprète existe ?
-        bool exists = await _db.Tolkidentities.AsNoTracking()
-                            .AnyAsync(t => t.Tolkcode == tolkcode);
+        // Oracle: éviter AnyAsync() -> TRUE/FALSE
+        bool exists = (await _db.Tolkidentities.AsNoTracking()
+            .CountAsync(t => t.Tolkcode == tolkcode)) > 0;
+
         if (!exists) return NotFound($"Interprète {tolkcode} introuvable.");
 
-        // Validation LAND 2 chars (évite ORA-12899)
-        if (string.IsNullOrWhiteSpace(body.Land) || body.Land.Length > 2)
+        body.Land = (body.Land ?? "").Trim().ToUpperInvariant();
+        if (body.Land.Length != 2)
             return BadRequest("Le code pays (LAND) est requis et doit faire 2 caractères.");
 
         var sCode = tolkcode.ToString();
@@ -90,7 +104,6 @@ public class AdressesController : ControllerBase
 
         using var tx = await _db.Database.BeginTransactionAsync();
 
-        // Adresse active actuelle (ENDDATE NULL)
         var active = await _db.Tolkadresses
             .Where(a => a.Tolkcode == sCode && a.Enddate == null)
             .OrderByDescending(a => a.Startdate)
@@ -98,17 +111,17 @@ public class AdressesController : ControllerBase
 
         if (active != null)
         {
-            // On clôture l’ancienne la veille du début de la nouvelle (ou le jour même selon ta règle)
             active.Enddate = body.Startdate.Date.AddDays(-1);
             active.Datemodif = now;
             active.Usermodif = User?.Identity?.Name ?? "system";
-
             await _db.SaveChangesAsync();
         }
 
-        // Créer la nouvelle adresse (ENDDATE = NULL)
         var newAdr = new Tolkadresse
         {
+            // ID obligatoire -> séquence
+            IdAdresse = (int)await NextIdAdresseAsync(),
+
             Tolkcode = sCode,
             Land = body.Land,
             Cp = body.Cp,
@@ -133,35 +146,31 @@ public class AdressesController : ControllerBase
         return CreatedAtAction(nameof(GetOne), new { id = newAdr.IdAdresse }, newAdr);
     }
 
-    // ---------------- Par adresse ----------------
-
     // GET /api/adresses/{id}
     [HttpGet("adresses/{id:int}")]
     public async Task<IActionResult> GetOne(int id)
     {
         var ent = await _db.Tolkadresses.AsNoTracking()
-                    .FirstOrDefaultAsync(x => x.IdAdresse == id);
+            .FirstOrDefaultAsync(x => x.IdAdresse == id);
         return ent is null ? NotFound() : Ok(ent);
     }
 
     // PUT /api/adresses/{id}
-    // ⚠️ NE PAS réécrire Tolkcode (évite ORA-01407 “TOLKCODE cannot be updated to NULL”)
     [HttpPut("adresses/{id:int}")]
     public async Task<IActionResult> Update(int id, [FromBody] Tolkadresse input)
     {
         if (input is null) return BadRequest("Payload manquant.");
-        if (input.IdAdresse != 0 && input.IdAdresse != id)
-            return BadRequest("Id incohérent.");
 
         var ent = await _db.Tolkadresses.FirstOrDefaultAsync(x => x.IdAdresse == id);
         if (ent is null) return NotFound();
 
-        // Validation LAND 2 chars
-        if (!string.IsNullOrWhiteSpace(input.Land) && input.Land.Length > 2)
-            return BadRequest("Le code pays (LAND) doit faire 2 caractères.");
+        if (!string.IsNullOrWhiteSpace(input.Land))
+        {
+            var land = input.Land.Trim().ToUpperInvariant();
+            if (land.Length != 2) return BadRequest("Le code pays (LAND) doit faire 2 caractères.");
+            ent.Land = land;
+        }
 
-        // Met à jour uniquement les champs “éditables”
-        ent.Land = input.Land;
         ent.Cp = input.Cp;
         ent.Commune = input.Commune;
         ent.Rue = input.Rue;
@@ -170,7 +179,6 @@ public class AdressesController : ControllerBase
         ent.Km = input.Km;
         ent.Startdate = input.Startdate == default ? ent.Startdate : input.Startdate.Date;
         ent.Enddate = input.Enddate?.Date;
-        // 🔒 NE PAS toucher à ent.Tolkcode ici
 
         ent.Datemodif = DateTime.UtcNow;
         ent.Usermodif = User?.Identity?.Name ?? "system";

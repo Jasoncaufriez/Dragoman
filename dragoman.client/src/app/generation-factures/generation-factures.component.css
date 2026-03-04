@@ -1,0 +1,279 @@
+/* Génération Factures · IBZ Civic Light */
+
+/* Alignement avec la navbar : même retrait horizontal via :host */
+:host {
+  display: block;
+  margin: 0 var(--layout-padding, 28px) var(--layout-padding, 28px);
+}
+
+.tab-bar {
+  display: flex;
+  gap: 3px;
+  background: #edf1f7;
+  border-radius: 10px;
+  padding: 3px;
+}
+
+.tab-btn {
+  padding: 7px 18px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: .84rem;
+  color: #4b5563;
+  transition: all .18s ease;
+}
+
+.tab-btn--active {
+  background: #fff;
+  color: #2f80ed;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04);
+}
+
+.gen-content { padding: 18px; }
+
+.gen-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.gen-form label { font-weight: 600; font-size: .84rem; }
+
+.info-block {
+  padding: 10px 18px;
+  background: #f9fbfd;
+  border-bottom: 1px solid #eef2f8;
+}
+
+.info-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .84rem;
+  color: #4b5563;
+}
+
+.info-label { font-weight: 700; color: #1f2937; }
+
+.po-val {
+  cursor: pointer;
+  padding: 3px 10px;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background .15s ease;
+}
+
+.po-val:hover { background: #eaf2fd; }
+
+.po-val .edit-icon {
+  font-size: .75em;
+  opacity: 0;
+  margin-left: 4px;
+  transition: opacity .15s;
+}
+
+.po-val:hover .edit-icon { opacity: 1; }
+
+.po-input {
+  padding: 5px 10px;
+  border: 1px solid #93c5fd;
+  border-radius: 5px;
+  font-size: .84rem;
+  font-weight: 600;
+  width: 140px;
+  outline: none;
+}
+
+.po-input:focus {
+  border-color: #2f80ed;
+  box-shadow: 0 0 0 3px rgba(47,128,237,.12);
+}
+
+.btn--primary {
+  background: #2f80ed;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .84rem;
+  box-shadow: 0 1px 3px rgba(47,128,237,.2);
+  transition: all .18s ease;
+}
+
+.btn--primary:hover { background: #1b65c4; }
+.btn--primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn--pdf { margin-left: auto; }
+
+.btn--sm {
+  padding: 5px 12px;
+  font-size: .82rem;
+  border-radius: 5px;
+  border: 1px solid #dbe3ef;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all .15s ease;
+}
+
+.btn--sm:hover { background: #f9fbfd; }
+
+.btn--green { color: #059669; border-color: #6ee7b7; background: #ecfdf5; }
+.btn--green:hover { background: #d1fae5; }
+
+.btn--red { color: #dc2626; border-color: #fca5a5; background: #fef2f2; margin-left: 4px; }
+.btn--red:hover { background: #fee2e2; }
+
+.btn--ghost { color: #6b7280; border-color: transparent; }
+.btn--ghost:hover { color: #4b5563; }
+
+.result-card { margin-top: 8px; }
+
+.alert--success {
+  background: #ecfdf5;
+  color: #065f46;
+  padding: 12px 16px;
+  border-radius: 7px;
+  border: 1px solid #6ee7b7;
+  margin: 10px 18px;
+  font-size: .84rem;
+}
+
+.alert--info {
+  background: #eaf2fd;
+  color: #174ea0;
+  padding: 12px 16px;
+  border-radius: 7px;
+  border: 1px solid #93c5fd;
+  font-size: .84rem;
+}
+
+.filters-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: #f9fbfd;
+  border-bottom: 1px solid #eef2f8;
+  flex-wrap: wrap;
+}
+
+.filters-bar label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .84rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.filters-bar input,
+.filters-bar select {
+  padding: 6px 10px;
+  border: 1px solid #dbe3ef;
+  border-radius: 7px;
+  font-size: .84rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 5px;
+  font-size: .76rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badge--blue         { background: #eaf2fd; color: #174ea0; }
+.badge--green        { background: #ecfdf5; color: #065f46; }
+.badge--red          { background: #fef2f2; color: #dc2626; }
+.badge--purple       { background: #f5f3ff; color: #7c3aed; }
+.badge--green-purple { background: #ecfdf5; color: #7c3aed; border: 1px solid #c4b5fd; }
+.badge--teal         { background: #e6fffa; color: #0f766e; }
+.badge--orange       { background: #fff7ed; color: #c2410c; }
+
+.row--approved      { background: #f0fdf4; }
+.row--cancelled     { background: #fef2f2; opacity: .7; }
+.row--credit        { background: #f5f3ff; }
+.row--transmitted   { background: #e6fffa; }
+.row--credit-trans  { background: #fff7ed; }
+
+.text--negative { color: #dc2626; }
+
+/* ── Actions cell ── */
+.actions-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Mail button */
+.btn--mail {
+  color: #2563eb;
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+.btn--mail:hover { background: #dbeafe; }
+
+/* Fedcom validation date */
+.fedcom-date {
+  font-size: .78rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+/* ── Checkbox "Transmis" ── */
+.chk-transmis {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  font-size: .78rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #f9fafb;
+  transition: all .15s ease;
+  user-select: none;
+}
+
+.chk-transmis:hover {
+  border-color: #9ca3af;
+  background: #f3f4f6;
+}
+
+.chk-transmis input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  accent-color: #0f766e;
+  cursor: pointer;
+  margin: 0;
+}
+
+.chk-transmis input[type="checkbox"]:disabled {
+  cursor: default;
+}
+
+.chk-transmis .chk-label {
+  color: #4b5563;
+  white-space: nowrap;
+}
+
+/* Checked state: green pill look */
+.chk-transmis:has(input:checked) {
+  background: #ecfdf5;
+  border-color: #6ee7b7;
+}
+
+.chk-transmis input[type="checkbox"]:checked + .chk-label {
+  color: #065f46;
+}

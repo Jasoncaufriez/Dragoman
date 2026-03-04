@@ -19,7 +19,13 @@ namespace Dragoman.Server.Mapping
             CreateMap<LangueDestination, LangueDestinationDto>().ReverseMap();
             // === Indisponibilités ===
             CreateMap<Tolkindispo, IndispoDto>().ReverseMap();
-            CreateMap<NewIndispoDto, Tolkindispo>(); 
+            CreateMap<NewIndispoDto, Tolkindispo>();
+
+            CreateMap<Tolklink, TolklinkDto>().ReverseMap();
+            CreateMap<NewTolklinkDto, Tolklink>();
+            CreateMap<Statut, StatutDto>().ReverseMap();
+            CreateMap<Facture, FactureDto>();
+
 
         }
     }

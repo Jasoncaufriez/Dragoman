@@ -1,5 +1,5 @@
 // src/app/services/authentification.service.ts
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -7,8 +7,9 @@ import { firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthentificationService {
-  private http = inject(HttpClient);
   private baseUrl = '/api/auth';
+
+  constructor(private http: HttpClient) {}
  
   /** Cache du login courant */
   private loginSubject = new BehaviorSubject<string | null>(null);

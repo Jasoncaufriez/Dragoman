@@ -1,8 +1,20 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { InterpretesService } from '../../services/interpretes.service';
 import { LanguesService } from '../../services/langues.service';
+
+function phoneValidator(ctrl: AbstractControl) {
+  const v: string = (ctrl.value || '').trim().replace(/[ .\-\/]/g, '');
+  if (!v) return null;
+  return /^(\+32|0)[1-9]\d{7,9}$/.test(v) ? null : { phone: true };
+}
+
+function tvaValidator(ctrl: AbstractControl) {
+  const v: string = (ctrl.value || '').trim().replace(/[ .]/g, '').toUpperCase();
+  if (!v) return null;
+  return /^BE\d{10}$/.test(v) ? null : { tva: true };
+}
 
 interface InterpreteMatch {
   tolkcode: number;
@@ -21,9 +33,17 @@ interface InterpreteMatch {
 })
 export class InterpreteListComponent {
   advForm: FormGroup;
+  createForm: FormGroup;
 
   langues: { id: number; libelle: string }[] = [];
   rows: InterpreteMatch[] = [];
+  quickRows: { tolkcode: string; nom?: string; prenom?: string; languesDestination: string[]; languesSource: string[] }[] = [];
+  quickQuery = '';
+  showQuickResults = false;
+  showCreateForm = false;
+  creating = false;
+  createError?: string;
+  createSuccess?: string;
   loading = false;
   error?: string;
 
@@ -39,6 +59,21 @@ export class InterpreteListComponent {
       langSrc: [null],
       langDst: [null],
       date: [todayISO]
+    });
+
+    this.createForm = fb.group({
+      nom:         ['', Validators.required],
+      prenom:      [''],
+      email:       ['', [Validators.email]],
+      tel:         ['', [phoneValidator]],
+      telbis:      ['', [phoneValidator]],
+      gsm:         ['', [phoneValidator]],
+      tva:         ['', [tvaValidator]],
+      iban:        [''],
+      bankrekening:[''],
+      taalrol:     [null],
+      beedigd:     [0],
+      genre:       ['']
     });
 
     this.loadLangues();
@@ -93,6 +128,23 @@ export class InterpreteListComponent {
     this.advForm.reset({ langSrc: null, langDst: null, date: new Date().toISOString().slice(0, 10) });
   }
 
+  runQuickSearch() {
+    if (!this.quickQuery || !this.quickQuery.trim()) return;
+    const q = this.quickQuery.trim();
+    const isNumber = /^\d+$/.test(q);
+    const mode = isNumber ? 'tolkcode' as const : 'nom' as const;
+
+    this.loading = true;
+    this.error = undefined;
+    this.showQuickResults = true;
+    this.rows = [];
+
+    this.api.search(mode, q).subscribe({
+      next: (r) => { this.quickRows = r; this.loading = false; },
+      error: () => { this.error = 'Erreur de recherche.'; this.loading = false; }
+    });
+  }
+
   runAdvanced() {
     const v = this.advForm.value;
     if (!v.langSrc || !v.langDst || !v.date) {
@@ -100,6 +152,8 @@ export class InterpreteListComponent {
       return;
     }
     this.loading = true; this.error = undefined;
+    this.showQuickResults = false;
+    this.quickRows = [];
 
     this.api.match({
       langSrc: v.langSrc,
@@ -111,7 +165,49 @@ export class InterpreteListComponent {
     });
   }
 
-  openDetail(tolkcode: number) {
+  openCreateForm() {
+    this.showCreateForm = !this.showCreateForm;
+    this.createError = undefined;
+    this.createSuccess = undefined;
+    if (this.showCreateForm) this.createForm.reset({ beedigd: 0, taalrol: null, genre: '' });
+  }
+
+  submitCreate() {
+    if (this.createForm.invalid) { this.createForm.markAllAsTouched(); return; }
+    this.creating = true;
+    this.createError = undefined;
+    this.createSuccess = undefined;
+
+    const v = this.createForm.value;
+    this.api.create({
+      nom:         v.nom?.trim().toUpperCase(),
+      prenom:      v.prenom?.trim() || undefined,
+      email:       v.email?.trim() || undefined,
+      tel:         v.tel?.trim() || undefined,
+      telbis:      v.telbis?.trim() || undefined,
+      gsm:         v.gsm?.trim() || undefined,
+      tva:         v.tva?.trim().replace(/[ .]/g, '').toUpperCase() || undefined,
+      iban:        v.iban?.trim() || undefined,
+      bankrekening:v.bankrekening?.trim() || undefined,
+      taalrol:     v.taalrol ?? undefined,
+      beedigd:     v.beedigd ?? 0,
+      genre:       v.genre?.trim() || undefined
+    }).subscribe({
+      next: (res) => {
+        this.creating = false;
+        this.createSuccess = `Interprète créé avec le tolkcode ${res.tolkcode} — ${res.nom} ${res.prenom ?? ''}`;
+        this.showCreateForm = false;
+        this.createForm.reset({ beedigd: 0, taalrol: null, genre: '' });
+      },
+      error: (err) => {
+        this.creating = false;
+        const errs = err?.error?.errors as string[];
+        this.createError = errs?.length ? errs.join(' | ') : (err?.error ?? 'Erreur inconnue');
+      }
+    });
+  }
+
+  openDetail(tolkcode: number | string) {
     this.router.navigate(['/interpretes', tolkcode, 'audiences']);
   }
 }

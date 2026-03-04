@@ -19,6 +19,6 @@
     public class StatutDto
     {
         public byte IdStatut { get; set; }
-        public string Libelle { get; set; } = "";
+        public string TypeStatut { get; set; } = "";
     }
 }

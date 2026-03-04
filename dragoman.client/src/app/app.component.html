@@ -1,2 +1,4 @@
-<app-navbar *ngIf="!router.url.startsWith('/hd')"></app-navbar>
+<app-navbar *ngIf="!router.url.startsWith('/hd') && !router.url.startsWith('/globalprotect') && !router.url.startsWith('/ad-status')">
+</app-navbar>
+
 <router-outlet></router-outlet>

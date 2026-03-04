@@ -14,5 +14,6 @@
         public string LangueCgoe { get; set; } = "";
         public decimal IdAffAudience { get; set; }
         public decimal? Tolkcode { get; set; }
+        public string Source { get; set; } = "VRM";
     }
 }

@@ -1,26 +1,32 @@
-.table .badge {
-  margin-right: 6px;
+/* Prestations · IBZ Civic Light */
+
+/* Alignement avec la navbar : même retrait horizontal via :host */
+:host {
+  display: block;
+  margin: 0 var(--layout-padding, 28px) var(--layout-padding, 28px);
 }
+
+.table .badge { margin-right: 6px; }
 
 .table tr.active {
-  background-color: var(--primary-100, #e0e7ff);
+  background-color: var(--color-primary-soft, #eaf2fd);
 }
 
-.badge--success {
-  background-color: #10b981;
-  color: white;
+.table tr.row--absent {
+  background-color: #fee; 
+  opacity: 0.7;
 }
 
-.badge--warning {
-  background-color: #f59e0b;
-  color: white;
-}
+.badge--success { background-color: #ecfdf5; color: #059669; }
+.badge--warning { background-color: #fffbeb; color: #d97706; }
+.badge--red { background-color: #fee; color: #b91c1c; }
 
 .form-card {
   margin-top: 20px;
-  padding: 16px;
-  background: var(--surface, #f9fafb);
-  border-radius: 8px;
+  padding: 18px;
+  background: #f9fbfd;
+  border-radius: var(--radius, 10px);
+  border: 1px solid var(--color-border-light, #eef2f8);
 }
 
 .form-grid-2 {

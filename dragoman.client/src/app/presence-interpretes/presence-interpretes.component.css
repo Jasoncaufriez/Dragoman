@@ -1,32 +1,28 @@
-/* src/app/reports/presence-interpretes/presence-interpretes.component.css */
-.table .center {
-  text-align: center;
+/* Présence Interprètes · IBZ Civic Light */
+
+/* Alignement avec la navbar : même retrait horizontal via :host */
+:host {
+  display: block;
+  margin: 0 var(--layout-padding, 28px) var(--layout-padding, 28px);
 }
 
-.table .ellipsis {
+.table .center  { text-align: center; }
+.table .ellipsis { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 220px; }
+
+.phone-link {
+  color: var(--accent, #5b5fc7);
+  text-decoration: none;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 220px;
+}
+.phone-link:hover {
+  text-decoration: underline;
+  color: var(--accent-hover, #4b4fbf);
 }
 
 @media print {
-  .toolbar {
-    display: none !important;
-  }
-
-  .card, .card--surface {
-    box-shadow: none !important;
-    border: none !important;
-  }
-
-  .table-wrap {
-    max-height: unset;
-    overflow: visible;
-    margin: 0;
-  }
-
-  .table {
-    font-size: 12px;
-  }
+  .toolbar { display: none !important; }
+  .card, .card--surface { box-shadow: none !important; border: none !important; }
+  .table-wrap { max-height: unset; overflow: visible; margin: 0; }
+  .table { font-size: 11px; }
+  .table thead th { background: #f4f7fb !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }

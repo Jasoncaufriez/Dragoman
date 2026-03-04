@@ -1,13 +1,39 @@
 <nav class="navbarinter">
+
+  <!-- Gauche : avatar + identité interprète -->
   <div class="nav-left">
-    👤 Interprète <strong>#{{ tolkcode }}</strong>
+    <div class="ni-avatar">{{ initiales }}</div>
+    <div class="ni-info">
+      <div class="ni-name">
+        <span class="ni-fullname">{{ prenom }} {{ nom }}</span>
+        <span class="ni-code">#{{ tolkcode }}</span>
+      </div>
+      <div class="ni-meta">
+        <a *ngIf="email" class="ni-link ni-link--mail" [href]="'mailto:' + email" title="{{ email }}">
+          ✉ {{ email }}
+        </a>
+        <a *ngIf="telephone" class="ni-link ni-link--phone" [href]="telTeamsUrl" title="Appeler via Teams">
+          📞 {{ telephone }}
+        </a>
+        <span *ngIf="languesSrc.length" class="ni-langs">
+          <span class="ni-lang-badge ni-lang-badge--src" *ngFor="let l of languesSrc">{{ l }}</span>
+          <span class="ni-sep" *ngIf="languesDst.length">→</span>
+          <span class="ni-lang-badge ni-lang-badge--dst" *ngFor="let l of languesDst">{{ l }}</span>
+        </span>
+      </div>
+    </div>
   </div>
+
+  <!-- Droite : navigation -->
   <div class="nav-right">
-    <a [routerLink]="['/interpretes', tolkcode, 'detail']" routerLinkActive="active">Identité</a>
-    <a [routerLink]="['/interpretes', tolkcode, 'adresses']" routerLinkActive="active">Adresse</a>
-    <a [routerLink]="['/interpretes', tolkcode, 'tva']" routerLinkActive="active">TVA / Statut</a>
-    <a [routerLink]="['/interpretes', tolkcode, 'langues']" routerLinkActive="active">Langues</a>
-    <a [routerLink]="['/interpretes', tolkcode, 'indispo']" routerLinkActive="active">Indispos</a>
-    <a [routerLink]="['/interpretes', tolkcode, 'audiences']" routerLinkActive="active">Audiences</a>
+    <a [routerLink]="['/interpretes', tolkcode, 'detail']"      routerLinkActive="active">Identité</a>
+    <a [routerLink]="['/interpretes', tolkcode, 'adresses']"    routerLinkActive="active">Adresse</a>
+    <a [routerLink]="['/interpretes', tolkcode, 'tva']"         routerLinkActive="active">TVA / Statut</a>
+    <a [routerLink]="['/interpretes', tolkcode, 'langues']"     routerLinkActive="active">Langues</a>
+    <a [routerLink]="['/interpretes', tolkcode, 'indispo']"     routerLinkActive="active">Indispos</a>
+    <a [routerLink]="['/interpretes', tolkcode, 'audiences']"   routerLinkActive="active">Audiences</a>
+    <a [routerLink]="['/interpretes', tolkcode, 'convocation']" routerLinkActive="active">Convocation</a>
   </div>
+
 </nav>
+

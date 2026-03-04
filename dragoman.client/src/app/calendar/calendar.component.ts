@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, combineLatest, map, startWith } from 'rxjs';
+import { Observable, combineLatest, map, startWith, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { CalendarService, CalendarData } from '../services/calendar.service';
 import { UserService } from '../services/user.service';
+import { InterpretesService } from '../services/interpretes.service';
 
 @Component({
   selector: 'app-calendar',
@@ -26,9 +27,25 @@ export class CalendarComponent implements OnInit {
 
   username = '';
 
+  // Filtre tolkcode vide
+  filterEmpty = false;
+  private filterEmpty$ = new BehaviorSubject<boolean>(false);
+
+  // Filtre exclure langueRequete commençant par *
+  excludeNoInterp = false;
+  private excludeNoInterp$ = new BehaviorSubject<boolean>(false);
+
+  // Modal d'affectation
+  showAssignModal = false;
+  assignRow: CalendarData | null = null;
+  tolkList: { tolkcode: number; nom: string; prenom: string }[] = [];
+  tolkSearchQuery = '';
+  assignError?: string;
+
   constructor(
     private calendarService: CalendarService,
     private userService: UserService,
+    private interpretesService: InterpretesService,
     private fb: FormBuilder,
     private router: Router
   ) { }
@@ -77,10 +94,22 @@ export class CalendarComponent implements OnInit {
     // Combine: filtres d’en-tête + recherche carte
     this.filteredRows$ = combineLatest([
       this.filterForm.valueChanges.pipe(startWith(this.filterForm.value)),
-      this.searchForm.valueChanges.pipe(startWith(this.searchForm.value))
+      this.searchForm.valueChanges.pipe(startWith(this.searchForm.value)),
+      this.filterEmpty$.pipe(startWith(this.filterEmpty)),
+      this.excludeNoInterp$.pipe(startWith(this.excludeNoInterp))
     ]).pipe(
-      map(([f, s]) => this.applyFilters(this.calendarData, f, s))
+      map(([f, s, emptyOnly, noInterp]) => this.applyFilters(this.calendarData, f, s, emptyOnly, noInterp))
     );
+  }
+
+  toggleFilterEmpty() {
+    this.filterEmpty = !this.filterEmpty;
+    this.filterEmpty$.next(this.filterEmpty);
+  }
+
+  toggleExcludeNoInterp() {
+    this.excludeNoInterp = !this.excludeNoInterp;
+    this.excludeNoInterp$.next(this.excludeNoInterp);
   }
 
   // Normalisations utilitaires
@@ -93,7 +122,7 @@ export class CalendarComponent implements OnInit {
   }
   private toISO(v: string) { return v ? new Date(v).toISOString().slice(0, 10) : ''; }
 
-  private applyFilters(rows: CalendarData[], f: any, s: any): CalendarData[] {
+  private applyFilters(rows: CalendarData[], f: any, s: any, emptyOnly = false, noInterp = false): CalendarData[] {
     const fromISO = this.toISO(f.dateFrom);
     const toISOv = this.toISO(f.dateTo);
 
@@ -110,6 +139,12 @@ export class CalendarComponent implements OnInit {
     const nrAudience = this.norm(s.idAffAudience);
 
     return rows.filter((r: any) => {
+      // Filtre tolkcode vide
+      if (emptyOnly && r.tolkcode) return false;
+
+      // Exclure langueRequete commençant par * (ex: *Aucun interprète demandé)
+      if (noInterp && r.langueRequete && r.langueRequete.startsWith('*')) return false;
+
       // Dates
       const d = this.dateISO(r.dateAudience);
       if (fromISO && d < fromISO) return false;
@@ -204,12 +239,65 @@ export class CalendarComponent implements OnInit {
     );
   }
 
+  goToInterprete(tolkcode: number) {
+    this.router.navigate(['/interpretes', tolkcode, 'audiences']);
+  }
+
   removeAssignment(r: CalendarData) {
     if (!r.tolkcode) return;
     if (!confirm(`Supprimer l'affectation (tolkcode ${r.tolkcode}) ?`)) return;
-    // TODO: brancher sur l'API de suppression quand prête
-    console.log('TODO suppression affectation', {
-      idAffAudience: r.idAffAudience, nroRoleGen: r.nroRoleGen, tolkcode: r.tolkcode
+    this.interpretesService.removeTolklink(r.tolkcode, r.idAffAudience).subscribe({
+      next: () => this.getCalendarData(),
+      error: (err: any) => {
+        console.error('Erreur suppression affectation', err);
+        alert(err?.error ?? 'Erreur lors de la suppression.');
+      }
     });
+  }
+
+  // --------- Modal d'affectation ---------
+
+  openAssignModal(r: CalendarData) {
+    this.assignRow = r;
+    this.tolkSearchQuery = '';
+    this.assignError = undefined;
+    this.showAssignModal = true;
+
+    if (this.tolkList.length === 0) {
+      this.interpretesService.listAllTolkcodes().subscribe({
+        next: list => this.tolkList = list,
+        error: () => this.assignError = 'Impossible de charger la liste des interprètes.'
+      });
+    }
+  }
+
+  get filteredTolkList() {
+    const q = this.tolkSearchQuery.toLowerCase().trim();
+    if (!q) return this.tolkList;
+    return this.tolkList.filter(t =>
+      t.tolkcode.toString().includes(q)
+      || (t.nom ?? '').toLowerCase().includes(q)
+      || (t.prenom ?? '').toLowerCase().includes(q)
+    );
+  }
+
+  assignTolk(tolkcode: number) {
+    if (!this.assignRow) return;
+    this.assignError = undefined;
+    this.interpretesService.addTolklink(tolkcode, this.assignRow.idAffAudience).subscribe({
+      next: () => {
+        this.showAssignModal = false;
+        this.assignRow = null;
+        this.getCalendarData();
+      },
+      error: (err: any) => {
+        this.assignError = err?.error?.message ?? err?.error ?? 'Erreur lors de l\'affectation.';
+      }
+    });
+  }
+
+  closeAssignModal() {
+    this.showAssignModal = false;
+    this.assignRow = null;
   }
 }

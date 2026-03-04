@@ -1,191 +1,68 @@
-/* Carte & en-têtes */
+/* HD Prestation Jour · IBZ Civic Light */
 .hd-carte {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.06);
-  border: 1px solid #e5e7eb;
+  background: #fff; border-radius: 10px; padding: 22px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05); border: 1px solid #dbe3ef;
 }
 
-  .hd-carte h2 {
-    margin: 0 0 6px 0;
-    font-size: 22px;
-  }
+.hd-carte h2 { margin: 0 0 6px 0; font-size: 20px; font-weight: 700; color: #1f2937; }
+.hd-meta { margin-bottom: 16px; color: #4b5563; font-size: .84rem; }
 
-.hd-meta {
-  margin-bottom: 16px;
-  opacity: .85;
-  color: #374151;
+.mini-cards { display: grid; gap: 12px; margin-bottom: 14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+.mini-card { background: #f9fbfd; border: 1px solid #dbe3ef; border-radius: 10px; padding: 14px 16px; display: grid; gap: 8px; }
+.mini-card .mini-label { font-weight: 600; color: #1f2937; font-size: .84rem; }
+
+.mini-card input, .mini-card select {
+  padding: 8px 12px; border: 1px solid #dbe3ef; border-radius: 7px;
+  outline: none; background: #fff; width: 100%; font-size: .84rem;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+.mini-card input:focus, .mini-card select:focus { border-color: #2f80ed; box-shadow: 0 0 0 3px rgba(47,128,237,.12); }
+.mini-card.mini-guard { display: flex; align-items: center; justify-content: center; }
+
+.inline { display: inline-flex; gap: 8px; align-items: center; }
+
+.form-grid { display: grid; gap: 14px; }
+.form-grid .row { display: grid; grid-template-columns: 200px 1fr; align-items: center; gap: 12px; }
+.form-grid label { font-weight: 600; font-size: .84rem; color: #1f2937; }
+
+.form-grid input[type="date"], .form-grid input[type="time"],
+.form-grid input[type="text"], .form-grid input[type="number"],
+.form-grid select, .form-grid textarea {
+  padding: 8px 12px; border: 1px solid #dbe3ef; border-radius: 7px;
+  outline: none; background: #fff; font-size: .84rem;
+  transition: border-color .18s ease, box-shadow .18s ease;
 }
 
-/* Mini-cards (Date / Régime / Garde) */
-.mini-cards {
-  display: grid;
-  gap: 12px;
-  margin-bottom: 12px;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+.form-grid input:focus, .form-grid select:focus, .form-grid textarea:focus {
+  border-color: #2f80ed; box-shadow: 0 0 0 3px rgba(47,128,237,.12);
 }
+.form-grid textarea { resize: vertical; }
 
-.mini-card {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 12px 14px;
-  display: grid;
-  gap: 8px;
-}
+.hd-table { width: 100%; border-collapse: collapse; margin: 10px 0 14px; font-size: .84rem; }
+.hd-table th, .hd-table td { border: 1px solid #dbe3ef; padding: 9px 12px; }
+.hd-table th { background: #f4f7fb; text-align: left; font-weight: 600; font-size: .76rem; text-transform: uppercase; letter-spacing: 0.05em; color: #4b5563; }
+.hd-table td input { width: 100%; box-sizing: border-box; }
 
-  .mini-card .mini-label {
-    font-weight: 600;
-    color: #374151;
-    font-size: 14px;
-  }
-
-  .mini-card input, .mini-card select {
-    padding: 8px 10px;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    outline: none;
-    background: #fff;
-    width: 100%;
-  }
-
-  .mini-card.mini-guard {
-    display: flex;
-    align-items: center;
-    justify-content: center
-  }
-
-.inline {
-  display: inline-flex;
-  gap: 8px;
-  align-items: center
-}
-
-/* Formulaire (reste) */
-.form-grid {
-  display: grid;
-  gap: 12px;
-}
-
-  .form-grid .row {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .form-grid label {
-    font-weight: 600;
-  }
-
-  .form-grid input[type="date"],
-  .form-grid input[type="time"],
-  .form-grid input[type="text"],
-  .form-grid input[type="number"],
-  .form-grid select,
-  .form-grid textarea {
-    padding: 8px 10px;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    outline: none;
-    background: #fff;
-  }
-
-  .form-grid textarea {
-    resize: vertical
-  }
-
-/* Tableaux */
-.hd-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 8px 0 14px;
-}
-
-  .hd-table th, .hd-table td {
-    border: 1px solid #e5e7eb;
-    padding: 8px;
-  }
-
-  .hd-table th {
-    background: #f8fafc;
-    text-align: left;
-    font-weight: 600;
-  }
-
-  .hd-table td input {
-    width: 100%;
-    box-sizing: border-box
-  }
-
-/* Boutons */
 button {
-  border: none;
-  border-radius: 8px;
-  padding: 10px 14px;
-  cursor: pointer;
-  background: #2563eb;
-  color: #fff;
-  transition: filter .12s ease,transform .06s ease;
+  border: none; border-radius: 7px; padding: 10px 16px; cursor: pointer;
+  background: #2f80ed; color: #fff; font-size: .84rem; font-weight: 500;
+  transition: background .15s ease, transform .06s ease;
+  box-shadow: 0 1px 3px rgba(47,128,237,.2);
 }
+button:hover { background: #1b65c4; }
+button:active { transform: translateY(1px); }
+button:disabled { opacity: .5; cursor: not-allowed; }
 
-  button:hover {
-    filter: brightness(1.05)
-  }
+.hd-table td button { padding: 6px 12px; border-radius: 5px; background: #dc2626; box-shadow: none; }
+.hd-table td button:hover { background: #b91c1c; }
 
-  button:active {
-    transform: translateY(1px)
-  }
+.form-grid > button[type="button"] { margin: 2px 0 12px; background: #4b5563; }
+.form-grid > button[type="button"]:hover { background: #374151; }
 
-  button:disabled {
-    opacity: .6;
-    cursor: not-allowed
-  }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px; }
+.actions .muted { color: #6b7280; }
 
-.hd-table td button {
-  padding: 6px 10px;
-  border-radius: 6px;
-  background: #ef4444;
-}
+:where(input,select,textarea,button):focus-visible { outline: 2px solid #93c5fd; outline-offset: 1px; }
 
-  .hd-table td button:hover {
-    filter: brightness(1.05)
-  }
-
-.form-grid > button[type="button"] {
-  margin: 2px 0 12px;
-  background: #334155;
-}
-
-  .form-grid > button[type="button"]:hover {
-    filter: brightness(1.05)
-  }
-
-/* Actions bas de formulaire */
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  margin-top: 10px;
-}
-
-  .actions .muted {
-    opacity: .8;
-    color: #6b7280
-  }
-
-/* Accessibilité focus */
-:where(input,select,textarea,button):focus-visible {
-  outline: 2px solid #93c5fd;
-  outline-offset: 1px;
-}
-
-/* Responsive */
-@media (max-width:700px) {
-  .form-grid .row {
-    grid-template-columns: 1fr;
-    align-items: start
-  }
-}
+@media (max-width: 700px) { .form-grid .row { grid-template-columns: 1fr; align-items: start; } }
